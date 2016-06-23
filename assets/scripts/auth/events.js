@@ -1,47 +1,50 @@
 'use strict';
+//
+const getFormFields = require('../../../lib/get-form-fields');
 
-const app = require('../app.js');
+const api = require('./api');
+const ui = require('./ui');
 
-const signUp = (data) => {
-  return $.ajax({
-    url: app.host + '/sign-up',
-    method: "POST",
-    data: data,
-  });
+
+const onSignUp = (event) => {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.signUp(data)
+  .done(ui.success)
+  .fail(ui.failure);
 };
 
-const signIn = (data) => {
-  return $.ajax({
-    url: app.host + '/sign-in',
-    method: "POST",
-    data: data,
-  });
+const onSignIn = (event) => {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.signIn(data)
+  .done(ui.signInSuccess)
+  .fail(ui.failure);
 };
 
-const signOut = () => {
-  return $.ajax({
-    url: app.host + '/sign-out/' + app.user.id,
-    method: "DELETE",
-    headers: {
-      Authorization: 'Token token=' + app.user.token,
-    },
-  });
+const onSignOut = (event) => {
+  event.preventDefault();
+  api.signOut()
+  .done(ui.signOutSuccess)
+  .fail(ui.failure);
 };
 
-const changePassword = (data) => {
-  return $.ajax({
-    url: app.host + '/change-password/' + app.user.id,
-    method: "PATCH",
-    headers: {
-      Authorization: 'Token token=' + app.user.token,
-    },
-    data: data,
-  });
+const onChangePassword = (event) => {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.changePassword(data)
+  .done(ui.success)
+  .fail(ui.failure);
 };
 
+
+const addHandlers = () => {
+  $('#sign-up').on('submit', onSignUp);
+  $('#sign-in').on('submit', onSignIn);
+  $('#sign-out').on('submit', onSignOut);
+  $('#change-password').on('submit', onChangePassword);
+};
+//
 module.exports = {
-  signUp,
-  signIn,
-  signOut,
-  changePassword,
+  addHandlers,
 };
