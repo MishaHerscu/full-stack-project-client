@@ -1,6 +1,6 @@
-$main-background-color: $dark-green;
-$secondary-background: $light-green;
-$font-color: $purpleish;
+$main-background-color: $paper-white;
+$secondary-background: $plain-grey;
+$font-color: $carbon;
 
 body {
   background-color: $main-background-color;
@@ -14,6 +14,7 @@ h2 {
 .nav {
   @include make-row();
   margin-left: 75%;
+
   .nav-button {
     @include make-lg-column(3);
     @include make-md-column(3);
