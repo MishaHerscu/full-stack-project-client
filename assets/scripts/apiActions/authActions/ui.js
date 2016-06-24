@@ -14,11 +14,19 @@ const failure = (error) => {
   console.error(error);
 };
 
+const signUpSuccess = function(){
+  $('#sign-in-email').val($('#sign-up-email').val());
+  $('#sign-in-pw').val($('#sign-up-pw').val());
+  $('#sign-in').submit();
+  $('#signUpModal').modal('hide');
+};
+
 const signInSuccess = (data) => {
   app.user = data.user;
   console.log(app.user);
   $('.signed-in').show();
   $('.signed-out').hide();
+  $('#signInModal').modal('hide');
 };
 
 const signOutSuccess = () => {
@@ -31,6 +39,7 @@ const signOutSuccess = () => {
 module.exports = {
   success,
   failure,
+  signUpSuccess,
   signInSuccess,
   signOutSuccess
 };
