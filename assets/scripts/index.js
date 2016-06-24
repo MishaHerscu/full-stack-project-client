@@ -23,4 +23,5 @@ $(() => {
   gameEvents.addHandlers();
   playerEvents.addHandlers();
   teamEvents.addHandlers();
+  teamEvents.onShowTeams();
 });
