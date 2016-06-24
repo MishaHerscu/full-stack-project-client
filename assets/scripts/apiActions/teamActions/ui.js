@@ -13,7 +13,9 @@ const failure = (error) => {
 };
 
 const onShowTeamsSuccess = (data) => {
-  console.log(data);
+  $('.teams-standing').html('');
+  let teamListingTemplate = require('../../templates/team-listing.handlebars');
+  $('.teams-standing').append(teamListingTemplate(data));
 };
 
 module.exports = {
