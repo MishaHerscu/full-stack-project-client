@@ -7,45 +7,132 @@
       <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
       <link rel="icon" href="assets/favicons/arc_favicons/favicon.ico" type="image/x-icon" />
     </head>
+
     <body class="container-fluid">
-      <article>
-        <form id="sign-up" class="signed-out">
-          <fieldset>
-            <legend>Sign up!</legend>
-            <input type="text" name="credentials[email]" placeholder="Email">
-            <input type="password" name="credentials[password]" placeholder="Password">
-            <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
-            <input type="submit" name="submit" value="Sign up!">
-          </fieldset>
-        </form>
 
-        <form id="sign-in" class="signed-out">
-          <fieldset>
-            <legend>Sign In!</legend>
-            <input type="text" name="credentials[email]" placeholder="Email">
-            <input type="password" name="credentials[password]" placeholder="Password">
-            <input type="submit" name="submit" value="Sign In">
-          </fieldset>
-        </form>
+      <nav class="navbar navbar-fixed-top navbar-transparent navbar-right" id="top-nav-bar">
 
-        <form id="sign-out" class="signed-in">
-          <fieldset>
-            <legend>Sign Out!</legend>
-            <input class="sign-out" type="submit" value="Sign Out">
-          </fieldset>
-        </form>
+        <span class="modal-button-container not-signed-in">
+          <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#signUpModal" value="Sign Up!">
+        </span>
 
-        <form id="change-password" class="signed-in">
-          <fieldset>
-            <legend>Change Password!</legend>
-            <input type="password" name="passwords[old]" placeholder="Current Password">
-            <input type="password" name="passwords[new]" placeholder="New Password">
-            <input type="submit" name="submit" value="Change Password">
-          </fieldset>
-        </form>
-      </article>
+        <span class="modal-button-container not-signed-in">
+          <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#signInModal" value="Sign In!">
+        </span>
+
+        <span class="modal-button-container signed-in-view">
+          <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#changePWModal" value="Change Password">
+        </span>
+
+        <span>
+          <input id="sign-out" class="modal-button btn btn-default signed-in-view" type="submit" name="submit" value="Sign out!">
+        </span>
+
+      </nav>
 
       <br><br>
+
+      <!-- MODAL SECTION -->
+      <!-- MODAL SECTION -->
+      <!-- MODAL SECTION -->
+      <!-- MODAL SECTION -->
+      <!-- MODAL SECTION -->
+
+      <!-- Sign Up Modal -->
+      <div id="signUpModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Sign Up</h4>
+            </div>
+
+              <div class="modal-body">
+
+                <form id="sign-up">
+                    <input type="text" name="credentials[email]" placeholder="email" id="sign-up-email">
+                    <input type="password" name="credentials[password]" placeholder="password" id="sign-up-pw">
+                    <input type="password" name="credentials[password_confirmation]" placeholder="password confirm" id="sign-up-pw-confirm">
+                    <br>
+                    <input type="submit" name="submit" value="Sign up!">
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sign In Modal -->
+        <div id="signInModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign In</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <form id="sign-in">
+                    <input type="text" name="credentials[email]" placeholder="email" id="sign-in-email">
+                    <input type="password" name="credentials[password]" placeholder="password" id="sign-in-pw">
+                    <br>
+                    <input type="submit" name="submit" value="Sign in!">
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Change Password Modal -->
+        <div id="changePWModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Change Password</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <form id="change-password">
+                    <input type="text" name="passwords[old]" placeholder="old password">
+                    <input type="text" name="passwords[new]" placeholder="new password">
+                    <input type="submit" name="submit" value="Change Password">
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
 
     </body>
 </html>
