@@ -9,6 +9,14 @@ const show = () => {
   });
 };
 
+const index = (teamId) => {
+  return $.ajax({
+    url: app.host + '/players/' + teamId,
+    method: "GET"
+  });
+};
+
 module.exports = {
-  show
+  show,
+  index
 };

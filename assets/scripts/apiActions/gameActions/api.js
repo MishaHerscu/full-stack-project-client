@@ -9,6 +9,14 @@ const show = () => {
   });
 };
 
+const index = (gameId) => {
+  return $.ajax({
+    url: app.host + '/games/' + gameId,
+    method: "GET"
+  });
+};
+
 module.exports = {
-  show
+  show,
+  index
 };
