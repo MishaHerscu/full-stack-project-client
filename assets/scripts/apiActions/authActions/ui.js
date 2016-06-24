@@ -1,6 +1,6 @@
 'use strict';
 
-const app = require('../app.js');
+const app = require('../../app.js');
 
 const success = (data) => {
   if (data) {

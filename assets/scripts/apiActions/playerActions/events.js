@@ -1,14 +1,19 @@
 'use strict';
-//
-const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
 
-const addHandlers = () => {
-
+const onShowPlayers = (event) => {
+  event.preventDefault();
+  api.show()
+  .done(ui.showPlayersSuccess)
+  .fail(ui.failure);
 };
-//
+
+const addHandlers = () => {
+  $('#show-players').on('submit', onShowPlayers);
+};
+
 module.exports = {
   addHandlers,
 };

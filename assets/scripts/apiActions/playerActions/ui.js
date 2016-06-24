@@ -1,7 +1,5 @@
 'use strict';
 
-const app = require('../app.js');
-
 const success = (data) => {
   if (data) {
     console.log(data);
@@ -14,7 +12,12 @@ const failure = (error) => {
   console.error(error);
 };
 
+const showPlayersSuccess = (data) => {
+  console.log(data);
+};
+
 module.exports = {
   success,
   failure,
+  showPlayersSuccess
 };
