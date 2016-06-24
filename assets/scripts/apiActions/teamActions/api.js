@@ -4,7 +4,7 @@ const app = require('../../app.js');
 
 const show = () => {
   return $.ajax({
-    url: app.host + '/show/',
+    url: app.host + '/teams/',
     method: "GET"
   });
 };
