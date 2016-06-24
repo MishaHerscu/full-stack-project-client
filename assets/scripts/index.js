@@ -6,13 +6,21 @@
 // use require without a reference to ensure a file is bundled
 require('./example');
 
-const authEvents = require('./auth/events.js');
+const authEvents = require('./apiActions/authActions/events.js');
+const gameEvents = require('./apiActions/gameActions/events.js');
+const playerEvents = require('./apiActions/playerActions/events.js');
+const teamEvents = require('./apiActions/teamActions/events.js');
+
 // const bookEvents = require('./books/book-events.js');
 
 $('.signed-in').hide();
 $('.signed-out').show();
+$('.standings').show();
+
 
 $(() => {
   authEvents.addHandlers();
-  // bookEvents.addHandlers();
+  gameEvents.addHandlers();
+  playerEvents.addHandlers();
+  teamEvents.addHandlers();
 });

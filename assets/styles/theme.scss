@@ -19,6 +19,15 @@ nav {
   text-align: right;
 }
 
+.standings {
+  margin: 10%;
+}
+
+.standings-cell {
+  border: 1px solid tint($carbon, 33%);
+  text-align: center;
+}
+
 .nav {
   @include make-row();
   margin-left: 75%;
