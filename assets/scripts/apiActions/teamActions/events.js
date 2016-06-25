@@ -12,7 +12,8 @@ const onCreateTeam = (event) => {
   .fail(ui.failure);
 };
 
-const onShowTeams = () => {
+const onShowTeams = (event) => {
+  event.preventDefault();
   $('#page-title').text('Standings');
 
   $('.standings').show();
