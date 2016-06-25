@@ -46,18 +46,12 @@ webpackJsonp([0],[
 	$('.signed-in').hide();
 	$('.signed-out').show();
 
-	$('.standings').show();
-	$('.games').hide();
-	$('.players').hide();
-	$('.team').hide();
-	$('.profile').hide();
-
 	$(function () {
 	  authEvents.addHandlers();
 	  gameEvents.addHandlers();
 	  playerEvents.addHandlers();
 	  teamEvents.addHandlers();
-	  teamEvents.onShowTeams();
+	  teamEvents.onPageLoad();
 	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -617,6 +611,10 @@ webpackJsonp([0],[
 	  api.create(event.data).done(ui.createTeamSuccess).fail(ui.failure);
 	};
 
+	var onPageLoad = function onPageLoad() {
+	  $('#standings-button').click();
+	};
+
 	var onShowTeams = function onShowTeams(event) {
 	  event.preventDefault();
 	  $('#page-title').text('Standings');
@@ -651,7 +649,8 @@ webpackJsonp([0],[
 	  addHandlers: addHandlers,
 	  onShowTeams: onShowTeams,
 	  onShowTeamPage: onShowTeamPage,
-	  onCreateTeam: onCreateTeam
+	  onCreateTeam: onCreateTeam,
+	  onPageLoad: onPageLoad
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
