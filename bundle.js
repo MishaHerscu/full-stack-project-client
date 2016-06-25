@@ -272,7 +272,7 @@ webpackJsonp([0],[
 
 	var signInSuccess = function signInSuccess(data) {
 	  app.user = data.user;
-	  console.log(app.user);
+	  // console.log(app.user);
 	  $('.signed-in').show();
 	  $('.signed-out').hide();
 	  $('#signInModal').modal('hide');
@@ -303,6 +303,13 @@ webpackJsonp([0],[
 	var api = __webpack_require__(10);
 	var ui = __webpack_require__(11);
 
+	var onCreateGame = function onCreateGame(event) {
+	  event.preventDefault();
+	  $('#createGameModal').modal('hide');
+
+	  api.create(event.data).done(ui.createGameSuccess).fail(ui.failure);
+	};
+
 	var onShowGames = function onShowGames(event) {
 	  event.preventDefault();
 	  $('#page-title').text('Games');
@@ -317,12 +324,14 @@ webpackJsonp([0],[
 	};
 
 	var addHandlers = function addHandlers() {
+	  $('#create-game').on('submit', onCreateGame);
 	  $('#games-button').on('click', onShowGames);
 	};
 
 	module.exports = {
 	  addHandlers: addHandlers,
-	  onShowGames: onShowGames
+	  onShowGames: onShowGames,
+	  onCreateGame: onCreateGame
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -412,10 +421,15 @@ webpackJsonp([0],[
 	  console.log(data);
 	};
 
+	var createGameSuccess = function createGameSuccess(data) {
+	  console.log(data);
+	};
+
 	module.exports = {
 	  success: success,
 	  failure: failure,
-	  showGamesSuccess: showGamesSuccess
+	  showGamesSuccess: showGamesSuccess,
+	  createGameSuccess: createGameSuccess
 	};
 
 /***/ },
@@ -427,6 +441,13 @@ webpackJsonp([0],[
 	var app = __webpack_require__(7);
 	var api = __webpack_require__(13);
 	var ui = __webpack_require__(14);
+
+	var onCreatePlayer = function onCreatePlayer(event) {
+	  event.preventDefault();
+	  $('#createPlayerModal').modal('hide');
+
+	  api.create(event.data).done(ui.createPlayerSuccess).fail(ui.failure);
+	};
 
 	var onShowPlayers = function onShowPlayers(event) {
 	  event.preventDefault();
@@ -459,6 +480,7 @@ webpackJsonp([0],[
 	};
 
 	var addHandlers = function addHandlers() {
+	  $('#create-player').on('submit', onCreatePlayer);
 	  $('#players-button').on('click', onShowPlayers);
 	  $('#profile-button').on('click', onShowProfilePage);
 	};
@@ -466,7 +488,8 @@ webpackJsonp([0],[
 	module.exports = {
 	  addHandlers: addHandlers,
 	  onShowPlayers: onShowPlayers,
-	  onShowProfilePage: onShowProfilePage
+	  onShowProfilePage: onShowProfilePage,
+	  onCreatePlayer: onCreatePlayer
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -553,7 +576,7 @@ webpackJsonp([0],[
 	};
 
 	var noProfile = function noProfile() {
-	  $('#createPlayerAccount').modal('show');
+	  $('#createPlayerModal').modal('show');
 	};
 
 	var showPlayersSuccess = function showPlayersSuccess(data) {
@@ -564,12 +587,17 @@ webpackJsonp([0],[
 	  console.log(data);
 	};
 
+	var createPlayerSuccess = function createPlayerSuccess(data) {
+	  console.log(data);
+	};
+
 	module.exports = {
 	  success: success,
 	  failure: failure,
 	  noProfile: noProfile,
 	  showPlayersSuccess: showPlayersSuccess,
-	  showProfilePageSuccess: showProfilePageSuccess
+	  showProfilePageSuccess: showProfilePageSuccess,
+	  createPlayerSuccess: createPlayerSuccess
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -582,7 +610,15 @@ webpackJsonp([0],[
 	var api = __webpack_require__(16);
 	var ui = __webpack_require__(17);
 
-	var onShowTeams = function onShowTeams() {
+	var onCreateTeam = function onCreateTeam(event) {
+	  event.preventDefault();
+	  $('#createTeamModal').modal('hide');
+
+	  api.create(event.data).done(ui.createTeamSuccess).fail(ui.failure);
+	};
+
+	var onShowTeams = function onShowTeams(event) {
+	  event.preventDefault();
 	  $('#page-title').text('Standings');
 
 	  $('.standings').show();
@@ -591,7 +627,7 @@ webpackJsonp([0],[
 	  $('.team').hide();
 	  $('.profile').hide();
 
-	  api.show().done(ui.onShowTeamsSuccess).fail(ui.failure);
+	  api.show().done(ui.showTeamsSuccess).fail(ui.failure);
 	};
 
 	var onShowTeamPage = function onShowTeamPage(event) {
@@ -606,6 +642,7 @@ webpackJsonp([0],[
 	};
 
 	var addHandlers = function addHandlers() {
+	  $('#create-team').on('submit', onCreateTeam);
 	  $('#team-button').on('click', onShowTeamPage);
 	  $('#standings-button').on('click', onShowTeams);
 	};
@@ -613,7 +650,8 @@ webpackJsonp([0],[
 	module.exports = {
 	  addHandlers: addHandlers,
 	  onShowTeams: onShowTeams,
-	  onShowTeamPage: onShowTeamPage
+	  onShowTeamPage: onShowTeamPage,
+	  onCreateTeam: onCreateTeam
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -745,7 +783,7 @@ webpackJsonp([0],[
 	  return sortedTeams;
 	};
 
-	var onShowTeamsSuccess = function onShowTeamsSuccess(data) {
+	var showTeamsSuccess = function showTeamsSuccess(data) {
 	  $('.teams-standing').html('');
 
 	  // update team stats
@@ -760,13 +798,18 @@ webpackJsonp([0],[
 	  $('.teams-standing').append(teamListingTemplate(data));
 	};
 
+	var createTeamSuccess = function createTeamSuccess(data) {
+	  console.log(data);
+	};
+
 	module.exports = {
 	  success: success,
 	  failure: failure,
 	  updateTeamStats: updateTeamStats,
 	  comparator: comparator,
 	  rankTeams: rankTeams,
-	  onShowTeamsSuccess: onShowTeamsSuccess
+	  showTeamsSuccess: showTeamsSuccess,
+	  createTeamSuccess: createTeamSuccess
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
