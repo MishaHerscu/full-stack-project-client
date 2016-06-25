@@ -13,7 +13,9 @@ const failure = (error) => {
 };
 
 const showGamesSuccess = (data) => {
-  console.log(data);
+  $('.games-data').html('');
+  let gameListingTemplate = require('../../templates/game-listing.handlebars');
+  $('.games-data').append(gameListingTemplate(data));
 };
 
 const createGameSuccess = (data) => {

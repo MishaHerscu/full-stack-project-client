@@ -59,7 +59,7 @@ const rankTeams = (teams) => {
 };
 
 const showTeamsSuccess = (data) => {
-  $('.teams-standing').html('');
+  $('.teams-standings').html('');
 
   // update team stats
   for(let i = 0, max = data.teams.length; i < max; i++){
@@ -70,7 +70,7 @@ const showTeamsSuccess = (data) => {
   data.teams = rankTeams(data.teams);
 
   let teamListingTemplate = require('../../templates/team-listing.handlebars');
-  $('.teams-standing').append(teamListingTemplate(data));
+  $('.teams-standings').append(teamListingTemplate(data));
 };
 
 const createTeamSuccess = (data) => {

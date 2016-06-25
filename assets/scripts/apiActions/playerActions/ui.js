@@ -17,7 +17,9 @@ const noProfile = () => {
 };
 
 const showPlayersSuccess = (data) => {
-  console.log(data);
+  $('.players-data').html('');
+  let playerListingTemplate = require('../../templates/player-listing.handlebars');
+  $('.players-data').append(playerListingTemplate(data));
 };
 
 const showProfilePageSuccess = (data) => {
