@@ -16,8 +16,13 @@ const showPlayersSuccess = (data) => {
   console.log(data);
 };
 
+const showProfilePageSuccess = (data) => {
+  console.log(data);
+};
+
 module.exports = {
   success,
   failure,
-  showPlayersSuccess
+  showPlayersSuccess,
+  showProfilePageSuccess
 };
