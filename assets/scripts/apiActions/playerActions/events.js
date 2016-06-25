@@ -4,6 +4,15 @@ const app = require('../../app.js');
 const api = require('./api');
 const ui = require('./ui');
 
+const onCreatePlayer = (event) => {
+  event.preventDefault();
+  $('#createPlayerModal').modal('hide');
+
+  api.create(event.data)
+  .done(ui.createPlayerSuccess)
+  .fail(ui.failure);
+};
+
 const onShowPlayers = (event) => {
   event.preventDefault();
   $('#page-title').text('Players');
@@ -39,6 +48,7 @@ const onShowProfilePage = (event) => {
 };
 
 const addHandlers = () => {
+  $('#create-player').on('submit', onCreatePlayer);
   $('#players-button').on('click', onShowPlayers);
   $('#profile-button').on('click', onShowProfilePage);
 };
@@ -46,5 +56,6 @@ const addHandlers = () => {
 module.exports = {
   addHandlers,
   onShowPlayers,
-  onShowProfilePage
+  onShowProfilePage,
+  onCreatePlayer
 };

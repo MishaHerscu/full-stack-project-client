@@ -13,7 +13,7 @@ const failure = (error) => {
 };
 
 const noProfile = () => {
-  $('#createPlayerAccount').modal('show');
+  $('#createPlayerModal').modal('show');
 };
 
 const showPlayersSuccess = (data) => {
@@ -24,10 +24,15 @@ const showProfilePageSuccess = (data) => {
   console.log(data);
 };
 
+const createPlayerSuccess = (data) => {
+  console.log(data);
+};
+
 module.exports = {
   success,
   failure,
   noProfile,
   showPlayersSuccess,
-  showProfilePageSuccess
+  showProfilePageSuccess,
+  createPlayerSuccess
 };

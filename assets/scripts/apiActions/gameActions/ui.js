@@ -16,8 +16,13 @@ const showGamesSuccess = (data) => {
   console.log(data);
 };
 
+const createGameSuccess = (data) => {
+  console.log(data);
+};
+
 module.exports = {
   success,
   failure,
-  showGamesSuccess
+  showGamesSuccess,
+  createGameSuccess
 };

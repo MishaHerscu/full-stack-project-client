@@ -3,6 +3,15 @@
 const api = require('./api');
 const ui = require('./ui');
 
+const onCreateTeam = (event) => {
+  event.preventDefault();
+  $('#createTeamModal').modal('hide');
+
+  api.create(event.data)
+  .done(ui.createTeamSuccess)
+  .fail(ui.failure);
+};
+
 const onShowTeams = () => {
   $('#page-title').text('Standings');
 
@@ -13,7 +22,7 @@ const onShowTeams = () => {
   $('.profile').hide();
 
   api.show()
-  .done(ui.onShowTeamsSuccess)
+  .done(ui.showTeamsSuccess)
   .fail(ui.failure);
 };
 
@@ -29,6 +38,7 @@ const onShowTeamPage = (event) => {
 };
 
 const addHandlers = () => {
+  $('#create-team').on('submit', onCreateTeam);
   $('#team-button').on('click', onShowTeamPage);
   $('#standings-button').on('click', onShowTeams);
 };
@@ -36,5 +46,6 @@ const addHandlers = () => {
 module.exports = {
   addHandlers,
   onShowTeams,
-  onShowTeamPage
+  onShowTeamPage,
+  onCreateTeam
 };

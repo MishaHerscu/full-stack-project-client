@@ -58,7 +58,7 @@ const rankTeams = (teams) => {
   return sortedTeams;
 };
 
-const onShowTeamsSuccess = (data) => {
+const showTeamsSuccess = (data) => {
   $('.teams-standing').html('');
 
   // update team stats
@@ -73,11 +73,16 @@ const onShowTeamsSuccess = (data) => {
   $('.teams-standing').append(teamListingTemplate(data));
 };
 
+const createTeamSuccess = (data) => {
+  console.log(data);
+};
+
 module.exports = {
   success,
   failure,
   updateTeamStats,
   comparator,
   rankTeams,
-  onShowTeamsSuccess
+  showTeamsSuccess,
+  createTeamSuccess
 };

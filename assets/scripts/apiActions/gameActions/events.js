@@ -3,6 +3,15 @@
 const api = require('./api');
 const ui = require('./ui');
 
+const onCreateGame = (event) => {
+  event.preventDefault();
+  $('#createGameModal').modal('hide');
+
+  api.create(event.data)
+  .done(ui.createGameSuccess)
+  .fail(ui.failure);
+};
+
 const onShowGames = (event) => {
   event.preventDefault();
   $('#page-title').text('Games');
@@ -19,10 +28,12 @@ const onShowGames = (event) => {
 };
 
 const addHandlers = () => {
+  $('#create-game').on('submit', onCreateGame);
   $('#games-button').on('click', onShowGames);
 };
 
 module.exports = {
   addHandlers,
   onShowGames,
+  onCreateGame
 };
