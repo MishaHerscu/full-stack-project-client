@@ -45,7 +45,12 @@ webpackJsonp([0],[
 
 	$('.signed-in').hide();
 	$('.signed-out').show();
+
 	$('.standings').show();
+	$('.games').hide();
+	$('.players').hide();
+	$('.team').hide();
+	$('.profile').hide();
 
 	$(function () {
 	  authEvents.addHandlers();
@@ -232,7 +237,8 @@ webpackJsonp([0],[
 	var app = {
 	  // host: 'http://localhost:3000',
 	  host: 'https://ironsidegoaltimate.herokuapp.com',
-	  user: null
+	  user: null,
+	  player: null
 	};
 
 	module.exports = app;
@@ -299,24 +305,24 @@ webpackJsonp([0],[
 
 	var onShowGames = function onShowGames(event) {
 	  event.preventDefault();
+	  $('#page-title').text('Games');
+
+	  $('.standings').hide();
+	  $('.games').show();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').hide();
+
 	  api.show().done(ui.showGamesSuccess).fail(ui.failure);
 	};
 
-	var onShowGamesPage = function onShowGamesPage(event) {
-	  event.preventDefault();
-	  $('.standings').hide();
-	  $('#page-title').text('Games');
-	};
-
 	var addHandlers = function addHandlers() {
-	  $('#show-games').on('submit', onShowGames);
-	  $('#games-button').on('click', onShowGamesPage);
+	  $('#games-button').on('click', onShowGames);
 	};
 
 	module.exports = {
 	  addHandlers: addHandlers,
-	  onShowGames: onShowGames,
-	  onShowGamesPage: onShowGamesPage
+	  onShowGames: onShowGames
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -424,15 +430,32 @@ webpackJsonp([0],[
 
 	var onShowPlayers = function onShowPlayers(event) {
 	  event.preventDefault();
+	  $('#page-title').text('Players');
+
+	  $('.standings').hide();
+	  $('.games').hide();
+	  $('.players').show();
+	  $('.team').hide();
+	  $('.profile').hide();
+
 	  api.show().done(ui.showPlayersSuccess).fail(ui.failure);
 	};
 
 	var onShowProfilePage = function onShowProfilePage(event) {
 	  event.preventDefault();
-	  console.log('MY app.user is: ', app.user);
-	  $('.standings').hide();
 	  $('#page-title').text('Profile');
-	  api.index(app.user.id).done(ui.showProfilePageSuccess).fail(ui.failure);
+
+	  $('.standings').hide();
+	  $('.games').hide();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').show();
+
+	  if (app.player !== null) {
+	    api.index(app.player.id).done(ui.showProfilePageSuccess).fail(ui.failure);
+	  } else {
+	    ui.noProfile();
+	  }
 	};
 
 	var addHandlers = function addHandlers() {
@@ -513,9 +536,9 @@ webpackJsonp([0],[
 
 /***/ },
 /* 14 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var success = function success(data) {
 	  if (data) {
@@ -529,6 +552,10 @@ webpackJsonp([0],[
 	  console.error(error);
 	};
 
+	var noProfile = function noProfile() {
+	  $('#createPlayerAccount').modal('show');
+	};
+
 	var showPlayersSuccess = function showPlayersSuccess(data) {
 	  console.log(data);
 	};
@@ -540,9 +567,11 @@ webpackJsonp([0],[
 	module.exports = {
 	  success: success,
 	  failure: failure,
+	  noProfile: noProfile,
 	  showPlayersSuccess: showPlayersSuccess,
 	  showProfilePageSuccess: showProfilePageSuccess
 	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
 /* 15 */
@@ -555,13 +584,25 @@ webpackJsonp([0],[
 
 	var onShowTeams = function onShowTeams() {
 	  $('#page-title').text('Standings');
+
 	  $('.standings').show();
+	  $('.games').hide();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').hide();
+
 	  api.show().done(ui.onShowTeamsSuccess).fail(ui.failure);
 	};
 
 	var onShowTeamPage = function onShowTeamPage(event) {
 	  event.preventDefault();
 	  $('#page-title').text('Team');
+
+	  $('.standings').hide();
+	  $('.games').hide();
+	  $('.players').hide();
+	  $('.team').show();
+	  $('.profile').hide();
 	};
 
 	var addHandlers = function addHandlers() {
