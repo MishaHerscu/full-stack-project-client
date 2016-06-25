@@ -78,6 +78,7 @@ module.exports = {
   success,
   failure,
   updateTeamStats,
+  comparator,
   rankTeams,
   onShowTeamsSuccess
 };
