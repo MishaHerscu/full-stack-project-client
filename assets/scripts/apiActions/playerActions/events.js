@@ -12,6 +12,8 @@ const onShowPlayers = (event) => {
 
 const onShowProfilePage = (event) => {
   event.preventDefault();
+  $('.standings').hide();
+  $('#page-title').text('Profile');
 };
 
 const addHandlers = () => {

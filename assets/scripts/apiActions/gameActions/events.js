@@ -12,6 +12,8 @@ const onShowGames = (event) => {
 
 const onShowGamesPage = (event) => {
   event.preventDefault();
+  $('.standings').hide();
+  $('#page-title').text('Games');
 };
 
 const addHandlers = () => {

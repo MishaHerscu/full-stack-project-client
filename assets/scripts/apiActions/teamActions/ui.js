@@ -59,7 +59,7 @@ const rankTeams = (teams) => {
 };
 
 const onShowTeamsSuccess = (data) => {
-  $('#teams-standing').html('');
+  $('.teams-standing').html('');
 
   // update team stats
   for(let i = 0, max = data.teams.length; i < max; i++){
