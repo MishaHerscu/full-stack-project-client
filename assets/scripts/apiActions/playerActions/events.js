@@ -6,6 +6,14 @@ const ui = require('./ui');
 
 const onShowPlayers = (event) => {
   event.preventDefault();
+  $('#page-title').text('Players');
+
+  $('.standings').hide();
+  $('.games').hide();
+  $('.players').show();
+  $('.team').hide();
+  $('.profile').hide();
+
   api.show()
   .done(ui.showPlayersSuccess)
   .fail(ui.failure);
@@ -13,12 +21,21 @@ const onShowPlayers = (event) => {
 
 const onShowProfilePage = (event) => {
   event.preventDefault();
-  console.log('MY app.user is: ', app.user);
-  $('.standings').hide();
   $('#page-title').text('Profile');
-  api.index(app.user.id)
-  .done(ui.showProfilePageSuccess)
-  .fail(ui.failure);
+
+  $('.standings').hide();
+  $('.games').hide();
+  $('.players').hide();
+  $('.team').hide();
+  $('.profile').show();
+
+  if(app.player !== null){
+    api.index(app.player.id)
+    .done(ui.showProfilePageSuccess)
+    .fail(ui.failure);
+  }else{
+    ui.noProfile();
+  }
 };
 
 const addHandlers = () => {

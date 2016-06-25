@@ -15,8 +15,12 @@ const teamEvents = require('./apiActions/teamActions/events.js');
 
 $('.signed-in').hide();
 $('.signed-out').show();
-$('.standings').show();
 
+$('.standings').show();
+$('.games').hide();
+$('.players').hide();
+$('.team').hide();
+$('.profile').hide();
 
 $(() => {
   authEvents.addHandlers();

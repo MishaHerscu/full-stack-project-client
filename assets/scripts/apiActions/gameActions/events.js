@@ -5,24 +5,24 @@ const ui = require('./ui');
 
 const onShowGames = (event) => {
   event.preventDefault();
+  $('#page-title').text('Games');
+
+  $('.standings').hide();
+  $('.games').show();
+  $('.players').hide();
+  $('.team').hide();
+  $('.profile').hide();
+
   api.show()
   .done(ui.showGamesSuccess)
   .fail(ui.failure);
 };
 
-const onShowGamesPage = (event) => {
-  event.preventDefault();
-  $('.standings').hide();
-  $('#page-title').text('Games');
-};
-
 const addHandlers = () => {
-  $('#show-games').on('submit', onShowGames);
-  $('#games-button').on('click', onShowGamesPage);
+  $('#games-button').on('click', onShowGames);
 };
 
 module.exports = {
   addHandlers,
   onShowGames,
-  onShowGamesPage
 };

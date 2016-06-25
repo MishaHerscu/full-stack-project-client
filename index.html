@@ -52,24 +52,91 @@
 
       <br><br>
 
-      <div>
+      <!--This div is a page title that tells the user where they are-->
+      <div class="signed-in">
         <h1 id="page-title">Standings</h1>
       </div>
 
-      <div class="standings">
-        <div id="standings-table" class="table">
+      <!--The following divs will be classes that I show and hide for different pages-->
+      <div id="page-body-options" class=signed-in>
 
-            <div class="standings-cell standings-header col-xs-2">Ranking</div>
-            <div class="standings-cell standings-header col-xs-2">Team</div>
-            <div class="standings-cell standings-header col-xs-2">Wins</div>
-            <div class="standings-cell standings-header col-xs-2">Losses</div>
-            <div class="standings-cell standings-header col-xs-2">Games</div>
-            <div class="standings-cell standings-header col-xs-2">Win Pct</div>
+        <div class="standings">
+          <div id="standings-table" class="table">
 
-            <div class="teams-standing"></div>
+              <div class="standings-cell standings-header col-xs-2">Ranking</div>
+              <div class="standings-cell standings-header col-xs-2">Team</div>
+              <div class="standings-cell standings-header col-xs-2">Wins</div>
+              <div class="standings-cell standings-header col-xs-2">Losses</div>
+              <div class="standings-cell standings-header col-xs-2">Games</div>
+              <div class="standings-cell standings-header col-xs-2">Win Pct</div>
 
-          </div>
+              <div class="teams-standing"></div>
+
+            </div>
+        </div>
+
+        <div class="games">
+          <div id="games-table" class="table">
+
+              <div class="standings-cell standings-header col-xs-2">Ranking</div>
+              <div class="standings-cell standings-header col-xs-2">Team</div>
+              <div class="standings-cell standings-header col-xs-2">Wins</div>
+              <div class="standings-cell standings-header col-xs-2">Losses</div>
+              <div class="standings-cell standings-header col-xs-2">Games</div>
+              <div class="standings-cell standings-header col-xs-2">Win Pct</div>
+
+              <div class="teams-standing"></div>
+
+            </div>
+        </div>
+
+        <div class="players">
+          <div id="players-table" class="table">
+
+              <div class="standings-cell standings-header col-xs-2">Ranking</div>
+              <div class="standings-cell standings-header col-xs-2">Team</div>
+              <div class="standings-cell standings-header col-xs-2">Wins</div>
+              <div class="standings-cell standings-header col-xs-2">Losses</div>
+              <div class="standings-cell standings-header col-xs-2">Games</div>
+              <div class="standings-cell standings-header col-xs-2">Win Pct</div>
+
+              <div class="teams-standing"></div>
+
+            </div>
+        </div>
+
+        <div class="team">
+          <div id="team-table" class="table">
+
+              <div class="standings-cell standings-header col-xs-2">Ranking</div>
+              <div class="standings-cell standings-header col-xs-2">Team</div>
+              <div class="standings-cell standings-header col-xs-2">Wins</div>
+              <div class="standings-cell standings-header col-xs-2">Losses</div>
+              <div class="standings-cell standings-header col-xs-2">Games</div>
+              <div class="standings-cell standings-header col-xs-2">Win Pct</div>
+
+              <div class="teams-standing"></div>
+
+            </div>
+        </div>
+
+        <div class="profile">
+          <div id="profile-table" class="table">
+
+              <div class="standings-cell standings-header col-xs-2">Ranking</div>
+              <div class="standings-cell standings-header col-xs-2">Team</div>
+              <div class="standings-cell standings-header col-xs-2">Wins</div>
+              <div class="standings-cell standings-header col-xs-2">Losses</div>
+              <div class="standings-cell standings-header col-xs-2">Games</div>
+              <div class="standings-cell standings-header col-xs-2">Win Pct</div>
+
+              <div class="teams-standing"></div>
+
+            </div>
+        </div>
+
       </div>
+
       <br><br><br>
 
       <!-- MODAL SECTION -->
@@ -161,6 +228,104 @@
                     <input type="text" name="passwords[old]" placeholder="old password">
                     <input type="text" name="passwords[new]" placeholder="new password">
                     <input type="submit" name="submit" value="Change Password">
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Create Player Modal -->
+        <div id="createPlayerAccount" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Player Account</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <form id="create-player-account">
+                    <input type="text" name="player-info[surname]" placeholder="last name">
+                    <input type="text" name="player-info[given_name]" placeholder="first name">
+                    <input type="text" name="player-info[email]" placeholder="email address">
+                    <input type="text" name="player-info[phone_number]" placeholder="phone number">
+                    <input type="text" name="player-info[captain]" placeholder="yes/no">
+                    <input type="text" name="player-info[team_id]" placeholder="team number">
+                    <input type="text" name="player-info[user_id]" placeholder="user number">
+                    <input type="submit" name="submit" value="Create!">
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Create Team Modal -->
+        <div id="createTeam" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Team</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <form id="create-team">
+                    <input type="text" name="team-info[name]" placeholder="team name">
+                    <input type="submit" name="submit" value="Create!">
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Create Game Modal -->
+        <div id="createGame" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Game</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <form id="create-game">
+                    <input type="text" name="game-info[date]" placeholder="date">
+                    <input type="text" name="game-info[opponent]" placeholder="opponent team_id">
+                    <input type="text" name="game-info[won]" placeholder="won? true/false">
+                    <input type="submit" name="submit" value="Create!">
                 </form>
 
               </div>
