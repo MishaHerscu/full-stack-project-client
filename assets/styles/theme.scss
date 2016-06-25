@@ -32,6 +32,10 @@ nav {
   text-align: center;
 }
 
+.team-name {
+  text-align: left;
+}
+
 .nav {
   @include make-row();
   margin-left: 75%;
