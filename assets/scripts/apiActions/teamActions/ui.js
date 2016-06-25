@@ -30,7 +30,7 @@ const updateTeamStats = (team) => {
         team.tieCount += 1;
       }
     }
-    team.winPct = ((team.winCount / team.gameCount) * 100) + '%';
+    team.winPct = (Math.round((team.winCount / team.gameCount) * 100)) + '%';
   }else{
     team.winPct = 'N/A';
   }
@@ -44,7 +44,7 @@ const comparator = (a, b) => {
 
 const rankTeams = (teams) => {
   let teamCount = teams.length;
-  let sortedTeams = teams.sort(comparator);
+  let sortedTeams = teams.sort(comparator).reverse();
   let ranks = [];
 
   for(let i = 0; i < teamCount; i++){
