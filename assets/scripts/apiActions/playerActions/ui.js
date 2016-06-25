@@ -1,5 +1,7 @@
 'use strict';
 
+const app = require('../../app.js');
+
 const success = (data) => {
   if (data) {
     // console.log(data);
@@ -13,6 +15,7 @@ const failure = (error) => {
 };
 
 const noProfile = () => {
+  $('#create-player-user-id').val(app.user.id);
   $('#createPlayerModal').modal('show');
 };
 

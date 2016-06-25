@@ -82,6 +82,7 @@ webpackJsonp([0],[
 
 	var onSignOut = function onSignOut(event) {
 	  event.preventDefault();
+	  $('#standings-button').click();
 	  api.signOut().done(ui.signOutSuccess).fail(ui.failure);
 	};
 
@@ -266,7 +267,7 @@ webpackJsonp([0],[
 
 	var signInSuccess = function signInSuccess(data) {
 	  app.user = data.user;
-	  // console.log(app.user);
+	  app.player = data.user.player;
 	  $('.signed-in').show();
 	  $('.signed-out').hide();
 	  $('#signInModal').modal('hide');
@@ -275,6 +276,7 @@ webpackJsonp([0],[
 	var signOutSuccess = function signOutSuccess() {
 	  console.log('User signed out successfully');
 	  app.user = null;
+	  app.player = null;
 	  $('.signed-in').hide();
 	  $('.signed-out').show();
 	};
@@ -294,14 +296,17 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var getFormFields = __webpack_require__(5);
+
 	var api = __webpack_require__(10);
 	var ui = __webpack_require__(11);
 
 	var onCreateGame = function onCreateGame(event) {
 	  event.preventDefault();
 	  $('#createGameModal').modal('hide');
+	  var data = getFormFields(event.target);
 
-	  api.create(event.data).done(ui.createGameSuccess).fail(ui.failure);
+	  api.create(data).done(ui.createGameSuccess).fail(ui.failure);
 	};
 
 	var onShowGames = function onShowGames(event) {
@@ -1648,6 +1653,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var getFormFields = __webpack_require__(5);
+
 	var app = __webpack_require__(7);
 	var api = __webpack_require__(34);
 	var ui = __webpack_require__(35);
@@ -1655,8 +1662,9 @@ webpackJsonp([0],[
 	var onCreatePlayer = function onCreatePlayer(event) {
 	  event.preventDefault();
 	  $('#createPlayerModal').modal('hide');
+	  var data = getFormFields(event.target);
 
-	  api.create(event.data).done(ui.createPlayerSuccess).fail(ui.failure);
+	  api.create(data).done(ui.createPlayerSuccess).fail(ui.failure);
 	};
 
 	var onShowPlayers = function onShowPlayers(event) {
@@ -1682,7 +1690,7 @@ webpackJsonp([0],[
 	  $('.team').hide();
 	  $('.profile').show();
 
-	  if (app.player !== null) {
+	  if (app.player !== null && app.player !== undefined) {
 	    api.index(app.player.id).done(ui.showProfilePageSuccess).fail(ui.failure);
 	  } else {
 	    ui.noProfile();
@@ -1773,6 +1781,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var app = __webpack_require__(7);
+
 	var success = function success(data) {
 	  if (data) {
 	    // console.log(data);
@@ -1786,6 +1796,7 @@ webpackJsonp([0],[
 	};
 
 	var noProfile = function noProfile() {
+	  $('#create-player-user-id').val(app.user.id);
 	  $('#createPlayerModal').modal('show');
 	};
 
@@ -1859,6 +1870,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var getFormFields = __webpack_require__(5);
+
 	var app = __webpack_require__(7);
 	var api = __webpack_require__(39);
 	var ui = __webpack_require__(40);
@@ -1866,8 +1879,9 @@ webpackJsonp([0],[
 	var onCreateTeam = function onCreateTeam(event) {
 	  event.preventDefault();
 	  $('#createTeamModal').modal('hide');
+	  var data = getFormFields(event.target);
 
-	  api.create(event.data).done(ui.createTeamSuccess).fail(ui.failure);
+	  api.create(data).done(ui.createTeamSuccess).fail(ui.failure);
 	};
 
 	var onPageLoad = function onPageLoad() {
@@ -1897,7 +1911,7 @@ webpackJsonp([0],[
 	  $('.team').show();
 	  $('.profile').hide();
 
-	  if (app.player !== null) {
+	  if (app.player !== null && app.player !== undefined) {
 	    api.index(app.player.team_id).done(ui.showTeamPageSuccess).fail(ui.failure);
 	  } else {
 	    $('#profile-button').click();
