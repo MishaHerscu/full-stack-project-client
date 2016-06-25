@@ -16,7 +16,43 @@ const index = (gameId) => {
   });
 };
 
+const create = function(data){
+  return $.ajax({
+    url: app.host + '/games',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + app.user.token,
+    },
+    data: data,
+  });
+};
+
+const update = function(id, data){
+  return $.ajax({
+    url: app.host + '/games/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + app.user.token,
+    },
+    data: data,
+  });
+};
+
+const destroy = function(gameId){
+  return $.ajax({
+    url: app.host + '/games/' + gameId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + app.user.token,
+    },
+    data: '',
+  });
+};
+
 module.exports = {
   show,
-  index
+  index,
+  create,
+  update,
+  destroy
 };
