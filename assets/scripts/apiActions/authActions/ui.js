@@ -28,6 +28,12 @@ const setPlayer = function(data){
   for(let i = 0; i < max; i++){
     if(players[i].user.id === app.user.id){
       app.player = players[i];
+      $('#profile-last-name').text(app.player.surname);
+      $('#profile-first-name').text(app.player.given_name);
+      $('#profile-email').text(app.player.email);
+      $('#profile-phone-number').text(app.player.phone_number);
+      $('#profile-captain').text(app.player.captain);
+      $('#profile-team-id').text(app.player.team_id);
     }
   }
 };

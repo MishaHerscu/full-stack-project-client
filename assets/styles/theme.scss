@@ -55,6 +55,15 @@ nav {
   text-align: left;
 }
 
+.profile {
+  text-align: left;
+}
+
+.profile-table {
+  margin-right: 40%;
+  width: 60%;
+}
+
 .nav {
   @include make-row();
   margin-left: 75%;
