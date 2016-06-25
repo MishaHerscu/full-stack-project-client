@@ -77,6 +77,10 @@ const createTeamSuccess = (data) => {
   console.log(data);
 };
 
+const showTeamPageSuccess = (data) => {
+  console.log(data);
+};
+
 module.exports = {
   success,
   failure,
@@ -84,5 +88,6 @@ module.exports = {
   comparator,
   rankTeams,
   showTeamsSuccess,
-  createTeamSuccess
+  createTeamSuccess,
+  showTeamPageSuccess
 };

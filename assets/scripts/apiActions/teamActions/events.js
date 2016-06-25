@@ -1,5 +1,6 @@
 'use strict';
 
+const app = require('../../app.js');
 const api = require('./api');
 const ui = require('./ui');
 
@@ -40,6 +41,14 @@ const onShowTeamPage = (event) => {
   $('.players').hide();
   $('.team').show();
   $('.profile').hide();
+
+  if(app.player !== null){
+    api.index(app.player.team_id)
+    .done(ui.showTeamPageSuccess)
+    .fail(ui.failure);
+  }else{
+    $('#profile-button').click();
+  }
 };
 
 const addHandlers = () => {
