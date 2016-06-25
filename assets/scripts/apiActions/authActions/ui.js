@@ -1,6 +1,7 @@
 'use strict';
 
 const app = require('../../app.js');
+const playerApi = require('../playerActions/api.js');
 
 const success = (data) => {
   if (data) {
@@ -21,12 +22,25 @@ const signUpSuccess = function(){
   $('#signUpModal').modal('hide');
 };
 
+const setPlayer = function(data){
+  let players = data.players;
+  let max = players.length;
+  for(let i = 0; i < max; i++){
+    if(players[i].user.id === app.user.id){
+      app.player = players[i];
+    }
+  }
+};
+
 const signInSuccess = (data) => {
-  app.user = data.user;
-  app.player = data.user.player;
+  $('#signInModal').modal('hide');
   $('.signed-in').show();
   $('.signed-out').hide();
-  $('#signInModal').modal('hide');
+  app.user = data.user;
+
+  playerApi.show()
+  .done(setPlayer)
+  .fail(playerApi.failure);
 };
 
 const signOutSuccess = () => {
@@ -42,5 +56,6 @@ module.exports = {
   failure,
   signUpSuccess,
   signInSuccess,
-  signOutSuccess
+  signOutSuccess,
+  setPlayer
 };

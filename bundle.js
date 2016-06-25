@@ -37,8 +37,8 @@ webpackJsonp([0],[
 	__webpack_require__(3);
 
 	var authEvents = __webpack_require__(4);
-	var gameEvents = __webpack_require__(9);
-	var playerEvents = __webpack_require__(33);
+	var gameEvents = __webpack_require__(10);
+	var playerEvents = __webpack_require__(34);
 	var teamEvents = __webpack_require__(38);
 
 	// const bookEvents = require('./books/book-events.js');
@@ -245,6 +245,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var app = __webpack_require__(7);
+	var playerApi = __webpack_require__(9);
 
 	var success = function success(data) {
 	  if (data) {
@@ -265,12 +266,23 @@ webpackJsonp([0],[
 	  $('#signUpModal').modal('hide');
 	};
 
+	var setPlayer = function setPlayer(data) {
+	  var players = data.players;
+	  var max = players.length;
+	  for (var i = 0; i < max; i++) {
+	    if (players[i].user.id === app.user.id) {
+	      app.player = players[i];
+	    }
+	  }
+	};
+
 	var signInSuccess = function signInSuccess(data) {
-	  app.user = data.user;
-	  app.player = data.user.player;
+	  $('#signInModal').modal('hide');
 	  $('.signed-in').show();
 	  $('.signed-out').hide();
-	  $('#signInModal').modal('hide');
+	  app.user = data.user;
+
+	  playerApi.show().done(setPlayer).fail(playerApi.failure);
 	};
 
 	var signOutSuccess = function signOutSuccess() {
@@ -286,7 +298,8 @@ webpackJsonp([0],[
 	  failure: failure,
 	  signUpSuccess: signUpSuccess,
 	  signInSuccess: signInSuccess,
-	  signOutSuccess: signOutSuccess
+	  signOutSuccess: signOutSuccess,
+	  setPlayer: setPlayer
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -296,10 +309,75 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var app = __webpack_require__(7);
+
+	var show = function show() {
+	  return $.ajax({
+	    url: app.host + '/players/',
+	    method: "GET"
+	  });
+	};
+
+	var index = function index(playerId) {
+	  return $.ajax({
+	    url: app.host + '/players/' + playerId,
+	    method: "GET"
+	  });
+	};
+
+	var create = function create(data) {
+	  console.log(data);
+	  return $.ajax({
+	    url: app.host + '/players',
+	    method: 'POST',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var update = function update(id, data) {
+	  return $.ajax({
+	    url: app.host + '/players/' + id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var destroy = function destroy(playerId) {
+	  return $.ajax({
+	    url: app.host + '/players/' + playerId,
+	    method: 'DELETE',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: ''
+	  });
+	};
+
+	module.exports = {
+	  show: show,
+	  index: index,
+	  create: create,
+	  update: update,
+	  destroy: destroy
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
 	var getFormFields = __webpack_require__(5);
 
-	var api = __webpack_require__(10);
-	var ui = __webpack_require__(11);
+	var api = __webpack_require__(11);
+	var ui = __webpack_require__(12);
 
 	var onCreateGame = function onCreateGame(event) {
 	  event.preventDefault();
@@ -335,7 +413,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -399,7 +477,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -418,7 +496,7 @@ webpackJsonp([0],[
 
 	var showGamesSuccess = function showGamesSuccess(data) {
 	  $('.games-data').html('');
-	  var gameListingTemplate = __webpack_require__(12);
+	  var gameListingTemplate = __webpack_require__(13);
 	  $('.games-data').append(gameListingTemplate(data));
 	};
 
@@ -435,15 +513,15 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(13);
+	var Handlebars = __webpack_require__(14);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return ((stack1 = container.invokePartial(__webpack_require__(32),depth0,{"name":"game","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+	  return ((stack1 = container.invokePartial(__webpack_require__(33),depth0,{"name":"game","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
@@ -451,16 +529,16 @@ webpackJsonp([0],[
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Create a simple path alias to allow browserify to resolve
 	// the runtime on a supported path.
-	module.exports = __webpack_require__(14)['default'];
+	module.exports = __webpack_require__(15)['default'];
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -474,30 +552,30 @@ webpackJsonp([0],[
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _handlebarsBase = __webpack_require__(15);
+	var _handlebarsBase = __webpack_require__(16);
 
 	var base = _interopRequireWildcard(_handlebarsBase);
 
 	// Each of these augment the Handlebars object. No need to setup here.
 	// (This is done to easily share code between commonjs and browse envs)
 
-	var _handlebarsSafeString = __webpack_require__(29);
+	var _handlebarsSafeString = __webpack_require__(30);
 
 	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
-	var _handlebarsException = __webpack_require__(17);
+	var _handlebarsException = __webpack_require__(18);
 
 	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
-	var _handlebarsUtils = __webpack_require__(16);
+	var _handlebarsUtils = __webpack_require__(17);
 
 	var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-	var _handlebarsRuntime = __webpack_require__(30);
+	var _handlebarsRuntime = __webpack_require__(31);
 
 	var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-	var _handlebarsNoConflict = __webpack_require__(31);
+	var _handlebarsNoConflict = __webpack_require__(32);
 
 	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -532,7 +610,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -543,17 +621,17 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
-	var _exception = __webpack_require__(17);
+	var _exception = __webpack_require__(18);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
-	var _helpers = __webpack_require__(18);
+	var _helpers = __webpack_require__(19);
 
-	var _decorators = __webpack_require__(26);
+	var _decorators = __webpack_require__(27);
 
-	var _logger = __webpack_require__(28);
+	var _logger = __webpack_require__(29);
 
 	var _logger2 = _interopRequireDefault(_logger);
 
@@ -642,7 +720,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -772,7 +850,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -818,7 +896,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -829,31 +907,31 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _helpersBlockHelperMissing = __webpack_require__(19);
+	var _helpersBlockHelperMissing = __webpack_require__(20);
 
 	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-	var _helpersEach = __webpack_require__(20);
+	var _helpersEach = __webpack_require__(21);
 
 	var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-	var _helpersHelperMissing = __webpack_require__(21);
+	var _helpersHelperMissing = __webpack_require__(22);
 
 	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-	var _helpersIf = __webpack_require__(22);
+	var _helpersIf = __webpack_require__(23);
 
 	var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-	var _helpersLog = __webpack_require__(23);
+	var _helpersLog = __webpack_require__(24);
 
 	var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-	var _helpersLookup = __webpack_require__(24);
+	var _helpersLookup = __webpack_require__(25);
 
 	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-	var _helpersWith = __webpack_require__(25);
+	var _helpersWith = __webpack_require__(26);
 
 	var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -870,14 +948,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -915,7 +993,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -925,9 +1003,9 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
-	var _exception = __webpack_require__(17);
+	var _exception = __webpack_require__(18);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
@@ -1015,7 +1093,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1025,7 +1103,7 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _exception = __webpack_require__(17);
+	var _exception = __webpack_require__(18);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
@@ -1046,14 +1124,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('if', function (conditional, options) {
@@ -1081,7 +1159,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1113,7 +1191,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1131,14 +1209,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('with', function (context, options) {
@@ -1170,7 +1248,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1181,7 +1259,7 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _decoratorsInline = __webpack_require__(27);
+	var _decoratorsInline = __webpack_require__(28);
 
 	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -1192,14 +1270,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
 	exports['default'] = function (instance) {
 	  instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -1227,14 +1305,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
 	var logger = {
 	  methodMap: ['debug', 'info', 'warn', 'error'],
@@ -1280,7 +1358,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	// Build out our basic SafeString type
@@ -1301,7 +1379,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1321,15 +1399,15 @@ webpackJsonp([0],[
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _utils = __webpack_require__(16);
+	var _utils = __webpack_require__(17);
 
 	var Utils = _interopRequireWildcard(_utils);
 
-	var _exception = __webpack_require__(17);
+	var _exception = __webpack_require__(18);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
-	var _base = __webpack_require__(15);
+	var _base = __webpack_require__(16);
 
 	function checkRevision(compilerInfo) {
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -1599,7 +1677,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
@@ -1626,10 +1704,10 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(13);
+	var Handlebars = __webpack_require__(14);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -1648,7 +1726,7 @@ webpackJsonp([0],[
 	},"useData":true});
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -1656,7 +1734,7 @@ webpackJsonp([0],[
 	var getFormFields = __webpack_require__(5);
 
 	var app = __webpack_require__(7);
-	var api = __webpack_require__(34);
+	var api = __webpack_require__(9);
 	var ui = __webpack_require__(35);
 
 	var onCreatePlayer = function onCreatePlayer(event) {
@@ -1708,71 +1786,6 @@ webpackJsonp([0],[
 	  onShowPlayers: onShowPlayers,
 	  onShowProfilePage: onShowProfilePage,
 	  onCreatePlayer: onCreatePlayer
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var app = __webpack_require__(7);
-
-	var show = function show() {
-	  return $.ajax({
-	    url: app.host + '/players/',
-	    method: "GET"
-	  });
-	};
-
-	var index = function index(playerId) {
-	  return $.ajax({
-	    url: app.host + '/players/' + playerId,
-	    method: "GET"
-	  });
-	};
-
-	var create = function create(data) {
-	  console.log(data);
-	  return $.ajax({
-	    url: app.host + '/players',
-	    method: 'POST',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: data
-	  });
-	};
-
-	var update = function update(id, data) {
-	  return $.ajax({
-	    url: app.host + '/players/' + id,
-	    method: 'PATCH',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: data
-	  });
-	};
-
-	var destroy = function destroy(playerId) {
-	  return $.ajax({
-	    url: app.host + '/players/' + playerId,
-	    method: 'DELETE',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: ''
-	  });
-	};
-
-	module.exports = {
-	  show: show,
-	  index: index,
-	  create: create,
-	  update: update,
-	  destroy: destroy
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -1829,7 +1842,7 @@ webpackJsonp([0],[
 /* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(13);
+	var Handlebars = __webpack_require__(14);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -1845,7 +1858,7 @@ webpackJsonp([0],[
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(13);
+	var Handlebars = __webpack_require__(14);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -2101,7 +2114,7 @@ webpackJsonp([0],[
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(13);
+	var Handlebars = __webpack_require__(14);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -2117,7 +2130,7 @@ webpackJsonp([0],[
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(13);
+	var Handlebars = __webpack_require__(14);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
