@@ -247,10 +247,10 @@ webpackJsonp([0],[
 
 	var success = function success(data) {
 	  if (data) {
-	    console.log(data);
+	    // console.log(data);
 	  } else {
-	    console.log('Success');
-	  }
+	      // console.log('Success');
+	    }
 	};
 
 	var failure = function failure(error) {
@@ -342,9 +342,45 @@ webpackJsonp([0],[
 	  });
 	};
 
+	var create = function create(data) {
+	  return $.ajax({
+	    url: app.host + '/games',
+	    method: 'POST',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var update = function update(id, data) {
+	  return $.ajax({
+	    url: app.host + '/games/' + id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var destroy = function destroy(gameId) {
+	  return $.ajax({
+	    url: app.host + '/games/' + gameId,
+	    method: 'DELETE',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: ''
+	  });
+	};
+
 	module.exports = {
 	  show: show,
-	  index: index
+	  index: index,
+	  create: create,
+	  update: update,
+	  destroy: destroy
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -356,10 +392,10 @@ webpackJsonp([0],[
 
 	var success = function success(data) {
 	  if (data) {
-	    console.log(data);
+	    // console.log(data);
 	  } else {
-	    console.log('Success');
-	  }
+	      // console.log('Success');
+	    }
 	};
 
 	var failure = function failure(error) {
@@ -382,6 +418,7 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var app = __webpack_require__(7);
 	var api = __webpack_require__(13);
 	var ui = __webpack_require__(14);
 
@@ -392,11 +429,14 @@ webpackJsonp([0],[
 
 	var onShowProfilePage = function onShowProfilePage(event) {
 	  event.preventDefault();
+	  console.log('MY app.user is: ', app.user);
 	  $('.standings').hide();
 	  $('#page-title').text('Profile');
+	  api.index(app.user.id).done(ui.showProfilePageSuccess).fail(ui.failure);
 	};
 
 	var addHandlers = function addHandlers() {
+	  $('#players-button').on('click', onShowPlayers);
 	  $('#profile-button').on('click', onShowProfilePage);
 	};
 
@@ -429,9 +469,45 @@ webpackJsonp([0],[
 	  });
 	};
 
+	var create = function create(data) {
+	  return $.ajax({
+	    url: app.host + '/players',
+	    method: 'POST',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var update = function update(id, data) {
+	  return $.ajax({
+	    url: app.host + '/players/' + id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var destroy = function destroy(playerId) {
+	  return $.ajax({
+	    url: app.host + '/players/' + playerId,
+	    method: 'DELETE',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: ''
+	  });
+	};
+
 	module.exports = {
 	  show: show,
-	  index: index
+	  index: index,
+	  create: create,
+	  update: update,
+	  destroy: destroy
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -443,10 +519,10 @@ webpackJsonp([0],[
 
 	var success = function success(data) {
 	  if (data) {
-	    console.log(data);
+	    // console.log(data);
 	  } else {
-	    console.log('Success');
-	  }
+	      // console.log('Success');
+	    }
 	};
 
 	var failure = function failure(error) {
@@ -457,10 +533,15 @@ webpackJsonp([0],[
 	  console.log(data);
 	};
 
+	var showProfilePageSuccess = function showProfilePageSuccess(data) {
+	  console.log(data);
+	};
+
 	module.exports = {
 	  success: success,
 	  failure: failure,
-	  showPlayersSuccess: showPlayersSuccess
+	  showPlayersSuccess: showPlayersSuccess,
+	  showProfilePageSuccess: showProfilePageSuccess
 	};
 
 /***/ },
@@ -512,14 +593,50 @@ webpackJsonp([0],[
 
 	var index = function index(teamId) {
 	  return $.ajax({
-	    url: app.host + '/players/' + teamId,
+	    url: app.host + '/teams/' + teamId,
 	    method: "GET"
+	  });
+	};
+
+	var create = function create(data) {
+	  return $.ajax({
+	    url: app.host + '/teams',
+	    method: 'POST',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var update = function update(id, data) {
+	  return $.ajax({
+	    url: app.host + '/teams/' + id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var destroy = function destroy(teamId) {
+	  return $.ajax({
+	    url: app.host + '/teams/' + teamId,
+	    method: 'DELETE',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: ''
 	  });
 	};
 
 	module.exports = {
 	  show: show,
-	  index: index
+	  index: index,
+	  create: create,
+	  update: update,
+	  destroy: destroy
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -531,10 +648,10 @@ webpackJsonp([0],[
 
 	var success = function success(data) {
 	  if (data) {
-	    console.log(data);
+	    // console.log(data);
 	  } else {
-	    console.log('Success');
-	  }
+	      // console.log('Success');
+	    }
 	};
 
 	var failure = function failure(error) {
@@ -597,7 +714,6 @@ webpackJsonp([0],[
 
 	  // rank teams
 	  data.teams = rankTeams(data.teams);
-	  console.log(data.teams);
 
 	  var teamListingTemplate = __webpack_require__(18);
 	  $('.teams-standing').append(teamListingTemplate(data));
