@@ -2,9 +2,9 @@
 
 const success = (data) => {
   if (data) {
-    console.log(data);
+    // console.log(data);
   } else {
-    console.log('Success');
+    // console.log('Success');
   }
 };
 
