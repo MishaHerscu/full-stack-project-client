@@ -17,6 +17,7 @@ const index = (playerId) => {
 };
 
 const create = function(data){
+  console.log(data);
   return $.ajax({
     url: app.host + '/players',
     method: 'POST',

@@ -1734,6 +1734,7 @@ webpackJsonp([0],[
 	};
 
 	var create = function create(data) {
+	  console.log(data);
 	  return $.ajax({
 	    url: app.host + '/players',
 	    method: 'POST',
