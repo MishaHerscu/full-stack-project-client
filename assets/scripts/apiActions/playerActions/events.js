@@ -10,11 +10,16 @@ const onShowPlayers = (event) => {
   .fail(ui.failure);
 };
 
+const onShowProfilePage = (event) => {
+  event.preventDefault();
+};
+
 const addHandlers = () => {
-  $('#show-players').on('submit', onShowPlayers);
+  $('#profile-button').on('click', onShowProfilePage);
 };
 
 module.exports = {
   addHandlers,
-  onShowPlayers
+  onShowPlayers,
+  onShowProfilePage
 };

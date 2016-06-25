@@ -9,10 +9,16 @@ const onShowTeams = () => {
   .fail(ui.failure);
 };
 
+const onShowTeamPage = (event) => {
+  event.preventDefault();
+};
+
 const addHandlers = () => {
+  $('#team-button').on('click', onShowTeamPage);
 };
 
 module.exports = {
   addHandlers,
-  onShowTeams
+  onShowTeams,
+  onShowTeamPage
 };
