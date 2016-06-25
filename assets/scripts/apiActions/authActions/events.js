@@ -24,6 +24,7 @@ const onSignIn = (event) => {
 
 const onSignOut = (event) => {
   event.preventDefault();
+  $('#standings-button').click();
   api.signOut()
   .done(ui.signOutSuccess)
   .fail(ui.failure);

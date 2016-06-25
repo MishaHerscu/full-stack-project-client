@@ -38,7 +38,7 @@ const onShowProfilePage = (event) => {
   $('.team').hide();
   $('.profile').show();
 
-  if(app.player !== null){
+  if(app.player !== null && app.player !== undefined){
     api.index(app.player.id)
     .done(ui.showProfilePageSuccess)
     .fail(ui.failure);

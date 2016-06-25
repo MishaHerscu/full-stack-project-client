@@ -23,7 +23,7 @@ const signUpSuccess = function(){
 
 const signInSuccess = (data) => {
   app.user = data.user;
-  // console.log(app.user);
+  app.player = data.user.player;
   $('.signed-in').show();
   $('.signed-out').hide();
   $('#signInModal').modal('hide');
@@ -32,6 +32,7 @@ const signInSuccess = (data) => {
 const signOutSuccess = () => {
   console.log('User signed out successfully');
   app.user = null;
+  app.player = null;
   $('.signed-in').hide();
   $('.signed-out').show();
 };

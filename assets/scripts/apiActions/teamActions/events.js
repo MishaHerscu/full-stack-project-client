@@ -42,7 +42,7 @@ const onShowTeamPage = (event) => {
   $('.team').show();
   $('.profile').hide();
 
-  if(app.player !== null){
+  if(app.player !== null && app.player !== undefined){
     api.index(app.player.team_id)
     .done(ui.showTeamPageSuccess)
     .fail(ui.failure);
