@@ -38,14 +38,37 @@ const updateTeamStats = (team) => {
   return team;
 };
 
+const comparator = (a, b) => {
+    return parseInt(a.winPct, 10) - parseInt(b.winPct, 10);
+};
+
+const rankTeams = (teams) => {
+  let teamCount = teams.length;
+  let sortedTeams = teams.sort(comparator);
+  let ranks = [];
+
+  for(let i = 0; i < teamCount; i++){
+    ranks.push(teams[i].id);
+  }
+
+  for(let j = 0; j < teamCount; j++){
+    teams[j].rank = ranks.indexOf(teams[j].id) + 1;
+  }
+
+  return sortedTeams;
+};
+
 const onShowTeamsSuccess = (data) => {
   $('#teams-standing').html('');
 
+  // update team stats
   for(let i = 0, max = data.teams.length; i < max; i++){
-    console.log(data.teams[i]);
     data.teams[i] = updateTeamStats(data.teams[i]);
-    console.log(data.teams[i]);
   }
+
+  // rank teams
+  data.teams = rankTeams(data.teams);
+  console.log(data.teams);
 
   let teamListingTemplate = require('../../templates/team-listing.handlebars');
   $('.teams-standing').append(teamListingTemplate(data));
@@ -54,5 +77,7 @@ const onShowTeamsSuccess = (data) => {
 module.exports = {
   success,
   failure,
+  updateTeamStats,
+  rankTeams,
   onShowTeamsSuccess
 };
