@@ -12,6 +12,10 @@ const onCreateTeam = (event) => {
   .fail(ui.failure);
 };
 
+const onPageLoad = () => {
+  $('#standings-button').click();
+};
+
 const onShowTeams = (event) => {
   event.preventDefault();
   $('#page-title').text('Standings');
@@ -48,5 +52,6 @@ module.exports = {
   addHandlers,
   onShowTeams,
   onShowTeamPage,
-  onCreateTeam
+  onCreateTeam,
+  onPageLoad
 };

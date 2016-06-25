@@ -16,16 +16,10 @@ const teamEvents = require('./apiActions/teamActions/events.js');
 $('.signed-in').hide();
 $('.signed-out').show();
 
-$('.standings').show();
-$('.games').hide();
-$('.players').hide();
-$('.team').hide();
-$('.profile').hide();
-
 $(() => {
   authEvents.addHandlers();
   gameEvents.addHandlers();
   playerEvents.addHandlers();
   teamEvents.addHandlers();
-  teamEvents.onShowTeams();
+  teamEvents.onPageLoad();
 });
