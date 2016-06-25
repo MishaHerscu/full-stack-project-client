@@ -68,7 +68,6 @@ const onShowTeamsSuccess = (data) => {
 
   // rank teams
   data.teams = rankTeams(data.teams);
-  console.log(data.teams);
 
   let teamListingTemplate = require('../../templates/team-listing.handlebars');
   $('.teams-standing').append(teamListingTemplate(data));
