@@ -42,8 +42,8 @@ const onShowProfilePage = (event) => {
   $('.profile').show();
 
   if(app.player !== null && app.player !== undefined){
-    api.index(app.player.id)
-    .done(ui.showProfilePageSuccess)
+    api.show()
+    .done(ui.showPlayersSuccess)
     .fail(ui.failure);
   }else{
     ui.noProfile();

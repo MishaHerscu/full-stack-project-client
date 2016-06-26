@@ -234,7 +234,8 @@ webpackJsonp([0],[
 	  // host: 'https://ironsidegoaltimate.herokuapp.com',
 	  user: null,
 	  player: null,
-	  team: null
+	  team: null,
+	  teamMembers: null
 	};
 
 	module.exports = app;
@@ -300,6 +301,7 @@ webpackJsonp([0],[
 	  app.user = null;
 	  app.player = null;
 	  app.team = null;
+	  app.teamMembers = null;
 	  $('.signed-in').hide();
 	  $('.signed-out').show();
 	};
@@ -537,15 +539,6 @@ webpackJsonp([0],[
 	  console.log(data);
 	};
 
-	var showTeamPageSuccess = function showTeamPageSuccess() {
-	  $('current-team-rank').text(app.team.rank);
-	  $('current-team-name').text(app.team.name);
-	  $('current-team-wins').text(app.team.winCount);
-	  $('current-team-losses').text(app.team.lossCount);
-	  $('current-team-games').text(app.team.gameCount);
-	  $('current-team-win-pct').text(app.team.winPct);
-	};
-
 	module.exports = {
 	  success: success,
 	  failure: failure,
@@ -553,8 +546,7 @@ webpackJsonp([0],[
 	  comparator: comparator,
 	  rankTeams: rankTeams,
 	  showTeamsSuccess: showTeamsSuccess,
-	  createTeamSuccess: createTeamSuccess,
-	  showTeamPageSuccess: showTeamPageSuccess
+	  createTeamSuccess: createTeamSuccess
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -2011,7 +2003,7 @@ webpackJsonp([0],[
 	  $('.profile').show();
 
 	  if (app.player !== null && app.player !== undefined) {
-	    api.index(app.player.id).done(ui.showProfilePageSuccess).fail(ui.failure);
+	    api.show().done(ui.showPlayersSuccess).fail(ui.failure);
 	  } else {
 	    ui.noProfile();
 	  }
@@ -2058,27 +2050,20 @@ webpackJsonp([0],[
 
 	var showPlayersSuccess = function showPlayersSuccess(data) {
 	  $('.players-data').html('');
+	  $('.team-members-data').html('');
+
+	  var allPlayers = data.players;
+	  var max = data.players.length;
+	  app.teamMembers = { players: [] };
+	  for (var i = 0; i < max; i++) {
+	    if (allPlayers[i].team_id === app.player.team_id) {
+	      app.teamMembers.players.push(allPlayers[i]);
+	    }
+	  }
+
 	  var playerListingTemplate = __webpack_require__(40);
 	  $('.players-data').append(playerListingTemplate(data));
-	};
-
-	var showProfilePageSuccess = function showProfilePageSuccess(data) {
-	  var player = data.player;
-
-	  $('#page-title').text('Profile');
-
-	  $('.standings').hide();
-	  $('.games').hide();
-	  $('.players').hide();
-	  $('.team').hide();
-	  $('.profile').show();
-
-	  $('#profile-last-name').text(player.surname);
-	  $('#profile-first-name').text(player.given_name);
-	  $('#profile-email').text(player.email);
-	  $('#profile-phone-number').text(player.phone_number);
-	  $('#profile-captain').text(player.captain);
-	  $('#profile-team-id').text(player.team_id);
+	  $('.team-members-data').append(playerListingTemplate(app.teamMembers));
 	};
 
 	var createPlayerSuccess = function createPlayerSuccess(data) {
@@ -2090,7 +2075,6 @@ webpackJsonp([0],[
 	  failure: failure,
 	  noProfile: noProfile,
 	  showPlayersSuccess: showPlayersSuccess,
-	  showProfilePageSuccess: showProfilePageSuccess,
 	  createPlayerSuccess: createPlayerSuccess
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
@@ -2182,8 +2166,13 @@ webpackJsonp([0],[
 	  $('.team').show();
 	  $('.profile').hide();
 
-	  if (app.player !== null && app.player !== undefined) {
-	    api.index(app.player.team_id).done(ui.showTeamPageSuccess).fail(ui.failure);
+	  if (app.team !== null && app.team !== undefined) {
+	    $('#current-team-rank').text(app.team.rank);
+	    $('#current-team-name').text(app.team.name);
+	    $('#current-team-wins').text(app.team.winCount);
+	    $('#current-team-losses').text(app.team.lossCount);
+	    $('#current-team-games').text(app.team.gameCount);
+	    $('#current-team-win-pct').text(app.team.winPct);
 	  } else {
 	    $('#profile-button').click();
 	  }

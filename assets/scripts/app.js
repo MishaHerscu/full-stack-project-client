@@ -6,6 +6,7 @@ const app = {
   user: null,
   player: null,
   team: null,
+  teamMembers: null,
 };
 
 module.exports = app;

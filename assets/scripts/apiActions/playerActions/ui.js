@@ -21,27 +21,20 @@ const noProfile = () => {
 
 const showPlayersSuccess = (data) => {
   $('.players-data').html('');
+  $('.team-members-data').html('');
+
+  let allPlayers = data.players;
+  let max = data.players.length;
+  app.teamMembers = { players: [] };
+  for(let i = 0; i < max; i++){
+    if(allPlayers[i].team_id === app.player.team_id){
+      app.teamMembers.players.push(allPlayers[i]);
+    }
+  }
+
   let playerListingTemplate = require('../../templates/player-listing.handlebars');
   $('.players-data').append(playerListingTemplate(data));
-};
-
-const showProfilePageSuccess = (data) => {
-  let player = data.player;
-
-  $('#page-title').text('Profile');
-
-  $('.standings').hide();
-  $('.games').hide();
-  $('.players').hide();
-  $('.team').hide();
-  $('.profile').show();
-
-  $('#profile-last-name').text(player.surname);
-  $('#profile-first-name').text(player.given_name);
-  $('#profile-email').text(player.email);
-  $('#profile-phone-number').text(player.phone_number);
-  $('#profile-captain').text(player.captain);
-  $('#profile-team-id').text(player.team_id);
+  $('.team-members-data').append(playerListingTemplate(app.teamMembers));
 };
 
 const createPlayerSuccess = (data) => {
@@ -53,6 +46,5 @@ module.exports = {
   failure,
   noProfile,
   showPlayersSuccess,
-  showProfilePageSuccess,
   createPlayerSuccess
 };
