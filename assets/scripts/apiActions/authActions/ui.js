@@ -2,6 +2,8 @@
 
 const app = require('../../app.js');
 const playerApi = require('../playerActions/api.js');
+const teamApi = require('../teamActions/api.js');
+const teamUi = require('../teamActions/ui.js');
 
 const success = (data) => {
   if (data) {
@@ -36,6 +38,9 @@ const setPlayer = function(data){
       $('#profile-team-id').text(app.player.team_id);
     }
   }
+  teamApi.show()
+  .done(teamUi.showTeamsSuccess)
+  .fail(teamUi.failure);
 };
 
 const signInSuccess = (data) => {
@@ -53,6 +58,7 @@ const signOutSuccess = () => {
   console.log('User signed out successfully');
   app.user = null;
   app.player = null;
+  app.team = null;
   $('.signed-in').hide();
   $('.signed-out').show();
 };

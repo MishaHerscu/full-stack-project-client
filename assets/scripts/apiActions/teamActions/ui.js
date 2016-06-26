@@ -1,5 +1,7 @@
 'use strict';
 
+const app = require('../../app.js');
+
 const success = (data) => {
   if (data) {
     // console.log(data);
@@ -69,6 +71,15 @@ const showTeamsSuccess = (data) => {
   // rank teams
   data.teams = rankTeams(data.teams);
 
+  // set current team
+  if(app.player !== null && app.player !== undefined){
+    for(let i = 0, max = data.teams.length; i < max; i++){
+      if(data.teams[i].id === app.player.team_id){
+        app.team = data.teams[i];
+      }
+    }
+  }
+
   let teamListingTemplate = require('../../templates/team-listing.handlebars');
   $('.teams-standings').append(teamListingTemplate(data));
 };
@@ -77,8 +88,13 @@ const createTeamSuccess = (data) => {
   console.log(data);
 };
 
-const showTeamPageSuccess = (data) => {
-  console.log(data);
+const showTeamPageSuccess = () => {
+  $('current-team-rank').text(app.team.rank);
+  $('current-team-name').text(app.team.name);
+  $('current-team-wins').text(app.team.winCount);
+  $('current-team-losses').text(app.team.lossCount);
+  $('current-team-games').text(app.team.gameCount);
+  $('current-team-win-pct').text(app.team.winPct);
 };
 
 module.exports = {

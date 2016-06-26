@@ -37,9 +37,9 @@ webpackJsonp([0],[
 	__webpack_require__(3);
 
 	var authEvents = __webpack_require__(4);
-	var gameEvents = __webpack_require__(10);
-	var playerEvents = __webpack_require__(34);
-	var teamEvents = __webpack_require__(38);
+	var gameEvents = __webpack_require__(33);
+	var playerEvents = __webpack_require__(38);
+	var teamEvents = __webpack_require__(42);
 
 	// const bookEvents = require('./books/book-events.js');
 
@@ -233,7 +233,8 @@ webpackJsonp([0],[
 	  host: 'http://localhost:3000',
 	  // host: 'https://ironsidegoaltimate.herokuapp.com',
 	  user: null,
-	  player: null
+	  player: null,
+	  team: null
 	};
 
 	module.exports = app;
@@ -246,6 +247,8 @@ webpackJsonp([0],[
 
 	var app = __webpack_require__(7);
 	var playerApi = __webpack_require__(9);
+	var teamApi = __webpack_require__(10);
+	var teamUi = __webpack_require__(11);
 
 	var success = function success(data) {
 	  if (data) {
@@ -280,6 +283,7 @@ webpackJsonp([0],[
 	      $('#profile-team-id').text(app.player.team_id);
 	    }
 	  }
+	  teamApi.show().done(teamUi.showTeamsSuccess).fail(teamUi.failure);
 	};
 
 	var signInSuccess = function signInSuccess(data) {
@@ -295,6 +299,7 @@ webpackJsonp([0],[
 	  console.log('User signed out successfully');
 	  app.user = null;
 	  app.player = null;
+	  app.team = null;
 	  $('.signed-in').hide();
 	  $('.signed-out').show();
 	};
@@ -380,69 +385,25 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var getFormFields = __webpack_require__(5);
-
-	var api = __webpack_require__(11);
-	var ui = __webpack_require__(12);
-
-	var onCreateGame = function onCreateGame(event) {
-	  event.preventDefault();
-	  $('#createGameModal').modal('hide');
-	  var data = getFormFields(event.target);
-
-	  api.create(data).done(ui.createGameSuccess).fail(ui.failure);
-	};
-
-	var onShowGames = function onShowGames(event) {
-	  event.preventDefault();
-	  $('#page-title').text('Games');
-
-	  $('.standings').hide();
-	  $('.games').show();
-	  $('.players').hide();
-	  $('.team').hide();
-	  $('.profile').hide();
-
-	  api.show().done(ui.showGamesSuccess).fail(ui.failure);
-	};
-
-	var addHandlers = function addHandlers() {
-	  $('#create-game').on('submit', onCreateGame);
-	  $('#games-button').on('click', onShowGames);
-	};
-
-	module.exports = {
-	  addHandlers: addHandlers,
-	  onShowGames: onShowGames,
-	  onCreateGame: onCreateGame
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
 	var app = __webpack_require__(7);
 
 	var show = function show() {
 	  return $.ajax({
-	    url: app.host + '/games/',
+	    url: app.host + '/teams/',
 	    method: "GET"
 	  });
 	};
 
-	var index = function index(gameId) {
+	var index = function index(teamId) {
 	  return $.ajax({
-	    url: app.host + '/games/' + gameId,
+	    url: app.host + '/teams/' + teamId,
 	    method: "GET"
 	  });
 	};
 
 	var create = function create(data) {
 	  return $.ajax({
-	    url: app.host + '/games',
+	    url: app.host + '/teams',
 	    method: 'POST',
 	    headers: {
 	      Authorization: 'Token token=' + app.user.token
@@ -453,7 +414,7 @@ webpackJsonp([0],[
 
 	var update = function update(id, data) {
 	  return $.ajax({
-	    url: app.host + '/games/' + id,
+	    url: app.host + '/teams/' + id,
 	    method: 'PATCH',
 	    headers: {
 	      Authorization: 'Token token=' + app.user.token
@@ -462,9 +423,9 @@ webpackJsonp([0],[
 	  });
 	};
 
-	var destroy = function destroy(gameId) {
+	var destroy = function destroy(teamId) {
 	  return $.ajax({
-	    url: app.host + '/games/' + gameId,
+	    url: app.host + '/teams/' + teamId,
 	    method: 'DELETE',
 	    headers: {
 	      Authorization: 'Token token=' + app.user.token
@@ -483,10 +444,12 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var app = __webpack_require__(7);
 
 	var success = function success(data) {
 	  if (data) {
@@ -500,51 +463,128 @@ webpackJsonp([0],[
 	  console.error(error);
 	};
 
-	var showGamesSuccess = function showGamesSuccess(data) {
-	  $('.games-data').html('');
-	  var gameListingTemplate = __webpack_require__(13);
-	  $('.games-data').append(gameListingTemplate(data));
+	var updateTeamStats = function updateTeamStats(team) {
+
+	  team.gameCount = team.games.length;
+
+	  team.winCount = 0;
+	  team.lossCount = 0;
+	  team.tieCount = 0;
+
+	  if (team.gameCount > 0) {
+	    for (var j = 0, max = team.gameCount; j < max; j++) {
+	      if (team.games[j].won === 'true') {
+	        team.winCount += 1;
+	      } else if (team.games[j].won === 'false') {
+	        team.lossCount += 1;
+	      } else {
+	        team.tieCount += 1;
+	      }
+	    }
+	    team.winPct = Math.round(team.winCount / team.gameCount * 100) + '%';
+	  } else {
+	    team.winPct = 'N/A';
+	  }
+
+	  return team;
 	};
 
-	var createGameSuccess = function createGameSuccess(data) {
+	var comparator = function comparator(a, b) {
+	  return parseInt(a.winPct, 10) - parseInt(b.winPct, 10);
+	};
+
+	var rankTeams = function rankTeams(teams) {
+	  var teamCount = teams.length;
+	  var sortedTeams = teams.sort(comparator).reverse();
+	  var ranks = [];
+
+	  for (var i = 0; i < teamCount; i++) {
+	    ranks.push(teams[i].id);
+	  }
+
+	  for (var j = 0; j < teamCount; j++) {
+	    teams[j].rank = ranks.indexOf(teams[j].id) + 1;
+	  }
+
+	  return sortedTeams;
+	};
+
+	var showTeamsSuccess = function showTeamsSuccess(data) {
+	  $('.teams-standings').html('');
+
+	  // update team stats
+	  for (var i = 0, max = data.teams.length; i < max; i++) {
+	    data.teams[i] = updateTeamStats(data.teams[i]);
+	  }
+
+	  // rank teams
+	  data.teams = rankTeams(data.teams);
+
+	  // set current team
+	  if (app.player !== null && app.player !== undefined) {
+	    for (var _i = 0, _max = data.teams.length; _i < _max; _i++) {
+	      if (data.teams[_i].id === app.player.team_id) {
+	        app.team = data.teams[_i];
+	      }
+	    }
+	  }
+
+	  var teamListingTemplate = __webpack_require__(12);
+	  $('.teams-standings').append(teamListingTemplate(data));
+	};
+
+	var createTeamSuccess = function createTeamSuccess(data) {
 	  console.log(data);
+	};
+
+	var showTeamPageSuccess = function showTeamPageSuccess() {
+	  $('current-team-rank').text(app.team.rank);
+	  $('current-team-name').text(app.team.name);
+	  $('current-team-wins').text(app.team.winCount);
+	  $('current-team-losses').text(app.team.lossCount);
+	  $('current-team-games').text(app.team.gameCount);
+	  $('current-team-win-pct').text(app.team.winPct);
 	};
 
 	module.exports = {
 	  success: success,
 	  failure: failure,
-	  showGamesSuccess: showGamesSuccess,
-	  createGameSuccess: createGameSuccess
+	  updateTeamStats: updateTeamStats,
+	  comparator: comparator,
+	  rankTeams: rankTeams,
+	  showTeamsSuccess: showTeamsSuccess,
+	  createTeamSuccess: createTeamSuccess,
+	  showTeamPageSuccess: showTeamPageSuccess
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(13);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = container.invokePartial(__webpack_require__(32),depth0,{"name":"team","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda((depth0 != null ? depth0.teams : depth0), depth0),{"name":"teams","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+	},"usePartial":true,"useData":true});
 
 /***/ },
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(14);
-	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var stack1;
+	// Create a simple path alias to allow browserify to resolve
+	// the runtime on a supported path.
+	module.exports = __webpack_require__(14)['default'];
 
-	  return ((stack1 = container.invokePartial(__webpack_require__(33),depth0,{"name":"game","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1;
-
-	  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda((depth0 != null ? depth0.games : depth0), depth0),{"name":"games","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-	},"usePartial":true,"useData":true});
 
 /***/ },
 /* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Create a simple path alias to allow browserify to resolve
-	// the runtime on a supported path.
-	module.exports = __webpack_require__(15)['default'];
-
-
-/***/ },
-/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -558,30 +598,30 @@ webpackJsonp([0],[
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _handlebarsBase = __webpack_require__(16);
+	var _handlebarsBase = __webpack_require__(15);
 
 	var base = _interopRequireWildcard(_handlebarsBase);
 
 	// Each of these augment the Handlebars object. No need to setup here.
 	// (This is done to easily share code between commonjs and browse envs)
 
-	var _handlebarsSafeString = __webpack_require__(30);
+	var _handlebarsSafeString = __webpack_require__(29);
 
 	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
-	var _handlebarsException = __webpack_require__(18);
+	var _handlebarsException = __webpack_require__(17);
 
 	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
-	var _handlebarsUtils = __webpack_require__(17);
+	var _handlebarsUtils = __webpack_require__(16);
 
 	var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-	var _handlebarsRuntime = __webpack_require__(31);
+	var _handlebarsRuntime = __webpack_require__(30);
 
 	var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-	var _handlebarsNoConflict = __webpack_require__(32);
+	var _handlebarsNoConflict = __webpack_require__(31);
 
 	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -616,7 +656,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -627,17 +667,17 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
-	var _exception = __webpack_require__(18);
+	var _exception = __webpack_require__(17);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
-	var _helpers = __webpack_require__(19);
+	var _helpers = __webpack_require__(18);
 
-	var _decorators = __webpack_require__(27);
+	var _decorators = __webpack_require__(26);
 
-	var _logger = __webpack_require__(29);
+	var _logger = __webpack_require__(28);
 
 	var _logger2 = _interopRequireDefault(_logger);
 
@@ -726,7 +766,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -856,7 +896,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -902,7 +942,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -913,31 +953,31 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _helpersBlockHelperMissing = __webpack_require__(20);
+	var _helpersBlockHelperMissing = __webpack_require__(19);
 
 	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-	var _helpersEach = __webpack_require__(21);
+	var _helpersEach = __webpack_require__(20);
 
 	var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-	var _helpersHelperMissing = __webpack_require__(22);
+	var _helpersHelperMissing = __webpack_require__(21);
 
 	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-	var _helpersIf = __webpack_require__(23);
+	var _helpersIf = __webpack_require__(22);
 
 	var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-	var _helpersLog = __webpack_require__(24);
+	var _helpersLog = __webpack_require__(23);
 
 	var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-	var _helpersLookup = __webpack_require__(25);
+	var _helpersLookup = __webpack_require__(24);
 
 	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-	var _helpersWith = __webpack_require__(26);
+	var _helpersWith = __webpack_require__(25);
 
 	var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -954,14 +994,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -999,7 +1039,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1009,9 +1049,9 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
-	var _exception = __webpack_require__(18);
+	var _exception = __webpack_require__(17);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
@@ -1099,7 +1139,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1109,7 +1149,7 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _exception = __webpack_require__(18);
+	var _exception = __webpack_require__(17);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
@@ -1130,14 +1170,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('if', function (conditional, options) {
@@ -1165,7 +1205,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1197,7 +1237,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1215,14 +1255,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('with', function (context, options) {
@@ -1254,7 +1294,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1265,7 +1305,7 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _decoratorsInline = __webpack_require__(28);
+	var _decoratorsInline = __webpack_require__(27);
 
 	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -1276,14 +1316,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
 	exports['default'] = function (instance) {
 	  instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -1311,14 +1351,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
 	var logger = {
 	  methodMap: ['debug', 'info', 'warn', 'error'],
@@ -1364,7 +1404,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	// Build out our basic SafeString type
@@ -1385,7 +1425,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1405,15 +1445,15 @@ webpackJsonp([0],[
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _utils = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
 
 	var Utils = _interopRequireWildcard(_utils);
 
-	var _exception = __webpack_require__(18);
+	var _exception = __webpack_require__(17);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
-	var _base = __webpack_require__(16);
+	var _base = __webpack_require__(15);
 
 	function checkRevision(compilerInfo) {
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -1683,7 +1723,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
@@ -1710,10 +1750,206 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(13);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+	  return "<!--  team standings -->\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.rank || (depth0 != null ? depth0.rank : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rank","hash":{},"data":data}) : helper)))
+	    + "</div>\n<div class=\"standings-cell team-name standings-row col-xs-2\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.winCount || (depth0 != null ? depth0.winCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"winCount","hash":{},"data":data}) : helper)))
+	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.lossCount || (depth0 != null ? depth0.lossCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"lossCount","hash":{},"data":data}) : helper)))
+	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.gameCount || (depth0 != null ? depth0.gameCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gameCount","hash":{},"data":data}) : helper)))
+	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">"
+	    + alias4(((helper = (helper = helpers.winPct || (depth0 != null ? depth0.winPct : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"winPct","hash":{},"data":data}) : helper)))
+	    + "</div>\n";
+	},"useData":true});
+
+/***/ },
 /* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(14);
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var getFormFields = __webpack_require__(5);
+
+	var api = __webpack_require__(34);
+	var ui = __webpack_require__(35);
+
+	var onCreateGame = function onCreateGame(event) {
+	  event.preventDefault();
+	  $('#createGameModal').modal('hide');
+	  var data = getFormFields(event.target);
+
+	  api.create(data).done(ui.createGameSuccess).fail(ui.failure);
+	};
+
+	var onShowGames = function onShowGames(event) {
+	  event.preventDefault();
+	  $('#page-title').text('Games');
+
+	  $('.standings').hide();
+	  $('.games').show();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').hide();
+
+	  api.show().done(ui.showGamesSuccess).fail(ui.failure);
+	};
+
+	var addHandlers = function addHandlers() {
+	  $('#create-game').on('submit', onCreateGame);
+	  $('#games-button').on('click', onShowGames);
+	};
+
+	module.exports = {
+	  addHandlers: addHandlers,
+	  onShowGames: onShowGames,
+	  onCreateGame: onCreateGame
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var app = __webpack_require__(7);
+
+	var show = function show() {
+	  return $.ajax({
+	    url: app.host + '/games/',
+	    method: "GET"
+	  });
+	};
+
+	var index = function index(gameId) {
+	  return $.ajax({
+	    url: app.host + '/games/' + gameId,
+	    method: "GET"
+	  });
+	};
+
+	var create = function create(data) {
+	  return $.ajax({
+	    url: app.host + '/games',
+	    method: 'POST',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var update = function update(id, data) {
+	  return $.ajax({
+	    url: app.host + '/games/' + id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var destroy = function destroy(gameId) {
+	  return $.ajax({
+	    url: app.host + '/games/' + gameId,
+	    method: 'DELETE',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: ''
+	  });
+	};
+
+	module.exports = {
+	  show: show,
+	  index: index,
+	  create: create,
+	  update: update,
+	  destroy: destroy
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var success = function success(data) {
+	  if (data) {
+	    // console.log(data);
+	  } else {
+	      // console.log('Success');
+	    }
+	};
+
+	var failure = function failure(error) {
+	  console.error(error);
+	};
+
+	var showGamesSuccess = function showGamesSuccess(data) {
+	  $('.games-data').html('');
+	  var gameListingTemplate = __webpack_require__(36);
+	  $('.games-data').append(gameListingTemplate(data));
+	};
+
+	var createGameSuccess = function createGameSuccess(data) {
+	  console.log(data);
+	};
+
+	module.exports = {
+	  success: success,
+	  failure: failure,
+	  showGamesSuccess: showGamesSuccess,
+	  createGameSuccess: createGameSuccess
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(13);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = container.invokePartial(__webpack_require__(37),depth0,{"name":"game","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda((depth0 != null ? depth0.games : depth0), depth0),{"name":"games","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+	},"usePartial":true,"useData":true});
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(13);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -1732,7 +1968,7 @@ webpackJsonp([0],[
 	},"useData":true});
 
 /***/ },
-/* 34 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -1741,7 +1977,7 @@ webpackJsonp([0],[
 
 	var app = __webpack_require__(7);
 	var api = __webpack_require__(9);
-	var ui = __webpack_require__(35);
+	var ui = __webpack_require__(39);
 
 	var onCreatePlayer = function onCreatePlayer(event) {
 	  event.preventDefault();
@@ -1796,7 +2032,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 35 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -1822,7 +2058,7 @@ webpackJsonp([0],[
 
 	var showPlayersSuccess = function showPlayersSuccess(data) {
 	  $('.players-data').html('');
-	  var playerListingTemplate = __webpack_require__(36);
+	  var playerListingTemplate = __webpack_require__(40);
 	  $('.players-data').append(playerListingTemplate(data));
 	};
 
@@ -1860,15 +2096,15 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 36 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(14);
+	var Handlebars = __webpack_require__(13);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return ((stack1 = container.invokePartial(__webpack_require__(37),depth0,{"name":"player","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+	  return ((stack1 = container.invokePartial(__webpack_require__(41),depth0,{"name":"player","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
@@ -1876,10 +2112,10 @@ webpackJsonp([0],[
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 37 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(14);
+	var Handlebars = __webpack_require__(13);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -1900,7 +2136,7 @@ webpackJsonp([0],[
 	},"useData":true});
 
 /***/ },
-/* 38 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -1908,8 +2144,8 @@ webpackJsonp([0],[
 	var getFormFields = __webpack_require__(5);
 
 	var app = __webpack_require__(7);
-	var api = __webpack_require__(39);
-	var ui = __webpack_require__(40);
+	var api = __webpack_require__(10);
+	var ui = __webpack_require__(11);
 
 	var onCreateTeam = function onCreateTeam(event) {
 	  event.preventDefault();
@@ -1967,221 +2203,6 @@ webpackJsonp([0],[
 	  onPageLoad: onPageLoad
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var app = __webpack_require__(7);
-
-	var show = function show() {
-	  return $.ajax({
-	    url: app.host + '/teams/',
-	    method: "GET"
-	  });
-	};
-
-	var index = function index(teamId) {
-	  return $.ajax({
-	    url: app.host + '/teams/' + teamId,
-	    method: "GET"
-	  });
-	};
-
-	var create = function create(data) {
-	  return $.ajax({
-	    url: app.host + '/teams',
-	    method: 'POST',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: data
-	  });
-	};
-
-	var update = function update(id, data) {
-	  return $.ajax({
-	    url: app.host + '/teams/' + id,
-	    method: 'PATCH',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: data
-	  });
-	};
-
-	var destroy = function destroy(teamId) {
-	  return $.ajax({
-	    url: app.host + '/teams/' + teamId,
-	    method: 'DELETE',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: ''
-	  });
-	};
-
-	module.exports = {
-	  show: show,
-	  index: index,
-	  create: create,
-	  update: update,
-	  destroy: destroy
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var success = function success(data) {
-	  if (data) {
-	    // console.log(data);
-	  } else {
-	      // console.log('Success');
-	    }
-	};
-
-	var failure = function failure(error) {
-	  console.error(error);
-	};
-
-	var updateTeamStats = function updateTeamStats(team) {
-
-	  team.gameCount = team.games.length;
-
-	  team.winCount = 0;
-	  team.lossCount = 0;
-	  team.tieCount = 0;
-
-	  if (team.gameCount > 0) {
-	    for (var j = 0, max = team.gameCount; j < max; j++) {
-	      if (team.games[j].won === 'true') {
-	        team.winCount += 1;
-	      } else if (team.games[j].won === 'false') {
-	        team.lossCount += 1;
-	      } else {
-	        team.tieCount += 1;
-	      }
-	    }
-	    team.winPct = Math.round(team.winCount / team.gameCount * 100) + '%';
-	  } else {
-	    team.winPct = 'N/A';
-	  }
-
-	  return team;
-	};
-
-	var comparator = function comparator(a, b) {
-	  return parseInt(a.winPct, 10) - parseInt(b.winPct, 10);
-	};
-
-	var rankTeams = function rankTeams(teams) {
-	  var teamCount = teams.length;
-	  var sortedTeams = teams.sort(comparator).reverse();
-	  var ranks = [];
-
-	  for (var i = 0; i < teamCount; i++) {
-	    ranks.push(teams[i].id);
-	  }
-
-	  for (var j = 0; j < teamCount; j++) {
-	    teams[j].rank = ranks.indexOf(teams[j].id) + 1;
-	  }
-
-	  return sortedTeams;
-	};
-
-	var showTeamsSuccess = function showTeamsSuccess(data) {
-	  $('.teams-standings').html('');
-
-	  // update team stats
-	  for (var i = 0, max = data.teams.length; i < max; i++) {
-	    data.teams[i] = updateTeamStats(data.teams[i]);
-	  }
-
-	  // rank teams
-	  data.teams = rankTeams(data.teams);
-
-	  var teamListingTemplate = __webpack_require__(41);
-	  $('.teams-standings').append(teamListingTemplate(data));
-	};
-
-	var createTeamSuccess = function createTeamSuccess(data) {
-	  console.log(data);
-	};
-
-	var showTeamPageSuccess = function showTeamPageSuccess(data) {
-	  console.log(data);
-	};
-
-	module.exports = {
-	  success: success,
-	  failure: failure,
-	  updateTeamStats: updateTeamStats,
-	  comparator: comparator,
-	  rankTeams: rankTeams,
-	  showTeamsSuccess: showTeamsSuccess,
-	  createTeamSuccess: createTeamSuccess,
-	  showTeamPageSuccess: showTeamPageSuccess
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Handlebars = __webpack_require__(14);
-	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var stack1;
-
-	  return ((stack1 = container.invokePartial(__webpack_require__(42),depth0,{"name":"team","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1;
-
-	  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda((depth0 != null ? depth0.teams : depth0), depth0),{"name":"teams","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-	},"usePartial":true,"useData":true});
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Handlebars = __webpack_require__(14);
-	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-	  return "<!--  team standings -->\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">"
-	    + alias4(((helper = (helper = helpers.rank || (depth0 != null ? depth0.rank : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rank","hash":{},"data":data}) : helper)))
-	    + "</div>\n<div class=\"standings-cell team-name standings-row col-xs-2\" data-id="
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">"
-	    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">"
-	    + alias4(((helper = (helper = helpers.winCount || (depth0 != null ? depth0.winCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"winCount","hash":{},"data":data}) : helper)))
-	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">"
-	    + alias4(((helper = (helper = helpers.lossCount || (depth0 != null ? depth0.lossCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"lossCount","hash":{},"data":data}) : helper)))
-	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">"
-	    + alias4(((helper = (helper = helpers.gameCount || (depth0 != null ? depth0.gameCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gameCount","hash":{},"data":data}) : helper)))
-	    + "</div>\n<div class=\"standings-cell standings-row col-xs-2\" data-id="
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">"
-	    + alias4(((helper = (helper = helpers.winPct || (depth0 != null ? depth0.winPct : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"winPct","hash":{},"data":data}) : helper)))
-	    + "</div>\n";
-	},"useData":true});
 
 /***/ },
 /* 43 */

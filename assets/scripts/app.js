@@ -5,6 +5,7 @@ const app = {
   // host: 'https://ironsidegoaltimate.herokuapp.com',
   user: null,
   player: null,
+  team: null,
 };
 
 module.exports = app;
