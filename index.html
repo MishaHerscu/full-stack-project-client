@@ -56,101 +56,111 @@
       <br><br>
 
       <!--The following divs will be classes that I show and hide for different pages-->
-      <div id="page-body-options">
+      <div id="page-body-options" class="col-xs-12">
 
         <div class="standings">
-          <div id="standings-table" class="table">
+          <div id="standings-table" class="table col-xs-12">
 
-              <div class="standings-cell standings-header col-xs-2">Ranking</div>
-              <div class="standings-cell standings-header col-xs-2">Team</div>
-              <div class="standings-cell standings-header col-xs-2">Wins</div>
-              <div class="standings-cell standings-header col-xs-2">Losses</div>
-              <div class="standings-cell standings-header col-xs-2">Games</div>
-              <div class="standings-cell standings-header col-xs-2">Win Pct</div>
+            <div class="standings-cell standings-header col-xs-2">Ranking</div>
+            <div class="standings-cell standings-header col-xs-2">Team</div>
+            <div class="standings-cell standings-header col-xs-2">Wins</div>
+            <div class="standings-cell standings-header col-xs-2">Losses</div>
+            <div class="standings-cell standings-header col-xs-2">Games</div>
+            <div class="standings-cell standings-header col-xs-2">Win Pct</div>
 
-              <div class="teams-standings"></div>
+            <div class="teams-standings"></div>
 
-            </div>
+          </div>
         </div>
 
         <div class="games content">
-          <div id="games-table" class="table">
+          <div id="games-table" class="table col-xs-12">
 
-              <div class="content-cell content-header col-xs-1">id</div>
-              <div class="content-cell content-header col-xs-1">team</div>
-              <div class="content-cell content-header col-xs-3">date</div>
-              <div class="content-cell content-header col-xs-4">opponent</div>
-              <div class="content-cell content-header col-xs-3">won</div>
+            <div class="content-cell content-header col-xs-1">id</div>
+            <div class="content-cell content-header col-xs-1">team</div>
+            <div class="content-cell content-header col-xs-3">date</div>
+            <div class="content-cell content-header col-xs-4">opponent</div>
+            <div class="content-cell content-header col-xs-3">won</div>
 
-              <div class="games-data"></div>
+            <div class="games-data"></div>
 
-              <br>
+          </div>
 
-              <div class="modal-button-container">
-                <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createGameModal" value="Create Game!">
-              </div>
+          <br>
 
-            </div>
+          <div class="modal-button-container content">
+            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createGameModal" value="Create Game!">
+          </div>
+
         </div>
 
         <div class="players content">
-          <div id="players-table" class="table">
+          <div id="players-table" class="table col-xs-12">
 
-              <div class="content-cell content-header col-xs-2">surname</div>
-              <div class="content-cell content-header col-xs-2">given_name</div>
-              <div class="content-cell content-header col-xs-3">email</div>
-              <div class="content-cell content-header col-xs-3">phone_number</div>
-              <div class="content-cell content-header col-xs-1">captain</div>
-              <div class="content-cell content-header col-xs-1">team</div>
+            <div class="content-cell content-header col-xs-2">surname</div>
+            <div class="content-cell content-header col-xs-2">given_name</div>
+            <div class="content-cell content-header col-xs-3">email</div>
+            <div class="content-cell content-header col-xs-3">phone_number</div>
+            <div class="content-cell content-header col-xs-1">captain</div>
+            <div class="content-cell content-header col-xs-1">team</div>
 
-              <div class="players-data"></div>
+            <div class="players-data"></div>
 
-            </div>
+          </div>
         </div>
 
         <div class="team content">
-          <div id="team-table" class="table">
+          <div id="team-table" class="table col-xs-12">
 
-              <div class="content-cell content-header col-xs-2">Ranking</div>
-              <div class="content-cell content-header col-xs-2">Team</div>
-              <div class="content-cell content-header col-xs-2">Wins</div>
-              <div class="content-cell content-header col-xs-2">Losses</div>
-              <div class="content-cell content-header col-xs-2">Games</div>
-              <div class="content-cell content-header col-xs-2">Win Pct</div>
+            <div class="content-cell content-header col-xs-2">Ranking</div>
+            <div class="content-cell content-header col-xs-2">Team</div>
+            <div class="content-cell content-header col-xs-2">Wins</div>
+            <div class="content-cell content-header col-xs-2">Losses</div>
+            <div class="content-cell content-header col-xs-2">Games</div>
+            <div class="content-cell content-header col-xs-2">Win Pct</div>
 
-              <div class="teams-data"></div>
+            <div class="teams-data"></div>
 
-              <br>
+            <br>
+          </div>
 
-              <div class="modal-button-container">
-                <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createTeamModal" value="Create Team!">
-              </div>
+          <div class="modal-button-container content">
+            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createTeamModal" value="Create Team!">
+          </div>
 
-            </div>
         </div>
 
         <div class="profile content">
-          <div id="profile-table" class="table profile profile-table">
+          <div id="profile-table" class="table profile profile-table col-xs-12">
 
-              <div class="profile content-cell content-header col-xs-6">Last Name</div>
-              <div id="profile-last-name" class="profile standings-cell standings-row col-xs-6">Last Name</div>
+            <div class="profile content-cell content-header col-xs-6">Last Name</div>
+            <div id="profile-last-name" class="profile standings-cell standings-row col-xs-6">Last Name</div>
 
-              <div class="profile content-cell content-header col-xs-6">First Name</div>
-              <div id="profile-first-name" class="profile standings-cell standings-row col-xs-6">First Name</div>
+            <div class="profile content-cell content-header col-xs-6">First Name</div>
+            <div id="profile-first-name" class="profile standings-cell standings-row col-xs-6">First Name</div>
 
-              <div class="profile content-cell content-header col-xs-6">Email</div>
-              <div id="profile-email" class="profile standings-cell standings-row col-xs-6">Email</div>
+            <div class="profile content-cell content-header col-xs-6">Email</div>
+            <div id="profile-email" class="profile standings-cell standings-row col-xs-6">Email</div>
 
-              <div class="profile content-cell content-header col-xs-6">Phone Number</div>
-              <div id="profile-phone-number" class="profile standings-cell standings-row col-xs-6">Phone Number</div>
+            <div class="profile content-cell content-header col-xs-6">Phone Number</div>
+            <div id="profile-phone-number" class="profile standings-cell standings-row col-xs-6">Phone Number</div>
 
-              <div class="profile content-cell content-header col-xs-6">Captain</div>
-              <div id="profile-captain" class="profile standings-cell standings-row col-xs-6">Captain</div>
+            <div class="profile content-cell content-header col-xs-6">Captain</div>
+            <div id="profile-captain" class="profile standings-cell standings-row col-xs-6">Captain</div>
 
-              <div class="profile content-cell content-header col-xs-6">Team ID</div>
-              <div id="profile-team-id" class="profile standings-cell standings-row col-xs-6">Team ID</div>
+            <div class="profile content-cell content-header col-xs-6">Team ID</div>
+            <div id="profile-team-id" class="profile standings-cell standings-row col-xs-6">Team ID</div>
 
-            </div>
+          </div>
+          <br>
+
+          <span class="modal-button-container content">
+            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#editProfileModal" value="Edit Profile">
+          </span>
+
+          <span class="modal-button-container content">
+            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#deleteAccountModal" value="Delete Account">
+          </span>
         </div>
 
       </div>
@@ -345,6 +355,71 @@
                     <input type="text" name="game[won]" placeholder="won? true/false">
                     <input type="submit" name="submit" value="Create!">
                 </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Edit Profile Modal -->
+        <div id="editProfileModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Profile</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <form id="edit-profile">
+                      <input type="text" name="player[surname]" placeholder="last name">
+                      <input type="text" name="player[given_name]" placeholder="first name">
+                      <input type="text" name="player[email]" placeholder="email address">
+                      <input type="text" name="player[phone_number]" placeholder="phone number">
+                      <input type="text" name="player[captain]" placeholder="captain? yes/no">
+                      <input type="text" name="player[team_id]" placeholder="team number">
+                      <input type="text" id="update-player-user-id" name="player[user_id]" placeholder="user_id">
+                      <input type="submit" name="submit" value="Update!">
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Delete Account Modal -->
+        <div id="deleteAccountModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Account</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <span>
+                  <input id="delete-account" class="modal-button btn btn-default" type="submit" name="submit" value="DELETE ACCOUNT">
+                </span>
 
               </div>
 
