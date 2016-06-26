@@ -46,10 +46,13 @@ const onShowTeamPage = (event) => {
   $('.team').show();
   $('.profile').hide();
 
-  if(app.player !== null && app.player !== undefined){
-    api.index(app.player.team_id)
-    .done(ui.showTeamPageSuccess)
-    .fail(ui.failure);
+  if(app.team !== null && app.team !== undefined){
+    $('#current-team-rank').text(app.team.rank);
+    $('#current-team-name').text(app.team.name);
+    $('#current-team-wins').text(app.team.winCount);
+    $('#current-team-losses').text(app.team.lossCount);
+    $('#current-team-games').text(app.team.gameCount);
+    $('#current-team-win-pct').text(app.team.winPct);
   }else{
     $('#profile-button').click();
   }

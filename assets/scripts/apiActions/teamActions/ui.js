@@ -88,15 +88,6 @@ const createTeamSuccess = (data) => {
   console.log(data);
 };
 
-const showTeamPageSuccess = () => {
-  $('current-team-rank').text(app.team.rank);
-  $('current-team-name').text(app.team.name);
-  $('current-team-wins').text(app.team.winCount);
-  $('current-team-losses').text(app.team.lossCount);
-  $('current-team-games').text(app.team.gameCount);
-  $('current-team-win-pct').text(app.team.winPct);
-};
-
 module.exports = {
   success,
   failure,
@@ -105,5 +96,4 @@ module.exports = {
   rankTeams,
   showTeamsSuccess,
   createTeamSuccess,
-  showTeamPageSuccess
 };
