@@ -4,9 +4,11 @@ const getFormFields = require('../../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
+const app = require('../../app.js');
 
 const onCreateGame = (event) => {
   event.preventDefault();
+  $('#current-team-id').text(app.player.team_id);
   $('#createGameModal').modal('hide');
   let data = getFormFields(event.target);
 

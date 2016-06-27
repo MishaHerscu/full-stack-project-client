@@ -20,6 +20,7 @@ const showGamesSuccess = (data) => {
 
 const createGameSuccess = (data) => {
   console.log(data);
+  showGamesSuccess(data);
 };
 
 module.exports = {

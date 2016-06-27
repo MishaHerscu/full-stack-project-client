@@ -1933,9 +1933,11 @@ webpackJsonp([0],[
 
 	var api = __webpack_require__(37);
 	var ui = __webpack_require__(38);
+	var app = __webpack_require__(7);
 
 	var onCreateGame = function onCreateGame(event) {
 	  event.preventDefault();
+	  $('#current-team-id').text(app.player.team_id);
 	  $('#createGameModal').modal('hide');
 	  var data = getFormFields(event.target);
 
@@ -2057,6 +2059,7 @@ webpackJsonp([0],[
 
 	var createGameSuccess = function createGameSuccess(data) {
 	  console.log(data);
+	  showGamesSuccess(data);
 	};
 
 	module.exports = {
