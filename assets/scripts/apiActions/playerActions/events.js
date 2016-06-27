@@ -55,7 +55,6 @@ const onEditProfile = (event) => {
 
   $('#editProfileModal').modal('hide');
   let data = getFormFields(event.target);
-  console.log('event handler data:', data);
   api.update(data)
   .done(ui.editProfileSuccess)
   .fail(ui.failure);

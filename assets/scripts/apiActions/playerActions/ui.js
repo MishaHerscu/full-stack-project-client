@@ -37,16 +37,14 @@ const showPlayersSuccess = (data) => {
   $('.team-members-data').append(playerListingTemplate(app.teamMembers));
 };
 
-const createPlayerSuccess = (data) => {
-  console.log(data);
+const createPlayerSuccess = () => {
   $('#update-player-user-id').val(app.user.id);
-  $('#sign-in').click();
+  $('#sign-in').submit();
 };
 
-const editProfileSuccess = (data) => {
-  console.log(data);
+const editProfileSuccess = () => {
   $('#update-player-user-id').val(app.user.id);
-  $('#sign-in').click();
+  $('#sign-in').submit();
 };
 
 const deleteAccountSuccess = () => {

@@ -28,7 +28,6 @@ const create = function(data){
 };
 
 const update = function(data){
-  console.log('api: ', data);
   return $.ajax({
     url: app.host + '/players/' + app.player.id,
     method: 'PATCH',

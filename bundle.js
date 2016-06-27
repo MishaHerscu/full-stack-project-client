@@ -352,7 +352,6 @@ webpackJsonp([0],[
 	};
 
 	var update = function update(data) {
-	  console.log('api: ', data);
 	  return $.ajax({
 	    url: app.host + '/players/' + app.player.id,
 	    method: 'PATCH',
@@ -2016,7 +2015,6 @@ webpackJsonp([0],[
 
 	  $('#editProfileModal').modal('hide');
 	  var data = getFormFields(event.target);
-	  console.log('event handler data:', data);
 	  api.update(data).done(ui.editProfileSuccess).fail(ui.failure);
 	};
 
@@ -2088,16 +2086,14 @@ webpackJsonp([0],[
 	  $('.team-members-data').append(playerListingTemplate(app.teamMembers));
 	};
 
-	var createPlayerSuccess = function createPlayerSuccess(data) {
-	  console.log(data);
+	var createPlayerSuccess = function createPlayerSuccess() {
 	  $('#update-player-user-id').val(app.user.id);
-	  $('#sign-in').click();
+	  $('#sign-in').submit();
 	};
 
-	var editProfileSuccess = function editProfileSuccess(data) {
-	  console.log(data);
+	var editProfileSuccess = function editProfileSuccess() {
 	  $('#update-player-user-id').val(app.user.id);
-	  $('#sign-in').click();
+	  $('#sign-in').submit();
 	};
 
 	var deleteAccountSuccess = function deleteAccountSuccess() {
