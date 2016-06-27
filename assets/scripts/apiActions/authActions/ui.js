@@ -36,6 +36,8 @@ const setPlayer = function(data){
       $('#profile-phone-number').text(app.player.phone_number);
       $('#profile-captain').text(app.player.captain);
       $('#profile-team-id').text(app.player.team_id);
+
+      $('#update-player-user-id').val(app.user.id);
     }
   }
   teamApi.show()

@@ -39,10 +39,14 @@ const showPlayersSuccess = (data) => {
 
 const createPlayerSuccess = (data) => {
   console.log(data);
+  $('#update-player-user-id').val(app.user.id);
+  $('#sign-in').click();
 };
 
 const editProfileSuccess = (data) => {
   console.log(data);
+  $('#update-player-user-id').val(app.user.id);
+  $('#sign-in').click();
 };
 
 const deleteAccountSuccess = () => {

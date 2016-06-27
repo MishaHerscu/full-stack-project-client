@@ -325,7 +325,7 @@
                     <input type="text" name="player[phone_number]" placeholder="phone number">
                     <input type="text" name="player[captain]" placeholder="captain? yes/no">
                     <input type="text" name="player[team_id]" placeholder="team number">
-                    <input type="text" id="create-player-user-id" name="player[user_id]" placeholder="user_id">
+                    <input type="text" class="hidden" id="create-player-user-id" name="player[user_id]" placeholder="user_id">
                     <input type="submit" name="submit" value="Create!">
                 </form>
 
@@ -417,13 +417,13 @@
               <div class="modal-body">
 
                 <form id="edit-profile">
-                      <input type="text" name="player[surname]" placeholder="last name">
-                      <input type="text" name="player[given_name]" placeholder="first name">
-                      <input type="text" name="player[email]" placeholder="email address">
-                      <input type="text" name="player[phone_number]" placeholder="phone number">
-                      <input type="text" name="player[captain]" placeholder="captain? yes/no">
-                      <input type="text" name="player[team_id]" placeholder="team number">
-                      <input type="text" id="update-player-user-id" name="player[user_id]" placeholder="user_id">
+                      <input type="text" name="newPlayerDetails[surname]" placeholder="last name">
+                      <input type="text" name="newPlayerDetails[given_name]" placeholder="first name">
+                      <input type="text" name="newPlayerDetails[email]" placeholder="email address">
+                      <input type="text" name="newPlayerDetails[phone_number]" placeholder="phone number">
+                      <input type="text" name="newPlayerDetails[captain]" placeholder="captain? yes/no">
+                      <input type="text" name="newPlayerDetails[team_id]" placeholder="team number">
+                      <input type="text" class="hidden" id="update-player-user-id" name="newPlayerDetails[user_id]" placeholder="user_id">
                       <input type="submit" name="submit" value="Update!">
                 </form>
 
