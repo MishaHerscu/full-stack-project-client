@@ -28,9 +28,9 @@ const create = function(data){
   });
 };
 
-const update = function(id, data){
+const update = function(data){
   return $.ajax({
-    url: app.host + '/players/' + id,
+    url: app.host + '/players/' + app.player.user_id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + app.user.token,

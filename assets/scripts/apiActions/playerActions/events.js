@@ -50,15 +50,38 @@ const onShowProfilePage = (event) => {
   }
 };
 
+const onEditProfile = (event) => {
+  event.preventDefault();
+  $('#editProfileModal').modal('hide');
+  let data = getFormFields(event.target);
+
+  api.update(data)
+  .done(ui.editProfileSuccess)
+  .fail(ui.failure);
+};
+
+const onDeleteAccount = (event) => {
+  event.preventDefault();
+  $('#deleteAccountModal').modal('hide');
+
+  api.destroy(app.player.user_id)
+  .done(ui.deleteAccountSuccess)
+  .fail(ui.failure);
+};
+
 const addHandlers = () => {
   $('#create-player').on('submit', onCreatePlayer);
   $('#players-button').on('click', onShowPlayers);
   $('#profile-button').on('click', onShowProfilePage);
+  $('#edit-profile').on('submit', onEditProfile);
+  $('#delete-account').on('click', onDeleteAccount);
 };
 
 module.exports = {
   addHandlers,
   onShowPlayers,
   onShowProfilePage,
-  onCreatePlayer
+  onCreatePlayer,
+  onEditProfile,
+  onDeleteAccount,
 };

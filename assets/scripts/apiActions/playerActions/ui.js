@@ -41,10 +41,20 @@ const createPlayerSuccess = (data) => {
   console.log(data);
 };
 
+const editProfileSuccess = (data) => {
+  console.log(data);
+};
+
+const deleteAccountSuccess = (data) => {
+  console.log(data);
+};
+
 module.exports = {
   success,
   failure,
   noProfile,
   showPlayersSuccess,
-  createPlayerSuccess
+  createPlayerSuccess,
+  editProfileSuccess,
+  deleteAccountSuccess,
 };
