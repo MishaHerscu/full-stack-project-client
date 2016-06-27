@@ -5,6 +5,7 @@ $font-color: $carbon;
 body {
   background-color: $main-background-color;
   color: $font-color;
+  font-size: 2em;
 }
 
 h2 {
@@ -35,6 +36,7 @@ nav {
 
 .standings-cell {
   border: 1px solid tint($carbon, 33%);
+  line-height: 40px;
   min-height: 40px;
   // padding-bottom: 20px;
   text-align: center;
@@ -50,6 +52,7 @@ nav {
 
 .content-cell {
   border: 1px solid tint($carbon, 33%);
+  line-height: 40px;
   min-height: 40px;
   // padding-bottom: 20px;
   text-align: center;
