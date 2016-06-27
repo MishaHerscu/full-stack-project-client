@@ -230,8 +230,8 @@ webpackJsonp([0],[
 	'use strict';
 
 	var app = {
-	  // host: 'http://localhost:3000',
-	  host: 'https://ironsidegoaltimate.herokuapp.com',
+	  host: 'http://localhost:3000',
+	  // host: 'https://ironsidegoaltimate.herokuapp.com',
 	  user: null,
 	  player: null,
 	  team: null,
@@ -282,6 +282,8 @@ webpackJsonp([0],[
 	      $('#profile-phone-number').text(app.player.phone_number);
 	      $('#profile-captain').text(app.player.captain);
 	      $('#profile-team-id').text(app.player.team_id);
+
+	      $('#update-player-user-id').val(app.user.id);
 	    }
 	  }
 	  teamApi.show().done(teamUi.showTeamsSuccess).fail(teamUi.failure);
@@ -350,8 +352,9 @@ webpackJsonp([0],[
 	};
 
 	var update = function update(data) {
+	  console.log('api: ', data);
 	  return $.ajax({
-	    url: app.host + '/players/' + app.player.user_id,
+	    url: app.host + '/players/' + app.player.id,
 	    method: 'PATCH',
 	    headers: {
 	      Authorization: 'Token token=' + app.user.token
@@ -2010,9 +2013,10 @@ webpackJsonp([0],[
 
 	var onEditProfile = function onEditProfile(event) {
 	  event.preventDefault();
+
 	  $('#editProfileModal').modal('hide');
 	  var data = getFormFields(event.target);
-
+	  console.log('event handler data:', data);
 	  api.update(data).done(ui.editProfileSuccess).fail(ui.failure);
 	};
 
@@ -2086,10 +2090,14 @@ webpackJsonp([0],[
 
 	var createPlayerSuccess = function createPlayerSuccess(data) {
 	  console.log(data);
+	  $('#update-player-user-id').val(app.user.id);
+	  $('#sign-in').click();
 	};
 
 	var editProfileSuccess = function editProfileSuccess(data) {
 	  console.log(data);
+	  $('#update-player-user-id').val(app.user.id);
+	  $('#sign-in').click();
 	};
 
 	var deleteAccountSuccess = function deleteAccountSuccess() {
