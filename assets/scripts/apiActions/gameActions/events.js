@@ -30,13 +30,24 @@ const onShowGames = (event) => {
   .fail(ui.failure);
 };
 
+const onDeleteGame = (event) => {
+  event.preventDefault();
+  let data = $(event.target).data("id");
+  console.log('delete data: ', data);
+  api.destroy(data)
+  .done(ui.deleteGameSuccess)
+  .fail(ui.failure);
+};
+
 const addHandlers = () => {
   $('#create-game').on('submit', onCreateGame);
   $('#games-button').on('click', onShowGames);
+  $(document).on('click', '.game-delete-button', onDeleteGame);
 };
 
 module.exports = {
   addHandlers,
   onShowGames,
-  onCreateGame
+  onCreateGame,
+  onDeleteGame
 };

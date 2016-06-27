@@ -19,8 +19,11 @@ const showGamesSuccess = (data) => {
 };
 
 const createGameSuccess = (data) => {
-  console.log(data);
   showGamesSuccess(data);
+  $('#games-button').click();
+};
+
+const deleteGameSuccess = () => {
   $('#games-button').click();
 };
 
@@ -28,5 +31,6 @@ module.exports = {
   success,
   failure,
   showGamesSuccess,
-  createGameSuccess
+  createGameSuccess,
+  deleteGameSuccess,
 };
