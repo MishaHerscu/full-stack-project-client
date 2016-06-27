@@ -39,6 +39,7 @@ const setPlayer = function(data){
       $('#profile-team-id').text(app.player.team_id);
 
       $('#update-player-user-id').val(app.user.id);
+      $('#current-team-id').val(app.player.team_id);
     }
   }
   teamApi.show()

@@ -241,8 +241,8 @@ webpackJsonp([0],[
 	'use strict';
 
 	var app = {
-	  // host: 'http://localhost:3000',
-	  host: 'https://ironsidegoaltimate.herokuapp.com',
+	  host: 'http://localhost:3000',
+	  // host: 'https://ironsidegoaltimate.herokuapp.com',
 	  user: null,
 	  player: null,
 	  team: null,
@@ -296,6 +296,7 @@ webpackJsonp([0],[
 	      $('#profile-team-id').text(app.player.team_id);
 
 	      $('#update-player-user-id').val(app.user.id);
+	      $('#current-team-id').val(app.player.team_id);
 	    }
 	  }
 	  teamApi.show().done(teamUi.showTeamsSuccess).then(playerApi.show().done(playerUi.showPlayersSuccess).fail(playerUi.failure)).fail(teamUi.failure);
@@ -1848,6 +1849,7 @@ webpackJsonp([0],[
 	    for (var _i = 0, _max = data.teams.length; _i < _max; _i++) {
 	      if (data.teams[_i].id === app.player.team_id) {
 	        app.team = data.teams[_i];
+	        $('#current-team-id').val(app.team.id);
 	      }
 	    }
 	  }
@@ -1933,11 +1935,9 @@ webpackJsonp([0],[
 
 	var api = __webpack_require__(37);
 	var ui = __webpack_require__(38);
-	var app = __webpack_require__(7);
 
 	var onCreateGame = function onCreateGame(event) {
 	  event.preventDefault();
-	  $('#current-team-id').text(app.player.team_id);
 	  $('#createGameModal').modal('hide');
 	  var data = getFormFields(event.target);
 

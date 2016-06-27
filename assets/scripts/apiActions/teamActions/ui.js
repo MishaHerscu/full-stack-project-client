@@ -76,6 +76,7 @@ const showTeamsSuccess = (data) => {
     for(let i = 0, max = data.teams.length; i < max; i++){
       if(data.teams[i].id === app.player.team_id){
         app.team = data.teams[i];
+        $('#current-team-id').val(app.team.id);
       }
     }
   }
