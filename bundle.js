@@ -419,10 +419,8 @@ webpackJsonp([0],[
 	  $('#createPlayerModal').modal('show');
 	};
 
-	var showPlayersSuccess = function showPlayersSuccess(data) {
-	  $('.players-data').html('');
+	var setTeamMembers = function setTeamMembers(data) {
 	  $('.team-members-data').html('');
-
 	  var allPlayers = data.players;
 	  var max = data.players.length;
 	  app.teamMembers = { players: [] };
@@ -431,10 +429,20 @@ webpackJsonp([0],[
 	      app.teamMembers.players.push(allPlayers[i]);
 	    }
 	  }
+	  var playerListingTemplate = __webpack_require__(11);
+	  $('.team-members-data').append(playerListingTemplate(app.teamMembers));
+	};
 
+	var showPlayersSuccess = function showPlayersSuccess(data) {
+	  $('.players-data').html('');
 	  var playerListingTemplate = __webpack_require__(11);
 	  $('.players-data').append(playerListingTemplate(data));
-	  $('.team-members-data').append(playerListingTemplate(app.teamMembers));
+
+	  if (app.player !== null && app.player !== undefined) {
+	    setTeamMembers(data);
+	  } else {
+	    noProfile();
+	  }
 	};
 
 	var createPlayerSuccess = function createPlayerSuccess() {
@@ -471,6 +479,7 @@ webpackJsonp([0],[
 	  success: success,
 	  failure: failure,
 	  noProfile: noProfile,
+	  setTeamMembers: setTeamMembers,
 	  showPlayersSuccess: showPlayersSuccess,
 	  createPlayerSuccess: createPlayerSuccess,
 	  editProfileSuccess: editProfileSuccess,

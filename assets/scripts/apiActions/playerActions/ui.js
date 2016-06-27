@@ -19,10 +19,8 @@ const noProfile = () => {
   $('#createPlayerModal').modal('show');
 };
 
-const showPlayersSuccess = (data) => {
-  $('.players-data').html('');
+const setTeamMembers = (data) => {
   $('.team-members-data').html('');
-
   let allPlayers = data.players;
   let max = data.players.length;
   app.teamMembers = { players: [] };
@@ -31,10 +29,20 @@ const showPlayersSuccess = (data) => {
       app.teamMembers.players.push(allPlayers[i]);
     }
   }
+  let playerListingTemplate = require('../../templates/player-listing.handlebars');
+  $('.team-members-data').append(playerListingTemplate(app.teamMembers));
+};
 
+const showPlayersSuccess = (data) => {
+  $('.players-data').html('');
   let playerListingTemplate = require('../../templates/player-listing.handlebars');
   $('.players-data').append(playerListingTemplate(data));
-  $('.team-members-data').append(playerListingTemplate(app.teamMembers));
+
+  if(app.player !== null && app.player !== undefined){
+    setTeamMembers(data);
+  } else {
+    noProfile();
+  }
 };
 
 const createPlayerSuccess = () => {
@@ -72,6 +80,7 @@ module.exports = {
   success,
   failure,
   noProfile,
+  setTeamMembers,
   showPlayersSuccess,
   createPlayerSuccess,
   editProfileSuccess,
