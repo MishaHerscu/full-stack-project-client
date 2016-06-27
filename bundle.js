@@ -2060,6 +2060,7 @@ webpackJsonp([0],[
 	var createGameSuccess = function createGameSuccess(data) {
 	  console.log(data);
 	  showGamesSuccess(data);
+	  $('#games-button').click();
 	};
 
 	module.exports = {

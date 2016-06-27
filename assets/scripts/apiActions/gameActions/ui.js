@@ -21,6 +21,7 @@ const showGamesSuccess = (data) => {
 const createGameSuccess = (data) => {
   console.log(data);
   showGamesSuccess(data);
+  $('#games-button').click();
 };
 
 module.exports = {
