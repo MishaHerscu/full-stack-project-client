@@ -64,7 +64,7 @@ const onDeleteAccount = (event) => {
   event.preventDefault();
   $('#deleteAccountModal').modal('hide');
 
-  api.destroy(app.player.user_id)
+  api.destroy(app.user.id)
   .done(ui.deleteAccountSuccess)
   .fail(ui.failure);
 };

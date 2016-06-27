@@ -45,8 +45,8 @@ const editProfileSuccess = (data) => {
   console.log(data);
 };
 
-const deleteAccountSuccess = (data) => {
-  console.log(data);
+const deleteAccountSuccess = () => {
+  $('#sign-out').click();
 };
 
 module.exports = {
