@@ -48,7 +48,24 @@ const editProfileSuccess = () => {
 };
 
 const deleteAccountSuccess = () => {
-  $('#sign-out').click();
+  console.log('User signed out successfully');
+  console.log('User account deleted');
+  app.user = null;
+  app.player = null;
+  app.team = null;
+  app.teamMembers = null;
+
+  $('#page-title').text('Standings');
+
+  $('.standings').show();
+  $('.games').hide();
+  $('.players').hide();
+  $('.team').hide();
+  $('.profile').hide();
+
+  $('.signed-in').hide();
+  $('.signed-out').show();
+
 };
 
 module.exports = {

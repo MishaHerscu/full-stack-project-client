@@ -215,11 +215,22 @@ webpackJsonp([0],[
 	  });
 	};
 
+	var deleteAccount = function deleteAccount() {
+	  return $.ajax({
+	    url: app.host + '/delete-account/' + app.user.id,
+	    method: "DELETE",
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
+	  });
+	};
+
 	module.exports = {
 	  signUp: signUp,
 	  signIn: signIn,
 	  signOut: signOut,
-	  changePassword: changePassword
+	  changePassword: changePassword,
+	  deleteAccount: deleteAccount
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -437,7 +448,23 @@ webpackJsonp([0],[
 	};
 
 	var deleteAccountSuccess = function deleteAccountSuccess() {
-	  $('#sign-out').click();
+	  console.log('User signed out successfully');
+	  console.log('User account deleted');
+	  app.user = null;
+	  app.player = null;
+	  app.team = null;
+	  app.teamMembers = null;
+
+	  $('#page-title').text('Standings');
+
+	  $('.standings').show();
+	  $('.games').hide();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').hide();
+
+	  $('.signed-in').hide();
+	  $('.signed-out').show();
 	};
 
 	module.exports = {
@@ -2080,6 +2107,8 @@ webpackJsonp([0],[
 	var app = __webpack_require__(7);
 	var api = __webpack_require__(9);
 	var ui = __webpack_require__(10);
+	var authApi = __webpack_require__(6);
+	var authUi = __webpack_require__(8);
 
 	var onCreatePlayer = function onCreatePlayer(event) {
 	  event.preventDefault();
@@ -2131,7 +2160,7 @@ webpackJsonp([0],[
 	  event.preventDefault();
 	  $('#deleteAccountModal').modal('hide');
 
-	  api.destroy(app.user.id).done(ui.deleteAccountSuccess).fail(ui.failure);
+	  api.destroy(app.player.id).done(authApi.deleteAccount().fail(authUi.failure)).then(ui.deleteAccountSuccess).fail(ui.failure);
 	};
 
 	var addHandlers = function addHandlers() {

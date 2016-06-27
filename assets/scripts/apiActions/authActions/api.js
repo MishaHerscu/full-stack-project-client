@@ -39,9 +39,20 @@ const changePassword = (data) => {
   });
 };
 
+const deleteAccount = () => {
+  return $.ajax({
+    url: app.host + '/delete-account/' + app.user.id,
+    method: "DELETE",
+    headers: {
+      Authorization: 'Token token=' + app.user.token,
+    },
+  });
+};
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
+  deleteAccount,
 };

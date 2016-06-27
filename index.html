@@ -76,128 +76,131 @@
           </div>
         </div>
 
-        <div class="games content">
+        <div id="other-page-options" class="signed-in">
 
-          <h3 class="page-title">Games</h3>
+          <div class="games content">
 
-          <div id="games-table" class="table col-xs-12">
+            <h3 class="page-title">Games</h3>
 
-            <div class="content-cell content-header col-xs-1">id</div>
-            <div class="content-cell content-header col-xs-1">team</div>
-            <div class="content-cell content-header col-xs-3">date</div>
-            <div class="content-cell content-header col-xs-4">opponent</div>
-            <div class="content-cell content-header col-xs-3">won</div>
+            <div id="games-table" class="table col-xs-12">
 
-            <div class="games-data"></div>
+              <div class="content-cell content-header col-xs-1">id</div>
+              <div class="content-cell content-header col-xs-1">team</div>
+              <div class="content-cell content-header col-xs-3">date</div>
+              <div class="content-cell content-header col-xs-4">opponent</div>
+              <div class="content-cell content-header col-xs-3">won</div>
 
-          </div>
+              <div class="games-data"></div>
 
-          <br>
-
-          <div class="modal-button-container content">
-            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createGameModal" value="Create Game!">
-          </div>
-
-        </div>
-
-        <div class="players content">
-
-          <h3 class="page-title">Players</h3>
-
-          <div id="players-table" class="table col-xs-12">
-
-            <div class="content-cell content-header col-xs-2">surname</div>
-            <div class="content-cell content-header col-xs-2">given_name</div>
-            <div class="content-cell content-header col-xs-3">email</div>
-            <div class="content-cell content-header col-xs-3">phone_number</div>
-            <div class="content-cell content-header col-xs-1">captain</div>
-            <div class="content-cell content-header col-xs-1">team</div>
-
-            <div class="players-data"></div>
-
-          </div>
-        </div>
-
-        <div class="team content">
-
-          <h3 class="page-title">Team Performance</h3>
-
-          <div id="team-table" class="table col-xs-12">
-
-            <div class="content-cell content-header col-xs-2">Rank</div>
-            <div class="content-cell content-header col-xs-2">Team</div>
-            <div class="content-cell content-header col-xs-2">Wins</div>
-            <div class="content-cell content-header col-xs-2">Losses</div>
-            <div class="content-cell content-header col-xs-2">Games</div>
-            <div class="content-cell content-header col-xs-2">Win Pct</div>
-
-            <div id="current-team-rank" class="standings-cell standings-row col-xs-2"></div>
-            <div id="current-team-name" class="standings-cell team-name standings-row col-xs-2"></div>
-            <div id="current-team-wins" class="standings-cell standings-row col-xs-2"></div>
-            <div id="current-team-losses" class="standings-cell standings-row col-xs-2"></div>
-            <div id="current-team-games" class="standings-cell standings-row col-xs-2"></div>
-            <div id="current-team-win-pct" class="standings-cell standings-row col-xs-2"></div>
+            </div>
 
             <br>
-          </div>
 
-          <h3 class="page-title">Team Members</h3>
-
-          <div id="team-members-table" class="table col-xs-12">
-
-            <div class="content-cell content-header col-xs-2">surname</div>
-            <div class="content-cell content-header col-xs-2">given_name</div>
-            <div class="content-cell content-header col-xs-3">email</div>
-            <div class="content-cell content-header col-xs-3">phone_number</div>
-            <div class="content-cell content-header col-xs-1">captain</div>
-            <div class="content-cell content-header col-xs-1">team</div>
-
-            <div class="team-members-data"></div>
+            <div class="modal-button-container content">
+              <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createGameModal" value="Create Game!">
+            </div>
 
           </div>
 
-          <div class="modal-button-container content">
-            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createTeamModal" value="Create New Team!">
+          <div class="players content">
+
+            <h3 class="page-title">Players</h3>
+
+            <div id="players-table" class="table col-xs-12">
+
+              <div class="content-cell content-header col-xs-2">surname</div>
+              <div class="content-cell content-header col-xs-2">given_name</div>
+              <div class="content-cell content-header col-xs-3">email</div>
+              <div class="content-cell content-header col-xs-3">phone_number</div>
+              <div class="content-cell content-header col-xs-1">captain</div>
+              <div class="content-cell content-header col-xs-1">team</div>
+
+              <div class="players-data"></div>
+
+            </div>
+          </div>
+
+          <div class="team content">
+
+            <h3 class="page-title">Team Performance</h3>
+
+            <div id="team-table" class="table col-xs-12">
+
+              <div class="content-cell content-header col-xs-2">Rank</div>
+              <div class="content-cell content-header col-xs-2">Team</div>
+              <div class="content-cell content-header col-xs-2">Wins</div>
+              <div class="content-cell content-header col-xs-2">Losses</div>
+              <div class="content-cell content-header col-xs-2">Games</div>
+              <div class="content-cell content-header col-xs-2">Win Pct</div>
+
+              <div id="current-team-rank" class="standings-cell standings-row col-xs-2"></div>
+              <div id="current-team-name" class="standings-cell team-name standings-row col-xs-2"></div>
+              <div id="current-team-wins" class="standings-cell standings-row col-xs-2"></div>
+              <div id="current-team-losses" class="standings-cell standings-row col-xs-2"></div>
+              <div id="current-team-games" class="standings-cell standings-row col-xs-2"></div>
+              <div id="current-team-win-pct" class="standings-cell standings-row col-xs-2"></div>
+
+              <br>
+            </div>
+
+            <h3 class="page-title">Team Members</h3>
+
+            <div id="team-members-table" class="table col-xs-12">
+
+              <div class="content-cell content-header col-xs-2">surname</div>
+              <div class="content-cell content-header col-xs-2">given_name</div>
+              <div class="content-cell content-header col-xs-3">email</div>
+              <div class="content-cell content-header col-xs-3">phone_number</div>
+              <div class="content-cell content-header col-xs-1">captain</div>
+              <div class="content-cell content-header col-xs-1">team</div>
+
+              <div class="team-members-data"></div>
+
+            </div>
+
+            <div class="modal-button-container content">
+              <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createTeamModal" value="Create New Team!">
+            </div>
+
+          </div>
+
+          <div class="profile content">
+
+            <h3 class="page-title">Profile</h3>
+
+            <div id="profile-table" class="table profile profile-table col-xs-12">
+
+              <div class="profile content-cell content-header col-xs-6">Last Name</div>
+              <div id="profile-last-name" class="profile standings-cell standings-row col-xs-6">Last Name</div>
+
+              <div class="profile content-cell content-header col-xs-6">First Name</div>
+              <div id="profile-first-name" class="profile standings-cell standings-row col-xs-6">First Name</div>
+
+              <div class="profile content-cell content-header col-xs-6">Email</div>
+              <div id="profile-email" class="profile standings-cell standings-row col-xs-6">Email</div>
+
+              <div class="profile content-cell content-header col-xs-6">Phone Number</div>
+              <div id="profile-phone-number" class="profile standings-cell standings-row col-xs-6">Phone Number</div>
+
+              <div class="profile content-cell content-header col-xs-6">Captain</div>
+              <div id="profile-captain" class="profile standings-cell standings-row col-xs-6">Captain</div>
+
+              <div class="profile content-cell content-header col-xs-6">Team ID</div>
+              <div id="profile-team-id" class="profile standings-cell standings-row col-xs-6">Team ID</div>
+
+            </div>
+            <br>
+
+            <span class="modal-button-container content">
+              <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#editProfileModal" value="Edit Profile">
+            </span>
+
+            <span class="modal-button-container content">
+              <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#deleteAccountModal" value="Delete Account">
+            </span>
           </div>
 
         </div>
-
-        <div class="profile content">
-
-          <h3 class="page-title">Profile</h3>
-
-          <div id="profile-table" class="table profile profile-table col-xs-12">
-
-            <div class="profile content-cell content-header col-xs-6">Last Name</div>
-            <div id="profile-last-name" class="profile standings-cell standings-row col-xs-6">Last Name</div>
-
-            <div class="profile content-cell content-header col-xs-6">First Name</div>
-            <div id="profile-first-name" class="profile standings-cell standings-row col-xs-6">First Name</div>
-
-            <div class="profile content-cell content-header col-xs-6">Email</div>
-            <div id="profile-email" class="profile standings-cell standings-row col-xs-6">Email</div>
-
-            <div class="profile content-cell content-header col-xs-6">Phone Number</div>
-            <div id="profile-phone-number" class="profile standings-cell standings-row col-xs-6">Phone Number</div>
-
-            <div class="profile content-cell content-header col-xs-6">Captain</div>
-            <div id="profile-captain" class="profile standings-cell standings-row col-xs-6">Captain</div>
-
-            <div class="profile content-cell content-header col-xs-6">Team ID</div>
-            <div id="profile-team-id" class="profile standings-cell standings-row col-xs-6">Team ID</div>
-
-          </div>
-          <br>
-
-          <span class="modal-button-container content">
-            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#editProfileModal" value="Edit Profile">
-          </span>
-
-          <span class="modal-button-container content">
-            <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#deleteAccountModal" value="Delete Account">
-          </span>
-        </div>
-
       </div>
 
       <br><br><br>

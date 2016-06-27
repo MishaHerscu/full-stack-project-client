@@ -5,6 +5,8 @@ const getFormFields = require('../../../../lib/get-form-fields');
 const app = require('../../app.js');
 const api = require('./api');
 const ui = require('./ui');
+const authApi = require('../authActions/api');
+const authUi = require('../authActions/ui');
 
 const onCreatePlayer = (event) => {
   event.preventDefault();
@@ -64,8 +66,12 @@ const onDeleteAccount = (event) => {
   event.preventDefault();
   $('#deleteAccountModal').modal('hide');
 
-  api.destroy(app.user.id)
-  .done(ui.deleteAccountSuccess)
+  api.destroy(app.player.id)
+  .done(
+    authApi.deleteAccount()
+    .fail(authUi.failure)
+  )
+  .then(ui.deleteAccountSuccess)
   .fail(ui.failure);
 };
 
