@@ -339,7 +339,6 @@ webpackJsonp([0],[
 	};
 
 	var create = function create(data) {
-	  console.log(data);
 	  return $.ajax({
 	    url: app.host + '/players',
 	    method: 'POST',
@@ -350,9 +349,9 @@ webpackJsonp([0],[
 	  });
 	};
 
-	var update = function update(id, data) {
+	var update = function update(data) {
 	  return $.ajax({
-	    url: app.host + '/players/' + id,
+	    url: app.host + '/players/' + app.player.user_id,
 	    method: 'PATCH',
 	    headers: {
 	      Authorization: 'Token token=' + app.user.token
@@ -2009,17 +2008,36 @@ webpackJsonp([0],[
 	  }
 	};
 
+	var onEditProfile = function onEditProfile(event) {
+	  event.preventDefault();
+	  $('#editProfileModal').modal('hide');
+	  var data = getFormFields(event.target);
+
+	  api.update(data).done(ui.editProfileSuccess).fail(ui.failure);
+	};
+
+	var onDeleteAccount = function onDeleteAccount(event) {
+	  event.preventDefault();
+	  $('#deleteAccountModal').modal('hide');
+
+	  api.destroy(app.user.id).done(ui.deleteAccountSuccess).fail(ui.failure);
+	};
+
 	var addHandlers = function addHandlers() {
 	  $('#create-player').on('submit', onCreatePlayer);
 	  $('#players-button').on('click', onShowPlayers);
 	  $('#profile-button').on('click', onShowProfilePage);
+	  $('#edit-profile').on('submit', onEditProfile);
+	  $('#delete-account').on('click', onDeleteAccount);
 	};
 
 	module.exports = {
 	  addHandlers: addHandlers,
 	  onShowPlayers: onShowPlayers,
 	  onShowProfilePage: onShowProfilePage,
-	  onCreatePlayer: onCreatePlayer
+	  onCreatePlayer: onCreatePlayer,
+	  onEditProfile: onEditProfile,
+	  onDeleteAccount: onDeleteAccount
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -2070,12 +2088,22 @@ webpackJsonp([0],[
 	  console.log(data);
 	};
 
+	var editProfileSuccess = function editProfileSuccess(data) {
+	  console.log(data);
+	};
+
+	var deleteAccountSuccess = function deleteAccountSuccess() {
+	  $('#sign-out').click();
+	};
+
 	module.exports = {
 	  success: success,
 	  failure: failure,
 	  noProfile: noProfile,
 	  showPlayersSuccess: showPlayersSuccess,
-	  createPlayerSuccess: createPlayerSuccess
+	  createPlayerSuccess: createPlayerSuccess,
+	  editProfileSuccess: editProfileSuccess,
+	  deleteAccountSuccess: deleteAccountSuccess
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
