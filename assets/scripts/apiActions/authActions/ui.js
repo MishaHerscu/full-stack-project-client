@@ -2,6 +2,7 @@
 
 const app = require('../../app.js');
 const playerApi = require('../playerActions/api.js');
+const playerUi = require('../playerActions/ui.js');
 const teamApi = require('../teamActions/api.js');
 const teamUi = require('../teamActions/ui.js');
 
@@ -42,6 +43,11 @@ const setPlayer = function(data){
   }
   teamApi.show()
   .done(teamUi.showTeamsSuccess)
+  .then(
+    playerApi.show()
+    .done(playerUi.showPlayersSuccess)
+    .fail(playerUi.failure)
+  )
   .fail(teamUi.failure);
 };
 
