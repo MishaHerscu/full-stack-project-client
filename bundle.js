@@ -297,6 +297,14 @@ webpackJsonp([0],[
 
 	      $('#update-player-user-id').val(app.user.id);
 	      $('#current-team-id').val(app.player.team_id);
+
+	      $('#update-player-surname').val(app.player.surname);
+	      $('#update-player-given-name').val(app.player.given_name);
+	      $('#update-player-email').val(app.player.email);
+	      $('#update-player-phone-number').val(app.player.phone_number);
+	      $('#update-player-captain').val(app.player.captain);
+	      $('#update-player-team-id').val(app.player.team_id);
+	      $('#update-player-user-id').val(app.user.id);
 	    }
 	  }
 	  teamApi.show().done(teamUi.showTeamsSuccess).then(playerApi.show().done(playerUi.showPlayersSuccess).fail(playerUi.failure)).fail(teamUi.failure);
@@ -452,6 +460,12 @@ webpackJsonp([0],[
 	};
 
 	var editProfileSuccess = function editProfileSuccess() {
+	  $('#update-player-surname').val(app.player.surname);
+	  $('#update-player-given-name').val(app.player.given_name);
+	  $('#update-player-email').val(app.player.email);
+	  $('#update-player-phone-number').val(app.player.phone_number);
+	  $('#update-player-captain').val(app.player.captain);
+	  $('#update-player-team-id').val(app.player.team_id);
 	  $('#update-player-user-id').val(app.user.id);
 	  $('#sign-in').submit();
 	};
