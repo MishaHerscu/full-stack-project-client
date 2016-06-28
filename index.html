@@ -494,10 +494,19 @@
               <div class="modal-body">
 
                 <form id="create-game">
-                    <input type="text" name="game[date]" placeholder="date"><br>
-                    <input type="text" name="game[opponent]" placeholder="opponent team_id"><br>
-                    <input type="text" class="hidden" id="current-team-id" name="game[team_id]" placeholder="team">
-                    <input type="text" name="game[won]" placeholder="won? true/false"><br>
+                    <input type="date" name="game[date]" placeholder="date"><br>
+                    <input type="number" name="game[opponent]" placeholder="opponent team_id"><br>
+                    <input type="number" class="hidden" id="current-team-id" name="game[team_id]" placeholder="team">
+                    <!-- <input type="text" name="game[won]" placeholder="won? true/false"><br> -->
+                    Won?
+                    <br>
+                    <label class="radio-inline">
+                      <input type="radio" name="game[won]" value="Yes" />Yes
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="game[won]" value="No" />No
+                    </label>
+                    <br>
                     <input type="submit" name="submit" class="btn btn-default" value="Create!">
                 </form>
 
@@ -601,9 +610,9 @@
               <div class="modal-body">
 
                 <form id="create-point">
-                  <input type="text" name="newPointDetails[game_id]" placeholder="Game ID"><br>
-                  <input type="text" name="newPointDetails[scorer_id]" placeholder="Scoring Player ID"><br>
-                  <input type="text" name="newPointDetails[assister_id]" placeholder="Assisting Player ID"><br>
+                  <input type="number" name="newPointDetails[game_id]" placeholder="Game ID"><br>
+                  <input type="number" name="newPointDetails[scorer_id]" placeholder="Scoring Player ID"><br>
+                  <input type="number" name="newPointDetails[assister_id]" placeholder="Assisting Player ID"><br>
                   <input type="submit" name="submit" class="btn btn-default" value="Create!">
                 </form>
 
