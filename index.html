@@ -324,7 +324,7 @@
               <div class="modal-body">
 
                 <form id="sign-up">
-                    <input type="text" name="credentials[email]" placeholder="email" id="sign-up-email"><br>
+                    <input type="email" name="credentials[email]" placeholder="email" id="sign-up-email"><br>
                     <input type="password" name="credentials[password]" placeholder="password" id="sign-up-pw"><br>
                     <input type="password" name="credentials[password_confirmation]" placeholder="password confirm" id="sign-up-pw-confirm"><br>
                     <input type="submit" name="submit" class="btn btn-default" value="Sign up!">
@@ -356,7 +356,7 @@
               <div class="modal-body">
 
                 <form id="sign-in">
-                    <input type="text" name="credentials[email]" placeholder="email" id="sign-in-email"><br>
+                    <input type="email" name="credentials[email]" placeholder="email" id="sign-in-email"><br>
                     <input type="password" name="credentials[password]" placeholder="password" id="sign-in-pw">
                     <br>
                     <input type="submit" name="submit" class="btn btn-default" value="Sign in!">
@@ -421,10 +421,19 @@
                 <form id="create-player">
                     <input type="text" name="player[surname]" placeholder="last name"><br>
                     <input type="text" name="player[given_name]" placeholder="first name"><br>
-                    <input type="text" name="player[email]" placeholder="email address"><br>
+                    <input type="email" name="player[email]" placeholder="email address"><br>
                     <input type="text" name="player[phone_number]" placeholder="phone number"><br>
-                    <input type="text" name="player[captain]" placeholder="captain? yes/no"><br>
-                    <input type="text" name="player[team_id]" placeholder="team number"><br>
+                    <!-- <input type="text" name="player[captain]" placeholder="captain? yes/no"><br> -->
+                    Captain?
+                    <br>
+                    <label class="radio-inline">
+                      <input type="radio" name="player[captain]" value="Yes" />Yes
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="player[captain]" value="No" />No
+                    </label>
+                    <br>
+                    <input type="number" name="player[team_id]" placeholder="team number"><br>
                     <input type="text" class="hidden" id="create-player-user-id" name="player[user_id]" placeholder="user_id">
                     <input type="submit" name="submit" class="btn btn-default" value="Create!">
                 </form>
@@ -520,10 +529,19 @@
                 <form id="edit-profile">
                       <input type="text" id="update-player-surname" name="newPlayerDetails[surname]" placeholder="last name"><br>
                       <input type="text" id="update-player-given-name" name="newPlayerDetails[given_name]" placeholder="first name"><br>
-                      <input type="text" id="update-player-email" name="newPlayerDetails[email]" placeholder="email address"><br>
+                      <input type="email" id="update-player-email" name="newPlayerDetails[email]" placeholder="email address"><br>
                       <input type="text" id="update-player-phone-number" name="newPlayerDetails[phone_number]" placeholder="phone number"><br>
-                      <input type="text" id="update-player-captain" name="newPlayerDetails[captain]" placeholder="captain? yes/no"><br>
-                      <input type="text" id="update-player-team-id" name="newPlayerDetails[team_id]" placeholder="team number"><br>
+                      <!-- <input type="text" id="update-player-captain" name="newPlayerDetails[captain]" placeholder="captain? yes/no"><br> -->
+                      Captain?
+                      <br>
+                      <label class="radio-inline">
+                        <input type="radio" name="newPlayerDetails[captain]" value="Yes" />Yes
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="newPlayerDetails[captain]" value="No" />No
+                      </label>
+                      <br>
+                      <input type="number" id="update-player-team-id" name="newPlayerDetails[team_id]" placeholder="team number"><br>
                       <input type="text" class="hidden" id="update-player-user-id" name="newPlayerDetails[user_id]" placeholder="user_id">
                       <input type="submit" name="submit" class="btn btn-default" value="Update!">
                 </form>

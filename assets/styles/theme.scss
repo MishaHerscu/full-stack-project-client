@@ -20,6 +20,14 @@ nav {
   text-align: right;
 }
 
+input:invalid {
+  border: 1px solid $invalid-red;
+}
+
+// input:valid {
+//   border: 1px solid $valid-green;
+// }
+
 .page-state-title {
   float: left;
   font-weight: bold;

@@ -12,6 +12,10 @@ $plain-black: #000;
 $board-hover-blue: #7db8ff;
 $border-grey: #1f1f1f;
 
+// colors for input validation
+$invalid-red: #8b0000;
+$valid-green: #008000;
+
 @function tint($color, $percentage) {
   @return mix($plain-white, $color, $percentage);
 }
