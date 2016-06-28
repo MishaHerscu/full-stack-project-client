@@ -76,7 +76,9 @@ const signOutSuccess = () => {
   app.user = null;
   app.player = null;
   app.team = null;
+  app.teams = null;
   app.teamMembers = null;
+  app.playerStats = null;
   $('.signed-in').hide();
   $('.signed-out').show();
 };

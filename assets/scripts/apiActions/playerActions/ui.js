@@ -33,10 +33,35 @@ const setTeamMembers = (data) => {
   $('.team-members-data').append(playerListingTemplate(app.teamMembers));
 };
 
+const setPlayerStats = (data) => {
+  app.playerStats = data.players;
+
+  let playerCount = app.playerStats.length;
+  for(let i = 0; i < playerCount; i++){
+    app.playerStats[i].goalCount = app.playerStats[i].goals.length;
+    app.playerStats[i].assistCount = app.playerStats[i].assists.length;
+    app.playerStats[i].pointCount = app.playerStats[i].goalCount + app.playerStats[i].assistCount;
+
+    // get game count
+    let teamCount = app.teams.length;
+    for(let j = 0; j < teamCount; j++){
+      if(app.teams[j].id === app.team.id){
+        app.playerStats[i].gameCount = app.teams[j].gameCount;
+      }
+    }
+
+    app.playerStats[i].GPG = app.playerStats[i].goalCount / app.playerStats[i].gameCount;
+    app.playerStats[i].APG = app.playerStats[i].assistCount / app.playerStats[i].gameCount;
+    app.playerStats[i].PPG = app.playerStats[i].pointCount / app.playerStats[i].gameCount;
+  }
+  console.log(app.playerStats);
+};
+
 const showPlayersSuccess = (data) => {
   $('.players-profile-data').html('');
   let playerListingTemplate = require('../../templates/player-listing.handlebars');
   $('.players-profile-data').append(playerListingTemplate(data));
+  setPlayerStats(data);
 
   if(app.player !== null && app.player !== undefined){
     setTeamMembers(data);
@@ -91,4 +116,5 @@ module.exports = {
   createPlayerSuccess,
   editProfileSuccess,
   deleteAccountSuccess,
+  setPlayerStats,
 };

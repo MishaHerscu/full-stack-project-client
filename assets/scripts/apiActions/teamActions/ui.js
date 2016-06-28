@@ -68,6 +68,9 @@ const showTeamsSuccess = (data) => {
     data.teams[i] = updateTeamStats(data.teams[i]);
   }
 
+  // persist data for other uses
+  app.teams = data.teams;
+
   // rank teams
   data.teams = rankTeams(data.teams);
 
