@@ -25,39 +25,47 @@ const signUpSuccess = function(){
   $('#signUpModal').modal('hide');
 };
 
+const setPlayerVals = function(){
+  $('#profile-last-name').text(app.player.surname);
+  $('#profile-first-name').text(app.player.given_name);
+  $('#profile-email').text(app.player.email);
+  $('#profile-phone-number').text(app.player.phone_number);
+  $('#profile-captain').text(app.player.captain);
+  $('#profile-team-id').text(app.player.team_id);
+
+  $('#update-player-user-id').val(app.user.id);
+  $('#current-team-id').val(app.player.team_id);
+
+  $('#update-player-surname').val(app.player.surname);
+  $('#update-player-given-name').val(app.player.given_name);
+  $('#update-player-email').val(app.player.email);
+  $('#update-player-phone-number').val(app.player.phone_number);
+  $('#update-player-captain').val(app.player.captain);
+  $('#update-player-team-id').val(app.player.team_id);
+  $('#update-player-user-id').val(app.user.id);
+};
+
 const setPlayer = function(data){
   let players = data.players;
   let max = players.length;
   for(let i = 0; i < max; i++){
     if(players[i].user.id === app.user.id){
       app.player = players[i];
-      $('#profile-last-name').text(app.player.surname);
-      $('#profile-first-name').text(app.player.given_name);
-      $('#profile-email').text(app.player.email);
-      $('#profile-phone-number').text(app.player.phone_number);
-      $('#profile-captain').text(app.player.captain);
-      $('#profile-team-id').text(app.player.team_id);
-
-      $('#update-player-user-id').val(app.user.id);
-      $('#current-team-id').val(app.player.team_id);
-
-      $('#update-player-surname').val(app.player.surname);
-      $('#update-player-given-name').val(app.player.given_name);
-      $('#update-player-email').val(app.player.email);
-      $('#update-player-phone-number').val(app.player.phone_number);
-      $('#update-player-captain').val(app.player.captain);
-      $('#update-player-team-id').val(app.player.team_id);
-      $('#update-player-user-id').val(app.user.id);
+      setPlayerVals();
     }
   }
-  teamApi.show()
-  .done(teamUi.showTeamsSuccess)
-  .then(
-    playerApi.show()
-    .done(playerUi.showPlayersSuccess)
-    .fail(playerUi.failure)
-  )
-  .fail(teamUi.failure);
+  if(app.player !== null && app.player !== undefined){
+    teamApi.show()
+    .done(teamUi.showTeamsSuccess)
+    .then(
+      playerApi.show()
+      .done(playerUi.showPlayersSuccess)
+      .fail(playerUi.failure)
+    )
+    .fail(teamUi.failure);
+  }else{
+    playerUi.noProfile();
+  }
 };
 
 const signInSuccess = (data) => {
