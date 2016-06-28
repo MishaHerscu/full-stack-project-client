@@ -12,6 +12,7 @@ const playerEvents = require('./apiActions/playerActions/events.js');
 const teamEvents = require('./apiActions/teamActions/events.js');
 const goalEvents = require('./apiActions/goalActions/events.js');
 const assistEvents = require('./apiActions/assistActions/events.js');
+const attendanceEvents = require('./apiActions/attendanceActions/events.js');
 
 
 // const bookEvents = require('./books/book-events.js');
@@ -26,6 +27,7 @@ $(() => {
   teamEvents.addHandlers();
   goalEvents.addHandlers();
   assistEvents.addHandlers();
+  attendanceEvents.addHandlers();
 
   teamEvents.onPageLoad();
 });
