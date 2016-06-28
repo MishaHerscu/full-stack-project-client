@@ -34,9 +34,9 @@ const setTeamMembers = (data) => {
 };
 
 const showPlayersSuccess = (data) => {
-  $('.players-data').html('');
+  $('.players-profile-data').html('');
   let playerListingTemplate = require('../../templates/player-listing.handlebars');
-  $('.players-data').append(playerListingTemplate(data));
+  $('.players-profile-data').append(playerListingTemplate(data));
 
   if(app.player !== null && app.player !== undefined){
     setTeamMembers(data);
