@@ -4,15 +4,32 @@ const getFormFields = require('../../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
+const assistApi = require('../assistActions/api');
 
 const onCreatePoint = (event) => {
   event.preventDefault();
   $('#createPointModal').modal('hide');
   let data = getFormFields(event.target);
+  console.log(data);
+  let goalData = {
+    goal: {
+     player_id: data.newPointDetails.scorer_id,
+     game_id: data.newPointDetails.game_id
+   }
+ };
+ let assistData = {
+   assist: {
+    player_id: data.newPointDetails.scorer_id,
+    game_id: data.newPointDetails.game_id
+  }
+};
 
-  api.create(data)
-  .done(ui.createPointSuccess)
-  .fail(ui.failure);
+  api.create(goalData)
+  .done(
+    assistApi.create(assistData)
+    .done(ui.createPointSuccess)
+    .fail(ui.failure)
+  );
 };
 
 const onShowPoints = (event) => {

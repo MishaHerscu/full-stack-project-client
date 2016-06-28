@@ -41,7 +41,7 @@ webpackJsonp([0],[
 	var playerEvents = __webpack_require__(43);
 	var teamEvents = __webpack_require__(44);
 	var goalEvents = __webpack_require__(45);
-	var assistEvents = __webpack_require__(50);
+	var assistEvents = __webpack_require__(51);
 
 	// const bookEvents = require('./books/book-events.js');
 
@@ -2430,13 +2430,27 @@ webpackJsonp([0],[
 
 	var api = __webpack_require__(46);
 	var ui = __webpack_require__(47);
+	var assistApi = __webpack_require__(50);
 
 	var onCreatePoint = function onCreatePoint(event) {
 	  event.preventDefault();
 	  $('#createPointModal').modal('hide');
 	  var data = getFormFields(event.target);
+	  console.log(data);
+	  var goalData = {
+	    goal: {
+	      player_id: data.newPointDetails.scorer_id,
+	      game_id: data.newPointDetails.game_id
+	    }
+	  };
+	  var assistData = {
+	    assist: {
+	      player_id: data.newPointDetails.scorer_id,
+	      game_id: data.newPointDetails.game_id
+	    }
+	  };
 
-	  api.create(data).done(ui.createPointSuccess).fail(ui.failure);
+	  api.create(goalData).done(assistApi.create(assistData).done(ui.createPointSuccess).fail(ui.failure));
 	};
 
 	var onShowPoints = function onShowPoints(event) {
@@ -2632,56 +2646,6 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var getFormFields = __webpack_require__(5);
-
-	var api = __webpack_require__(51);
-	var ui = __webpack_require__(52);
-
-	var onCreateAssist = function onCreateAssist(event) {
-	  event.preventDefault();
-	  $('#createAssistModal').modal('hide');
-	  var data = getFormFields(event.target);
-
-	  api.create(data).done(ui.createAssistSuccess).fail(ui.failure);
-	};
-
-	var onShowAssists = function onShowAssists(event) {
-	  event.preventDefault();
-	  $('#page-title').text('Assists');
-
-	  $('.standings').hide();
-	  $('.games').hide();
-	  $('.players').hide();
-	  $('.team').hide();
-	  $('.profile').hide();
-	  $('.points').show();
-
-	  api.show().done(ui.showAssistsSuccess).fail(ui.failure);
-	};
-
-	var onDeleteAssist = function onDeleteAssist(event) {
-	  event.preventDefault();
-	  var data = $(event.target).data("id");
-	  api.destroy(data).done(ui.deleteAssistSuccess).fail(ui.failure);
-	};
-
-	var addHandlers = function addHandlers() {
-	  $('#create-assist').on('submit', onCreateAssist);
-	  $('#assists-button').on('click', onShowAssists);
-	  $(document).on('click', '.assist-delete-button', onDeleteAssist);
-	};
-
-	module.exports = {
-	  addHandlers: addHandlers
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
 	var app = __webpack_require__(7);
 
 	var show = function show() {
@@ -2737,6 +2701,56 @@ webpackJsonp([0],[
 	  create: create,
 	  update: update,
 	  destroy: destroy
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var getFormFields = __webpack_require__(5);
+
+	var api = __webpack_require__(50);
+	var ui = __webpack_require__(52);
+
+	var onCreateAssist = function onCreateAssist(event) {
+	  event.preventDefault();
+	  $('#createAssistModal').modal('hide');
+	  var data = getFormFields(event.target);
+
+	  api.create(data).done(ui.createAssistSuccess).fail(ui.failure);
+	};
+
+	var onShowAssists = function onShowAssists(event) {
+	  event.preventDefault();
+	  $('#page-title').text('Points');
+
+	  $('.standings').hide();
+	  $('.games').hide();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').hide();
+	  $('.points').show();
+
+	  api.show().done(ui.showAssistsSuccess).fail(ui.failure);
+	};
+
+	var onDeleteAssist = function onDeleteAssist(event) {
+	  event.preventDefault();
+	  var data = $(event.target).data("id");
+	  api.destroy(data).done(ui.deleteAssistSuccess).fail(ui.failure);
+	};
+
+	var addHandlers = function addHandlers() {
+	  $('#create-assist').on('submit', onCreateAssist);
+	  $('#assists-button').on('click', onShowAssists);
+	  $(document).on('click', '.assist-delete-button', onDeleteAssist);
+	};
+
+	module.exports = {
+	  addHandlers: addHandlers
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 

@@ -17,7 +17,7 @@ const onCreateAssist = (event) => {
 
 const onShowAssists = (event) => {
   event.preventDefault();
-  $('#page-title').text('Assists');
+  $('#page-title').text('Points');
 
   $('.standings').hide();
   $('.games').hide();
