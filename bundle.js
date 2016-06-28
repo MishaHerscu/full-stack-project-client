@@ -480,7 +480,7 @@ webpackJsonp([0],[
 	  }).reverse();
 
 	  for (var k = 0; k < app.playerStats.length; k++) {
-	    app.playerStats[k].rank = k;
+	    app.playerStats[k].rank = k + 1;
 	  }
 	};
 
@@ -488,15 +488,16 @@ webpackJsonp([0],[
 	  $('.players-profile-data').html('');
 	  $('.players-stats-data').html('');
 
-	  // show player contact info
-	  var playerListingTemplate = __webpack_require__(11);
-	  $('.players-profile-data').append(playerListingTemplate(data));
-
 	  // show player stats
 	  setPlayerStats(data);
 	  var statsData = { statPlayers: app.playerStats };
 	  var statPlayerListingTemplate = __webpack_require__(32);
 	  $('.players-stats-data').append(statPlayerListingTemplate(statsData));
+
+	  // show player contact info
+	  var profileData = { players: app.playerStats };
+	  var playerListingTemplate = __webpack_require__(11);
+	  $('.players-profile-data').append(playerListingTemplate(profileData));
 
 	  if (app.player !== null && app.player !== undefined) {
 	    setTeamMembers(data);
@@ -1754,13 +1755,15 @@ webpackJsonp([0],[
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-	  return "<div class=\"standings-cell person-name standings-row col-xs-2\">"
+	  return "<div class=\"standings-cell person-name standings-row col-xs-1\">"
+	    + alias4(((helper = (helper = helpers.rank || (depth0 != null ? depth0.rank : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rank","hash":{},"data":data}) : helper)))
+	    + "</div>\n<div class=\"standings-cell person-name standings-row col-xs-2\">"
 	    + alias4(((helper = (helper = helpers.surname || (depth0 != null ? depth0.surname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"surname","hash":{},"data":data}) : helper)))
 	    + "</div>\n<div class=\"standings-cell person-name standings-row col-xs-2\">"
 	    + alias4(((helper = (helper = helpers.given_name || (depth0 != null ? depth0.given_name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"given_name","hash":{},"data":data}) : helper)))
 	    + "</div>\n<div class=\"standings-cell person-name standings-row col-xs-3\">"
 	    + alias4(((helper = (helper = helpers.email || (depth0 != null ? depth0.email : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"email","hash":{},"data":data}) : helper)))
-	    + "</div>\n<div class=\"standings-cell person-name standings-row col-xs-3\">"
+	    + "</div>\n<div class=\"standings-cell person-name standings-row col-xs-2\">"
 	    + alias4(((helper = (helper = helpers.phone_number || (depth0 != null ? depth0.phone_number : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"phone_number","hash":{},"data":data}) : helper)))
 	    + "</div>\n<div class=\"standings-cell person-name standings-row col-xs-1\">"
 	    + alias4(((helper = (helper = helpers.captain || (depth0 != null ? depth0.captain : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"captain","hash":{},"data":data}) : helper)))

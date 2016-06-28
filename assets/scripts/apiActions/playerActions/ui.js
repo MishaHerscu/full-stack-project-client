@@ -77,15 +77,16 @@ const showPlayersSuccess = (data) => {
   $('.players-profile-data').html('');
   $('.players-stats-data').html('');
 
-  // show player contact info
-  let playerListingTemplate = require('../../templates/player-listing.handlebars');
-  $('.players-profile-data').append(playerListingTemplate(data));
-
   // show player stats
   setPlayerStats(data);
   let statsData = { statPlayers: app.playerStats };
   let statPlayerListingTemplate = require('../../templates/stat-player-listing.handlebars');
   $('.players-stats-data').append(statPlayerListingTemplate(statsData));
+
+  // show player contact info
+  let profileData = { players: app.playerStats };
+  let playerListingTemplate = require('../../templates/player-listing.handlebars');
+  $('.players-profile-data').append(playerListingTemplate(profileData));
 
   if(app.player !== null && app.player !== undefined){
     setTeamMembers(data);
