@@ -60,14 +60,32 @@ const setPlayerStats = (data) => {
       app.playerStats[i].PPG = 'N/A';
     }
   }
-  console.log(app.playerStats);
+
+  // sort and assign rank
+  app.playerStats.sort(
+    function(a, b) {
+      return a.PPG - b.PPG;
+    }
+  ).reverse();
+
+  for(let k = 0; k < app.playerStats.length; k++){
+    app.playerStats[k].rank = k;
+  }
 };
 
 const showPlayersSuccess = (data) => {
   $('.players-profile-data').html('');
+  $('.players-stats-data').html('');
+
+  // show player contact info
   let playerListingTemplate = require('../../templates/player-listing.handlebars');
   $('.players-profile-data').append(playerListingTemplate(data));
+
+  // show player stats
   setPlayerStats(data);
+  let statsData = { statPlayers: app.playerStats };
+  let statPlayerListingTemplate = require('../../templates/stat-player-listing.handlebars');
+  $('.players-stats-data').append(statPlayerListingTemplate(statsData));
 
   if(app.player !== null && app.player !== undefined){
     setTeamMembers(data);
