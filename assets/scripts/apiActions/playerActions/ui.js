@@ -55,9 +55,9 @@ const setPlayerStats = (data) => {
       app.playerStats[i].APG = Math.round(1000 * app.playerStats[i].assistCount / app.playerStats[i].gameCount) / 1000;
       app.playerStats[i].PPG = Math.round(1000 * app.playerStats[i].pointCount / app.playerStats[i].gameCount) / 1000;
     }else{
-      app.playerStats[i].GPG = 'N/A';
-      app.playerStats[i].APG = 'N/A';
-      app.playerStats[i].PPG = 'N/A';
+      app.playerStats[i].GPG = 0.000;
+      app.playerStats[i].APG = 0.000;
+      app.playerStats[i].PPG = 0.000;
     }
   }
 

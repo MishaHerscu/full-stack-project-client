@@ -34,7 +34,7 @@ const updateTeamStats = (team) => {
     }
     team.winPct = (Math.round((team.winCount / team.gameCount) * 100)) + '%';
   }else{
-    team.winPct = 'N/A';
+    team.winPct = '0%';
   }
 
   return team;
