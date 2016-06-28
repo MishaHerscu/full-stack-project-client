@@ -69,7 +69,7 @@ const setPlayerStats = (data) => {
   ).reverse();
 
   for(let k = 0; k < app.playerStats.length; k++){
-    app.playerStats[k].rank = k;
+    app.playerStats[k].rank = k + 1;
   }
 };
 
