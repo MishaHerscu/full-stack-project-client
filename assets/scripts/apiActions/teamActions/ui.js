@@ -62,6 +62,8 @@ const rankTeams = (teams) => {
 
 const showTeamsSuccess = (data) => {
   $('.teams-standings').html('');
+  // let headerHTML = '<tr><th class="standings-cell standings-header col-xs-2">Ranking</th><th class="standings-cell standings-header col-xs-2">Team</th><th class="standings-cell standings-header col-xs-2">Wins</th><th class="standings-cell standings-header col-xs-2">Losses</th><th class="standings-cell standings-header col-xs-2">Games</th><th class="standings-cell standings-header col-xs-2">Win Pct</th></tr>';
+  // $('.teams-standings').html(headerHTML);
 
   // update team stats
   for(let i = 0, max = data.teams.length; i < max; i++){
@@ -83,9 +85,8 @@ const showTeamsSuccess = (data) => {
       }
     }
   }
-
-  let teamListingTemplate = require('../../templates/team-listing.handlebars');
-  $('.teams-standings').append(teamListingTemplate(data));
+  let teamListingTemplate = require('../../templates/team.handlebars');
+  $('.teams-standings').html(teamListingTemplate(data));
 };
 
 const createTeamSuccess = (data) => {

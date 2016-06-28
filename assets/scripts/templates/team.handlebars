@@ -1,7 +1,21 @@
 <!--  team standings -->
-<div class="standings-cell standings-row col-xs-2" data-id={{id}}>{{rank}}</div>
-<div class="standings-cell team-name standings-row col-xs-2" data-id={{id}}>{{name}}</div>
-<div class="standings-cell standings-row col-xs-2" data-id={{id}}>{{winCount}}</div>
-<div class="standings-cell standings-row col-xs-2" data-id={{id}}>{{lossCount}}</div>
-<div class="standings-cell standings-row col-xs-2" data-id={{id}}>{{gameCount}}</div>
-<div class="standings-cell standings-row col-xs-2" data-id={{id}}>{{winPct}}</div>
+<table id="standings-table" class="table table-striped table-bordered table-hover table-responsive teams-standings col-xs-12">
+  <tr>
+    <th class="standings-cell standings-header col-xs-2">Ranking</th>
+    <th class="standings-cell standings-header col-xs-2">Team</th>
+    <th class="standings-cell standings-header col-xs-2">Wins</th>
+    <th class="standings-cell standings-header col-xs-2">Losses</th>
+    <th class="standings-cell standings-header col-xs-2">Games</th>
+    <th class="standings-cell standings-header col-xs-2">Win Pct</th>
+  </tr>
+  {{#each teams}}
+    <tr>
+      <td class="standings-cell standings-row col-xs-2" data-id={{id}}>{{rank}}</td>
+      <td class="standings-cell team-name standings-row col-xs-2" data-id={{id}}>{{name}}</td>
+      <td class="standings-cell standings-row col-xs-2" data-id={{id}}>{{winCount}}</td>
+      <td class="standings-cell standings-row col-xs-2" data-id={{id}}>{{lossCount}}</td>
+      <td class="standings-cell standings-row col-xs-2" data-id={{id}}>{{gameCount}}</td>
+      <td class="standings-cell standings-row col-xs-2" data-id={{id}}>{{winPct}}</td>
+    </tr>
+  {{/each}}
+</table>
