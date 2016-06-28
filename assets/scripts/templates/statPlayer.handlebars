@@ -1,10 +1,29 @@
-<div class="standings-cell person-name standings-row col-xs-1">{{rank}}</div>
-<div class="standings-cell person-name standings-row col-xs-2">{{surname}}</div>
-<div class="standings-cell person-name standings-row col-xs-2">{{given_name}}</div>
-<div class="standings-cell person-name standings-row col-xs-1">{{gameCount}}</div>
-<div class="standings-cell person-name standings-row col-xs-1">{{goalCount}}</div>
-<div class="standings-cell person-name standings-row col-xs-1">{{assistCount}}</div>
-<div class="standings-cell person-name standings-row col-xs-1">{{pointCount}}</div>
-<div class="standings-cell person-name standings-row col-xs-1">{{GPG}}</div>
-<div class="standings-cell person-name standings-row col-xs-1">{{APG}}</div>
-<div class="standings-cell person-name standings-row col-xs-1">{{PPG}}</div>
+<!--  player stats -->
+<table id="players-stats-table" class="table table-striped table-bordered table-hover table-responsive players-stats-data col-xs-12">
+  <tr>
+    <th class="standings-cell person-name standings-row col-xs-1">Rank</th>
+    <th class="standings-cell person-name standings-row col-xs-2">Last Name</th>
+    <th class="standings-cell person-name standings-row col-xs-2">First Name</th>
+    <th class="standings-cell person-name standings-row col-xs-1">Games</th>
+    <th class="standings-cell person-name standings-row col-xs-1">Goals</th>
+    <th class="standings-cell person-name standings-row col-xs-1">Assists</th>
+    <th class="standings-cell person-name standings-row col-xs-1">Points</th>
+    <th class="standings-cell person-name standings-row col-xs-1">GPG</th>
+    <th class="standings-cell person-name standings-row col-xs-1">APG</th>
+    <th class="standings-cell person-name standings-row col-xs-1">PPG</th>
+  </tr>
+  {{#each statPlayers}}
+    <tr>
+      <td class="standings-cell person-name standings-row col-xs-1">{{rank}}</td>
+      <td class="standings-cell person-name standings-row col-xs-2">{{surname}}</td>
+      <td class="standings-cell person-name standings-row col-xs-2">{{given_name}}</td>
+      <td class="standings-cell person-name standings-row col-xs-1">{{gameCount}}</td>
+      <td class="standings-cell person-name standings-row col-xs-1">{{goalCount}}</td>
+      <td class="standings-cell person-name standings-row col-xs-1">{{assistCount}}</td>
+      <td class="standings-cell person-name standings-row col-xs-1">{{pointCount}}</td>
+      <td class="standings-cell person-name standings-row col-xs-1">{{GPG}}</td>
+      <td class="standings-cell person-name standings-row col-xs-1">{{APG}}</td>
+      <td class="standings-cell person-name standings-row col-xs-1">{{PPG}}</td>
+    </tr>
+  {{/each}}
+</table>

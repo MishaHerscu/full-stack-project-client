@@ -88,18 +88,16 @@
 
             <h3 class="page-title">Games</h3>
 
-            <div id="games-table" class="table col-xs-12">
-
-              <div class="content-cell content-header col-xs-1">ID</div>
-              <div class="content-cell content-header col-xs-1">Team</div>
-              <div class="content-cell content-header col-xs-2">Date</div>
-              <div class="content-cell content-header col-xs-4">Opponent</div>
-              <div class="content-cell content-header col-xs-3">Won</div>
-              <div class="content-cell content-header col-xs-1">Delete</div>
-
-              <div class="games-data"></div>
-
-            </div>
+            <table id="games-table" class="table table-striped table-bordered table-hover table-responsive games-data col-xs-12">
+              <tr>
+                <th class="content-cell content-header col-xs-1">ID</th>
+                <th class="content-cell content-header col-xs-1">Team</th>
+                <th class="content-cell content-header col-xs-2">Date</th>
+                <th class="content-cell content-header col-xs-4">Opponent</th>
+                <th class="content-cell content-header col-xs-3">Won</th>
+                <th class="content-cell content-header col-xs-1">Delete</th>
+              </tr>
+            </table>
 
             <br>
 
@@ -113,36 +111,29 @@
 
             <h3 class="page-title">Goals</h3>
 
-            <div id="goal-table" class="table col-xs-12">
+            <table id="goals-table" class="table table-striped table-bordered table-hover table-responsive goals-data col-xs-12">
+              <tr>
+                <th class="content-cell content-header col-xs-3" data-id={{id}}>ID</th>
+                <th class="content-cell content-header col-xs-3" data-id={{id}}>Player Surname</th>
+                <th class="content-cell content-header col-xs-3" data-id={{id}}>Player First Name</th>
+                <th class="content-cell content-header col-xs-2" data-id={{id}}>Game ID</th>
+                <th class="content-cell content-header col-xs-1" data-id={{id}}>Delete</th>
+              </tr>
+            </table>
 
-              <div class="content-cell content-header col-xs-3" data-id={{id}}>ID</div>
-              <div class="content-cell content-header col-xs-3" data-id={{id}}>Player Surname</div>
-              <div class="content-cell content-header col-xs-3" data-id={{id}}>Player First Name</div>
-              <div class="content-cell content-header col-xs-2" data-id={{id}}>Game ID</div>
-              <div class="content-cell content-header col-xs-1" data-id={{id}}>Delete</div>
-
-              <div class="goals-data"></div>
-
-              <br>
-
-            </div>
             <br><br><br>
 
             <h3 class="page-title">Assists</h3>
 
-            <div id="assist-table" class="table col-xs-12">
-
-              <div class="content-cell content-header col-xs-3" data-id={{id}}>ID</div>
-              <div class="content-cell content-header col-xs-3" data-id={{id}}>Player Surname</div>
-              <div class="content-cell content-header col-xs-3" data-id={{id}}>Player First Name</div>
-              <div class="content-cell content-header col-xs-2" data-id={{id}}>Game ID</div>
-              <div class="content-cell content-header col-xs-1" data-id={{id}}>Delete</div>
-
-              <div class="assists-data"></div>
-
-              <br>
-
-            </div>
+            <table id="assists-table" class="table table-striped table-bordered table-hover table-responsive assists-data col-xs-12">
+              <tr>
+                <th class="content-cell content-header col-xs-3" data-id={{id}}>ID</th>
+                <th class="content-cell content-header col-xs-3" data-id={{id}}>Player Surname</th>
+                <th class="content-cell content-header col-xs-3" data-id={{id}}>Player First Name</th>
+                <th class="content-cell content-header col-xs-2" data-id={{id}}>Game ID</th>
+                <th class="content-cell content-header col-xs-1" data-id={{id}}>Delete</th>
+              </tr>
+            </table>
 
             <br><br>
 
@@ -156,79 +147,75 @@
 
             <h3 class="page-title">Player Ranking</h3>
 
-            <div id="players-stats-table" class="table col-xs-12">
-
-              <div class="content-cell content-header col-xs-1">Rank</div>
-              <div class="content-cell content-header col-xs-2">Surname</div>
-              <div class="content-cell content-header col-xs-2">Given_name</div>
-              <div class="content-cell content-header col-xs-1">Games</div>
-              <div class="content-cell content-header col-xs-1">Goals</div>
-              <div class="content-cell content-header col-xs-1">Assists</div>
-              <div class="content-cell content-header col-xs-1">Points</div>
-              <div class="content-cell content-header col-xs-1">GPG</div>
-              <div class="content-cell content-header col-xs-1">APG</div>
-              <div class="content-cell content-header col-xs-1">PPG</div>
-
-              <div class="players-stats-data"></div>
-
-            </div>
+            <table id="players-stats-table" class="table table-striped table-bordered table-hover table-responsive players-stats-data col-xs-12">
+              <tr>
+                <th class="standings-cell person-name standings-row col-xs-1">Rank</th>
+                <th class="standings-cell person-name standings-row col-xs-2">Last Name</th>
+                <th class="standings-cell person-name standings-row col-xs-2">First Name</th>
+                <th class="standings-cell person-name standings-row col-xs-1">Games</th>
+                <th class="standings-cell person-name standings-row col-xs-1">Goals</th>
+                <th class="standings-cell person-name standings-row col-xs-1">Assists</th>
+                <th class="standings-cell person-name standings-row col-xs-1">Points</th>
+                <th class="standings-cell person-name standings-row col-xs-1">GPG</th>
+                <th class="standings-cell person-name standings-row col-xs-1">APG</th>
+                <th class="standings-cell person-name standings-row col-xs-1">PPG</th>
+              </tr>
+            </table>
             <br><br>
 
             <h3 class="page-title">Players Profile Information</h3>
 
-            <div id="players-profile-table" class="table col-xs-12">
+            <table id="player-profile-table" class="table table-striped table-bordered table-hover table-responsive players-profile-data col-xs-12">
+              <tr>
+                <th class="content-cell content-header col-xs-1">Rank</th>
+                <th class="content-cell content-header col-xs-2">Surname</th>
+                <th class="content-cell content-header col-xs-2">Given_name</th>
+                <th class="content-cell content-header col-xs-3">Email</th>
+                <th class="content-cell content-header col-xs-2">Phone_number</th>
+                <th class="content-cell content-header col-xs-1">Captain</th>
+                <th class="content-cell content-header col-xs-1">Team</th>
+              </tr>
+            </table>
 
-              <div class="content-cell content-header col-xs-1">Rank</div>
-              <div class="content-cell content-header col-xs-2">Surname</div>
-              <div class="content-cell content-header col-xs-2">Given_name</div>
-              <div class="content-cell content-header col-xs-3">Email</div>
-              <div class="content-cell content-header col-xs-2">Phone_number</div>
-              <div class="content-cell content-header col-xs-1">Captain</div>
-              <div class="content-cell content-header col-xs-1">Team</div>
-
-              <div class="players-profile-data"></div>
-
-            </div>
           </div>
 
           <div class="team content">
 
             <h3 class="page-title">Team Performance</h3>
 
-            <div id="team-table" class="table col-xs-12">
-
-              <div class="content-cell content-header col-xs-2">Rank</div>
-              <div class="content-cell content-header col-xs-2">Team</div>
-              <div class="content-cell content-header col-xs-2">Wins</div>
-              <div class="content-cell content-header col-xs-2">Losses</div>
-              <div class="content-cell content-header col-xs-2">Games</div>
-              <div class="content-cell content-header col-xs-2">Win Pct</div>
-
-              <div id="current-team-rank" class="standings-cell standings-row col-xs-2"></div>
-              <div id="current-team-name" class="standings-cell team-name standings-row col-xs-2"></div>
-              <div id="current-team-wins" class="standings-cell standings-row col-xs-2"></div>
-              <div id="current-team-losses" class="standings-cell standings-row col-xs-2"></div>
-              <div id="current-team-games" class="standings-cell standings-row col-xs-2"></div>
-              <div id="current-team-win-pct" class="standings-cell standings-row col-xs-2"></div>
-
-              <br>
-            </div>
+            <table id="team-table" class="table table-striped table-bordered table-hover table-responsive col-xs-12">
+              <tr>
+                <th class="content-cell content-header col-xs-2">Rank</th>
+                <th class="content-cell content-header col-xs-2">Team</th>
+                <th class="content-cell content-header col-xs-2">Wins</th>
+                <th class="content-cell content-header col-xs-2">Losses</th>
+                <th class="content-cell content-header col-xs-2">Games</th>
+                <th class="content-cell content-header col-xs-2">Win Pct</th>
+              </tr>
+              <tr>
+                <td id="current-team-rank" class="standings-cell standings-row col-xs-2"></td>
+                <td id="current-team-name" class="standings-cell team-name standings-row col-xs-2"></td>
+                <td id="current-team-wins" class="standings-cell standings-row col-xs-2"></td>
+                <td id="current-team-losses" class="standings-cell standings-row col-xs-2"></td>
+                <td id="current-team-games" class="standings-cell standings-row col-xs-2"></td>
+                <td id="current-team-win-pct" class="standings-cell standings-row col-xs-2"></td>
+              </tr>
+            </table>
+            <br>
 
             <h3 class="page-title">Team Members</h3>
 
-            <div id="team-members-table" class="table col-xs-12">
-
-              <div class="content-cell content-header col-xs-1">Rank</div>
-              <div class="content-cell content-header col-xs-2">Surname</div>
-              <div class="content-cell content-header col-xs-2">Given_name</div>
-              <div class="content-cell content-header col-xs-3">Email</div>
-              <div class="content-cell content-header col-xs-2">Phone_number</div>
-              <div class="content-cell content-header col-xs-1">Captain</div>
-              <div class="content-cell content-header col-xs-1">Team</div>
-
-              <div class="team-members-data"></div>
-
-            </div>
+            <table id="team-members-data" class="table table-striped table-bordered table-hover table-responsive col-xs-12">
+              <tr>
+                <th class="content-cell content-header col-xs-1">Rank</th>
+                <th class="content-cell content-header col-xs-2">Surname</th>
+                <th class="content-cell content-header col-xs-2">Given_name</th>
+                <th class="content-cell content-header col-xs-3">Email</th>
+                <th class="content-cell content-header col-xs-2">Phone_number</th>
+                <th class="content-cell content-header col-xs-1">Captain</th>
+                <th class="content-cell content-header col-xs-1">Team</th>
+              </tr>
+            </table>
 
             <div class="modal-button-container content">
               <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createTeamModal" value="Create New Team!">
@@ -299,19 +286,17 @@
 
             <h3 class="page-title">Game Attendances</h3>
 
-            <div id="attendances-table" class="table col-xs-12">
-
-              <div class="content-cell content-header col-xs-1">ID</div>
-              <div class="content-cell content-header col-xs-1">Game</div>
-              <div class="content-cell content-header col-xs-3">Team</div>
-              <div class="content-cell content-header col-xs-2">Date</div>
-              <div class="content-cell content-header col-xs-3">Opponent</div>
-              <div class="content-cell content-header col-xs-1">Won</div>
-              <div class="content-cell content-header col-xs-1">Delete</div>
-
-              <div class="attendance-data"></div>
-
-            </div>
+            <table id="attendances-table" class="table table-striped table-bordered table-hover table-responsive attendance-data col-xs-12">
+              <tr>
+                <th class="standings-cell standings-row col-xs-1">ID</th>
+                <th class="standings-cell standings-row col-xs-1">Game</th>
+                <th class="standings-cell standings-row col-xs-3">Team</th>
+                <th class="standings-cell standings-row col-xs-2">Date</th>
+                <th class="standings-cell team-name standings-row col-xs-3">Opponent</th>
+                <th class="standings-cell standings-row col-xs-1">Won</th>
+                <th class="standings-cell standings-row col-xs-1">Delete</th>
+              </tr>
+            </table>
             <br>
 
             <div class="modal-button-container content">

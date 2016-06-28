@@ -1,9 +1,25 @@
-<div class="standings-cell standings-row col-xs-1">{{id}}</div>
-<div class="standings-cell standings-row col-xs-1">{{game_id}}</div>
-<div class="standings-cell standings-row col-xs-3">{{game.team.name}}</div>
-<div class="standings-cell standings-row col-xs-2">{{game.date}}</div>
-<div class="standings-cell team-name standings-row col-xs-3">{{game.opponent}}</div>
-<div class="standings-cell standings-row col-xs-1">{{game.won}}</div>
-<div class="standings-cell standings-row col-xs-1">
-  <button class="btn btn-default attendance-delete-button" data-id={{id}}>Delete</button>
-</div>
+<!--  attendances data -->
+<table id="attendances-table" class="table table-striped table-bordered table-hover table-responsive attendance-data col-xs-12">
+  <tr>
+    <th class="standings-cell standings-row col-xs-1">ID</th>
+    <th class="standings-cell standings-row col-xs-1">Game</th>
+    <th class="standings-cell standings-row col-xs-3">Team</th>
+    <th class="standings-cell standings-row col-xs-2">Date</th>
+    <th class="standings-cell team-name standings-row col-xs-3">Opponent</th>
+    <th class="standings-cell standings-row col-xs-1">Won</th>
+    <th class="standings-cell standings-row col-xs-1">Delete</th>
+  </tr>
+  {{#each attendances}}
+    <tr>
+      <td class="standings-cell standings-row col-xs-1">{{id}}</td>
+      <td class="standings-cell standings-row col-xs-1">{{game_id}}</td>
+      <td class="standings-cell standings-row col-xs-3">{{game.team.name}}</td>
+      <td class="standings-cell standings-row col-xs-2">{{game.date}}</td>
+      <td class="standings-cell team-name standings-row col-xs-3">{{game.opponent}}</td>
+      <td class="standings-cell standings-row col-xs-1">{{game.won}}</td>
+      <td class="standings-cell standings-row col-xs-1">
+        <button class="btn btn-default attendance-delete-button" data-id={{id}}>Delete</button>
+      <td>
+    </tr>
+  {{/each}}
+</table>

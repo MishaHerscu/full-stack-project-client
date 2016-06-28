@@ -14,8 +14,8 @@ const failure = (error) => {
 
 const showAssistsSuccess = (data) => {
   $('.assists-data').html('');
-  let assistListingTemplate = require('../../templates/assist-listing.handlebars');
-  $('.assists-data').append(assistListingTemplate(data));
+  let assistListingTemplate = require('../../templates/assist.handlebars');
+  $('.assists-data').html(assistListingTemplate(data));
 };
 
 const createAssistSuccess = (data) => {

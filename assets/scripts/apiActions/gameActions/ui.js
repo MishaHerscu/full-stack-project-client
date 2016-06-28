@@ -17,8 +17,6 @@ const failure = (error) => {
 const showGamesSuccess = (data) => {
   app.games = data.games;
 
-  $('.attendance-data').text('');
-
   let attendancesCount = app.player.attendances.length;
   let gamesCount = app.games.length;
   for (let i = 0; i < attendancesCount; i++){
@@ -31,12 +29,13 @@ const showGamesSuccess = (data) => {
 
   let attendanceData = { attendances: app.player.attendances };
 
-  let attendanceListingTemplate = require('../../templates/attendance-listing.handlebars');
-  $('.attendance-data').append(attendanceListingTemplate(attendanceData));
+  $('.attendance-data').html('');
+  let attendanceListingTemplate = require('../../templates/attendance.handlebars');
+  $('.attendance-data').html(attendanceListingTemplate(attendanceData));
 
   $('.games-data').html('');
-  let gameListingTemplate = require('../../templates/game-listing.handlebars');
-  $('.games-data').append(gameListingTemplate(data));
+  let gameListingTemplate = require('../../templates/game.handlebars');
+  $('.games-data').html(gameListingTemplate(data));
 };
 
 const createGameSuccess = (data) => {
