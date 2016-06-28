@@ -27,6 +27,7 @@ const onShowPlayers = (event) => {
   $('.players').show();
   $('.team').hide();
   $('.profile').hide();
+  $('.points').hide();
 
   api.show()
   .done(ui.showPlayersSuccess)

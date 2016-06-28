@@ -24,6 +24,14 @@
         </span>
 
         <span>
+          <input id="points-button" class="modal-button btn btn-default signed-in" type="submit" name="submit" value="Points">
+        </span>
+
+        <span>
+          <input id="assists-button" class="hidden modal-button btn btn-default signed-in" type="submit" name="submit" value="Points">
+        </span>
+
+        <span>
           <input id="players-button" class="modal-button btn btn-default signed-in" type="submit" name="submit" value="Players">
         </span>
 
@@ -103,6 +111,51 @@
 
           </div>
 
+          <div class="points content">
+
+            <h3 class="page-title">Goals</h3>
+
+            <div id="goal-table" class="table col-xs-12">
+
+              <div class="standings-cell standings-row col-xs-3" data-id={{id}}>ID</div>
+              <div class="standings-cell standings-row col-xs-3" data-id={{id}}>Player Surname</div>
+              <div class="standings-cell standings-row col-xs-3" data-id={{id}}>Player First Name</div>
+              <div class="standings-cell standings-row col-xs-2" data-id={{id}}>Game ID</div>
+              <div class="standings-cell standings-row col-xs-1" data-id={{id}}>Delete</div>
+
+              <div class="goals-data"></div>
+
+              <br>
+
+              <div class="modal-button-container content">
+                <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createGameModal" value="Create Goal!">
+              </div>
+
+            </div>
+            <br><br>
+
+            <h3 class="page-title">Assists</h3>
+
+            <div id="assist-table" class="table col-xs-12">
+
+              <div class="standings-cell standings-row col-xs-3" data-id={{id}}>ID</div>
+              <div class="standings-cell standings-row col-xs-3" data-id={{id}}>Player Surname</div>
+              <div class="standings-cell standings-row col-xs-3" data-id={{id}}>Player First Name</div>
+              <div class="standings-cell standings-row col-xs-2" data-id={{id}}>Game ID</div>
+              <div class="standings-cell standings-row col-xs-1" data-id={{id}}>Delete</div>
+
+              <div class="assists-data"></div>
+
+              <br>
+
+              <div class="modal-button-container content">
+                <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createGameModal" value="Create Assist!">
+              </div>
+
+            </div>
+
+          </div>
+
           <div class="players content">
 
             <h3 class="page-title">Player Ranking</h3>
@@ -122,7 +175,8 @@
 
               <div class="players-stats-data"></div>
 
-            </div><br><br>
+            </div>
+            <br><br>
 
             <h3 class="page-title">Players Profile Information</h3>
 

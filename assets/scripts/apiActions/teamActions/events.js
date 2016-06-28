@@ -30,6 +30,7 @@ const onShowTeams = (event) => {
   $('.players').hide();
   $('.team').hide();
   $('.profile').hide();
+  $('.points').hide();
 
   api.show()
   .done(ui.showTeamsSuccess)
@@ -45,6 +46,7 @@ const onShowTeamPage = (event) => {
   $('.players').hide();
   $('.team').show();
   $('.profile').hide();
+  $('.points').hide();
 
   if(app.team !== null && app.team !== undefined){
     $('#current-team-rank').text(app.team.rank);

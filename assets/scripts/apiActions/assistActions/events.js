@@ -5,49 +5,46 @@ const getFormFields = require('../../../../lib/get-form-fields');
 const api = require('./api');
 const ui = require('./ui');
 
-const onCreateGame = (event) => {
+const onCreateAssist = (event) => {
   event.preventDefault();
-  $('#createGameModal').modal('hide');
+  $('#createAssistModal').modal('hide');
   let data = getFormFields(event.target);
 
   api.create(data)
-  .done(ui.createGameSuccess)
+  .done(ui.createAssistSuccess)
   .fail(ui.failure);
 };
 
-const onShowGames = (event) => {
+const onShowAssists = (event) => {
   event.preventDefault();
-  $('#page-title').text('Games');
+  $('#page-title').text('Assists');
 
   $('.standings').hide();
-  $('.games').show();
+  $('.games').hide();
   $('.players').hide();
   $('.team').hide();
   $('.profile').hide();
-  $('.points').hide();
+  $('.points').show();
 
   api.show()
-  .done(ui.showGamesSuccess)
+  .done(ui.showAssistsSuccess)
   .fail(ui.failure);
 };
 
-const onDeleteGame = (event) => {
+const onDeleteAssist = (event) => {
   event.preventDefault();
   let data = $(event.target).data("id");
   api.destroy(data)
-  .done(ui.deleteGameSuccess)
+  .done(ui.deleteAssistSuccess)
   .fail(ui.failure);
 };
 
 const addHandlers = () => {
-  $('#create-game').on('submit', onCreateGame);
-  $('#games-button').on('click', onShowGames);
-  $(document).on('click', '.game-delete-button', onDeleteGame);
+  $('#create-assist').on('submit', onCreateAssist);
+  $('#assists-button').on('click', onShowAssists);
+  $(document).on('click', '.assist-delete-button', onDeleteAssist);
 };
 
 module.exports = {
   addHandlers,
-  onShowGames,
-  onCreateGame,
-  onDeleteGame
 };

@@ -5,49 +5,49 @@ const getFormFields = require('../../../../lib/get-form-fields');
 const api = require('./api');
 const ui = require('./ui');
 
-const onCreateGame = (event) => {
+const onCreatePoint = (event) => {
   event.preventDefault();
-  $('#createGameModal').modal('hide');
+  $('#createPointModal').modal('hide');
   let data = getFormFields(event.target);
 
   api.create(data)
-  .done(ui.createGameSuccess)
+  .done(ui.createPointSuccess)
   .fail(ui.failure);
 };
 
-const onShowGames = (event) => {
+const onShowPoints = (event) => {
   event.preventDefault();
-  $('#page-title').text('Games');
+  $('#page-title').text('Points');
 
   $('.standings').hide();
-  $('.games').show();
+  $('.games').hide();
   $('.players').hide();
   $('.team').hide();
   $('.profile').hide();
-  $('.points').hide();
+  $('.points').show();
 
   api.show()
-  .done(ui.showGamesSuccess)
+  .done(ui.showGoalsSuccess)
   .fail(ui.failure);
 };
 
-const onDeleteGame = (event) => {
+const onDeletePoint = (event) => {
   event.preventDefault();
   let data = $(event.target).data("id");
   api.destroy(data)
-  .done(ui.deleteGameSuccess)
+  .done(ui.deletePointSuccess)
   .fail(ui.failure);
 };
 
 const addHandlers = () => {
-  $('#create-game').on('submit', onCreateGame);
-  $('#games-button').on('click', onShowGames);
-  $(document).on('click', '.game-delete-button', onDeleteGame);
+  $('#create-point').on('submit', onCreatePoint);
+  $('#points-button').on('click', onShowPoints);
+  $(document).on('click', '.goal-delete-button', onDeletePoint);
 };
 
 module.exports = {
   addHandlers,
-  onShowGames,
-  onCreateGame,
-  onDeleteGame
+  onShowPoints,
+  onCreatePoint,
+  onDeletePoint
 };

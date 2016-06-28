@@ -126,6 +126,7 @@ const deleteAccountSuccess = () => {
   $('.players').hide();
   $('.team').hide();
   $('.profile').hide();
+  $('.points').hide();
 
   $('.signed-in').hide();
   $('.signed-out').show();

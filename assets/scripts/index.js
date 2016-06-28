@@ -10,6 +10,9 @@ const authEvents = require('./apiActions/authActions/events.js');
 const gameEvents = require('./apiActions/gameActions/events.js');
 const playerEvents = require('./apiActions/playerActions/events.js');
 const teamEvents = require('./apiActions/teamActions/events.js');
+const goalEvents = require('./apiActions/goalActions/events.js');
+const assistEvents = require('./apiActions/assistActions/events.js');
+
 
 // const bookEvents = require('./books/book-events.js');
 
@@ -21,5 +24,8 @@ $(() => {
   gameEvents.addHandlers();
   playerEvents.addHandlers();
   teamEvents.addHandlers();
+  goalEvents.addHandlers();
+  assistEvents.addHandlers();
+
   teamEvents.onPageLoad();
 });
