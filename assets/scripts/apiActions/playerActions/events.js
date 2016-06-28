@@ -43,6 +43,7 @@ const onShowProfilePage = (event) => {
   $('.players').hide();
   $('.team').hide();
   $('.profile').show();
+  $('.points').hide();
 
   if(app.player !== null && app.player !== undefined){
     api.show()

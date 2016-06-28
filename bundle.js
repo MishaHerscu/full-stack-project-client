@@ -2387,6 +2387,7 @@ webpackJsonp([0],[
 	  $('.players').hide();
 	  $('.team').hide();
 	  $('.profile').show();
+	  $('.points').hide();
 
 	  if (app.player !== null && app.player !== undefined) {
 	    api.show().done(ui.showPlayersSuccess).fail(ui.failure);
