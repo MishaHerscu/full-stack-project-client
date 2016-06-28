@@ -2,6 +2,7 @@
 
 const getFormFields = require('../../../../lib/get-form-fields');
 
+const helpers = require('../../helpers.js');
 const app = require('../../app.js');
 const api = require('./api');
 const ui = require('./ui');
@@ -22,12 +23,8 @@ const onShowPlayers = (event) => {
   event.preventDefault();
   $('#page-title').text('Players');
 
-  $('.standings').hide();
-  $('.games').hide();
+  helpers.hideAll();
   $('.players').show();
-  $('.team').hide();
-  $('.profile').hide();
-  $('.points').hide();
 
   api.show()
   .done(ui.showPlayersSuccess)
@@ -38,12 +35,8 @@ const onShowProfilePage = (event) => {
   event.preventDefault();
   $('#page-title').text('Profile');
 
-  $('.standings').hide();
-  $('.games').hide();
-  $('.players').hide();
-  $('.team').hide();
+  helpers.hideAll();
   $('.profile').show();
-  $('.points').hide();
 
   if(app.player !== null && app.player !== undefined){
     api.show()

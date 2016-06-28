@@ -2,6 +2,7 @@
 
 const getFormFields = require('../../../../lib/get-form-fields');
 
+const helpers = require('../../helpers.js');
 const api = require('./api');
 const ui = require('./ui');
 
@@ -19,12 +20,8 @@ const onShowGames = (event) => {
   event.preventDefault();
   $('#page-title').text('Games');
 
-  $('.standings').hide();
+  helpers.hideAll();
   $('.games').show();
-  $('.players').hide();
-  $('.team').hide();
-  $('.profile').hide();
-  $('.points').hide();
 
   api.show()
   .done(ui.showGamesSuccess)

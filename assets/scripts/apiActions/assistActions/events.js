@@ -2,6 +2,7 @@
 
 const getFormFields = require('../../../../lib/get-form-fields');
 
+const helpers = require('../../helpers.js');
 const api = require('./api');
 const ui = require('./ui');
 
@@ -19,11 +20,7 @@ const onShowAssists = (event) => {
   event.preventDefault();
   $('#page-title').text('Points');
 
-  $('.standings').hide();
-  $('.games').hide();
-  $('.players').hide();
-  $('.team').hide();
-  $('.profile').hide();
+  helpers.hideAll();
   $('.points').show();
 
   api.show()

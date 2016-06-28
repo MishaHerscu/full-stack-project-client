@@ -1,5 +1,6 @@
 'use strict';
 
+const helpers = require('../../helpers.js');
 const app = require('../../app.js');
 
 const success = (data) => {
@@ -133,12 +134,8 @@ const deleteAccountSuccess = () => {
 
   $('#page-title').text('Standings');
 
+  helpers.hideAll();
   $('.standings').show();
-  $('.games').hide();
-  $('.players').hide();
-  $('.team').hide();
-  $('.profile').hide();
-  $('.points').hide();
 
   $('.signed-in').hide();
   $('.signed-out').show();

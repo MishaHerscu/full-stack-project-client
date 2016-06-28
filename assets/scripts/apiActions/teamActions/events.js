@@ -2,6 +2,7 @@
 
 const getFormFields = require('../../../../lib/get-form-fields');
 
+const helpers = require('../../helpers.js');
 const app = require('../../app.js');
 const api = require('./api');
 const ui = require('./ui');
@@ -25,12 +26,8 @@ const onShowTeams = (event) => {
   event.preventDefault();
   $('#page-title').text('Standings');
 
+  helpers.hideAll();
   $('.standings').show();
-  $('.games').hide();
-  $('.players').hide();
-  $('.team').hide();
-  $('.profile').hide();
-  $('.points').hide();
 
   api.show()
   .done(ui.showTeamsSuccess)
@@ -41,12 +38,8 @@ const onShowTeamPage = (event) => {
   event.preventDefault();
   $('#page-title').text('Team');
 
-  $('.standings').hide();
-  $('.games').hide();
-  $('.players').hide();
+  helpers.hideAll();
   $('.team').show();
-  $('.profile').hide();
-  $('.points').hide();
 
   if(app.team !== null && app.team !== undefined){
     $('#current-team-rank').text(app.team.rank);

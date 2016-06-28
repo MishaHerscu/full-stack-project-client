@@ -14,7 +14,6 @@ const goalEvents = require('./apiActions/goalActions/events.js');
 const assistEvents = require('./apiActions/assistActions/events.js');
 const attendanceEvents = require('./apiActions/attendanceActions/events.js');
 
-
 // const bookEvents = require('./books/book-events.js');
 
 $('.signed-in').hide();
