@@ -50,9 +50,15 @@ const setPlayerStats = (data) => {
       }
     }
 
-    app.playerStats[i].GPG = app.playerStats[i].goalCount / app.playerStats[i].gameCount;
-    app.playerStats[i].APG = app.playerStats[i].assistCount / app.playerStats[i].gameCount;
-    app.playerStats[i].PPG = app.playerStats[i].pointCount / app.playerStats[i].gameCount;
+    if(app.playerStats[i].gameCount > 0){
+      app.playerStats[i].GPG = Math.round(1000 * app.playerStats[i].goalCount / app.playerStats[i].gameCount) / 1000;
+      app.playerStats[i].APG = Math.round(1000 * app.playerStats[i].assistCount / app.playerStats[i].gameCount) / 1000;
+      app.playerStats[i].PPG = Math.round(1000 * app.playerStats[i].pointCount / app.playerStats[i].gameCount) / 1000;
+    }else{
+      app.playerStats[i].GPG = 'N/A';
+      app.playerStats[i].APG = 'N/A';
+      app.playerStats[i].PPG = 'N/A';
+    }
   }
   console.log(app.playerStats);
 };
