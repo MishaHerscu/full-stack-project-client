@@ -37,7 +37,7 @@ webpackJsonp([0],[
 	__webpack_require__(3);
 
 	var authEvents = __webpack_require__(4);
-	var gameEvents = __webpack_require__(38);
+	var gameEvents = __webpack_require__(44);
 	var playerEvents = __webpack_require__(45);
 	var teamEvents = __webpack_require__(46);
 	var goalEvents = __webpack_require__(47);
@@ -270,8 +270,8 @@ webpackJsonp([0],[
 	var playerUi = __webpack_require__(10);
 	var teamApi = __webpack_require__(34);
 	var teamUi = __webpack_require__(35);
-	var gameApi = __webpack_require__(34);
-	var gameUi = __webpack_require__(35);
+	var gameApi = __webpack_require__(38);
+	var gameUi = __webpack_require__(39);
 
 	var success = function success(data) {
 	  if (data) {
@@ -2083,59 +2083,6 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var getFormFields = __webpack_require__(5);
-
-	var api = __webpack_require__(39);
-	var ui = __webpack_require__(40);
-
-	var onCreateGame = function onCreateGame(event) {
-	  event.preventDefault();
-	  $('#createGameModal').modal('hide');
-	  var data = getFormFields(event.target);
-
-	  api.create(data).done(ui.createGameSuccess).fail(ui.failure);
-	};
-
-	var onShowGames = function onShowGames(event) {
-	  event.preventDefault();
-	  $('#page-title').text('Games');
-
-	  $('.standings').hide();
-	  $('.games').show();
-	  $('.players').hide();
-	  $('.team').hide();
-	  $('.profile').hide();
-	  $('.points').hide();
-
-	  api.show().done(ui.showGamesSuccess).fail(ui.failure);
-	};
-
-	var onDeleteGame = function onDeleteGame(event) {
-	  event.preventDefault();
-	  var data = $(event.target).data("id");
-	  api.destroy(data).done(ui.deleteGameSuccess).fail(ui.failure);
-	};
-
-	var addHandlers = function addHandlers() {
-	  $('#create-game').on('submit', onCreateGame);
-	  $('#games-button').on('click', onShowGames);
-	  $(document).on('click', '.game-delete-button', onDeleteGame);
-	};
-
-	module.exports = {
-	  addHandlers: addHandlers,
-	  onShowGames: onShowGames,
-	  onCreateGame: onCreateGame,
-	  onDeleteGame: onDeleteGame
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
 	var app = __webpack_require__(7);
 
 	var show = function show() {
@@ -2195,7 +2142,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -2231,11 +2178,11 @@ webpackJsonp([0],[
 
 	  var attendanceData = { attendances: app.player.attendances };
 
-	  var attendanceListingTemplate = __webpack_require__(41);
+	  var attendanceListingTemplate = __webpack_require__(40);
 	  $('.attendance-data').append(attendanceListingTemplate(attendanceData));
 
 	  $('.games-data').html('');
-	  var gameListingTemplate = __webpack_require__(43);
+	  var gameListingTemplate = __webpack_require__(42);
 	  $('.games-data').append(gameListingTemplate(data));
 	};
 
@@ -2258,7 +2205,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(12);
@@ -2266,7 +2213,7 @@ webpackJsonp([0],[
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return ((stack1 = container.invokePartial(__webpack_require__(42),depth0,{"name":"attendance","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+	  return ((stack1 = container.invokePartial(__webpack_require__(41),depth0,{"name":"attendance","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
@@ -2274,7 +2221,7 @@ webpackJsonp([0],[
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(12);
@@ -2300,7 +2247,7 @@ webpackJsonp([0],[
 	},"useData":true});
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(12);
@@ -2308,7 +2255,7 @@ webpackJsonp([0],[
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return ((stack1 = container.invokePartial(__webpack_require__(44),depth0,{"name":"game","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+	  return ((stack1 = container.invokePartial(__webpack_require__(43),depth0,{"name":"game","data":data,"indent":"  ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
@@ -2316,7 +2263,7 @@ webpackJsonp([0],[
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(12);
@@ -2338,6 +2285,59 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n</div>\n";
 	},"useData":true});
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var getFormFields = __webpack_require__(5);
+
+	var api = __webpack_require__(38);
+	var ui = __webpack_require__(39);
+
+	var onCreateGame = function onCreateGame(event) {
+	  event.preventDefault();
+	  $('#createGameModal').modal('hide');
+	  var data = getFormFields(event.target);
+
+	  api.create(data).done(ui.createGameSuccess).fail(ui.failure);
+	};
+
+	var onShowGames = function onShowGames(event) {
+	  event.preventDefault();
+	  $('#page-title').text('Games');
+
+	  $('.standings').hide();
+	  $('.games').show();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').hide();
+	  $('.points').hide();
+
+	  api.show().done(ui.showGamesSuccess).fail(ui.failure);
+	};
+
+	var onDeleteGame = function onDeleteGame(event) {
+	  event.preventDefault();
+	  var data = $(event.target).data("id");
+	  api.destroy(data).done(ui.deleteGameSuccess).fail(ui.failure);
+	};
+
+	var addHandlers = function addHandlers() {
+	  $('#create-game').on('submit', onCreateGame);
+	  $('#games-button').on('click', onShowGames);
+	  $(document).on('click', '.game-delete-button', onDeleteGame);
+	};
+
+	module.exports = {
+	  addHandlers: addHandlers,
+	  onShowGames: onShowGames,
+	  onCreateGame: onCreateGame,
+	  onDeleteGame: onDeleteGame
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
 /* 45 */

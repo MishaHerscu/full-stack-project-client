@@ -5,8 +5,8 @@ const playerApi = require('../playerActions/api.js');
 const playerUi = require('../playerActions/ui.js');
 const teamApi = require('../teamActions/api.js');
 const teamUi = require('../teamActions/ui.js');
-const gameApi = require('../teamActions/api.js');
-const gameUi = require('../teamActions/ui.js');
+const gameApi = require('../gameActions/api.js');
+const gameUi = require('../gameActions/ui.js');
 
 const success = (data) => {
   if (data) {
