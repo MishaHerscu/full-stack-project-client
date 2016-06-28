@@ -97,5 +97,6 @@ module.exports = {
   signUpSuccess,
   signInSuccess,
   signOutSuccess,
-  setPlayer
+  setPlayer,
+  setPlayerVals
 };

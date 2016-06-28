@@ -90,6 +90,18 @@ const showPlayersSuccess = (data) => {
 
   if(app.player !== null && app.player !== undefined){
     setTeamMembers(data);
+    for(let m = 0, max = app.playerStats.length; m < max; m++){
+      if(app.playerStats[m].id === app.player.id){
+        $('#profile-rank').text(app.playerStats[m].rank);
+        $('#profile-games').text(app.playerStats[m].gameCount);
+        $('#profile-goals').text(app.playerStats[m].goalCount);
+        $('#profile-assists').text(app.playerStats[m].assistCount);
+        $('#profile-points').text(app.playerStats[m].pointCount);
+        $('#profile-gpg').text(app.playerStats[m].GPG);
+        $('#profile-apg').text(app.playerStats[m].APG);
+        $('#profile-ppg').text(app.playerStats[m].PPG);
+      }
+    }
   } else {
     noProfile();
   }
