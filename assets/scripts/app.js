@@ -7,6 +7,7 @@ const app = {
   player: null,
   team: null,
   teams: null,
+  games: null,
   teamMembers: null,
   playerStats: null,
 };

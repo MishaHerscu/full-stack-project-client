@@ -5,6 +5,8 @@ const playerApi = require('../playerActions/api.js');
 const playerUi = require('../playerActions/ui.js');
 const teamApi = require('../teamActions/api.js');
 const teamUi = require('../teamActions/ui.js');
+const gameApi = require('../teamActions/api.js');
+const gameUi = require('../teamActions/ui.js');
 
 const success = (data) => {
   if (data) {
@@ -60,6 +62,11 @@ const setPlayer = function(data){
     .then(
       playerApi.show()
       .done(playerUi.showPlayersSuccess)
+      .then(
+        gameApi.show()
+        .done(gameUi.showGamesSuccess)
+        .fail(gameUi.failure)
+      )
       .fail(playerUi.failure)
     )
     .fail(teamUi.failure);
@@ -86,6 +93,7 @@ const signOutSuccess = () => {
   app.player = null;
   app.team = null;
   app.teams = null;
+  app.games = null;
   app.teamMembers = null;
   app.playerStats = null;
   $('.signed-in').hide();
