@@ -72,6 +72,7 @@ const signInSuccess = (data) => {
   $('#signInModal').modal('hide');
   $('.signed-in').show();
   $('.signed-out').hide();
+  $('#create-player-email').val($('#sign-in-email').val());
   app.user = data.user;
 
   playerApi.show()
