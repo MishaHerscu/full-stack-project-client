@@ -2604,7 +2604,7 @@ webpackJsonp([0],[
 	var showGoalsSuccess = function showGoalsSuccess(data) {
 	  $('.goals-data').html('');
 	  var goalListingTemplate = __webpack_require__(46);
-	  $('.goals-data').append(goalListingTemplate(data));
+	  $('.goals-data').html(goalListingTemplate(data));
 	  $('#assists-button').click();
 	};
 

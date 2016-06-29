@@ -15,7 +15,7 @@ const failure = (error) => {
 const showGoalsSuccess = (data) => {
   $('.goals-data').html('');
   let goalListingTemplate = require('../../templates/goal.handlebars');
-  $('.goals-data').append(goalListingTemplate(data));
+  $('.goals-data').html(goalListingTemplate(data));
   $('#assists-button').click();
 };
 
