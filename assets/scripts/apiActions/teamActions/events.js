@@ -4,16 +4,15 @@ const getFormFields = require('../../../../lib/get-form-fields');
 
 const helpers = require('../../helpers.js');
 const app = require('../../app.js');
-const api = require('./api');
-const ui = require('./ui');
-const postUi = require('../postActions/ui');
+const api = require('./api.js');
+const ui = require('./ui.js');
+const postUi = require('../postActions/ui.js');
 
 
 const onCreateTeam = (event) => {
   event.preventDefault();
   $('#createTeamModal').modal('hide');
   let data = getFormFields(event.target);
-
 
   api.create(data)
   .done(ui.createTeamSuccess)

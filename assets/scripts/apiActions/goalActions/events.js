@@ -3,9 +3,9 @@
 const getFormFields = require('../../../../lib/get-form-fields');
 
 const helpers = require('../../helpers.js');
-const api = require('./api');
-const ui = require('./ui');
-const assistApi = require('../assistActions/api');
+const api = require('./api.js');
+const ui = require('./ui.js');
+const assistApi = require('../assistActions/api.js');
 
 const onCreatePoint = (event) => {
   event.preventDefault();

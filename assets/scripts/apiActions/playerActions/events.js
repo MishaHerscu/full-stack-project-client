@@ -4,10 +4,10 @@ const getFormFields = require('../../../../lib/get-form-fields');
 
 const helpers = require('../../helpers.js');
 const app = require('../../app.js');
-const api = require('./api');
-const ui = require('./ui');
-const authApi = require('../authActions/api');
-const authUi = require('../authActions/ui');
+const api = require('./api.js');
+const ui = require('./ui.js');
+const authApi = require('../authActions/api.js');
+const authUi = require('../authActions/ui.js');
 
 const onCreatePlayer = (event) => {
   event.preventDefault();

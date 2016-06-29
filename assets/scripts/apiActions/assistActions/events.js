@@ -3,8 +3,8 @@
 const getFormFields = require('../../../../lib/get-form-fields');
 
 const helpers = require('../../helpers.js');
-const api = require('./api');
-const ui = require('./ui');
+const api = require('./api.js');
+const ui = require('./ui.js');
 
 const onCreateAssist = (event) => {
   event.preventDefault();

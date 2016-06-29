@@ -3,12 +3,12 @@
 const getFormFields = require('../../../../lib/get-form-fields');
 
 const helpers = require('../../helpers.js');
-const api = require('./api');
-const ui = require('./ui');
-const goalApi = require('../goalActions/api');
-const goalUi = require('../goalActions/ui');
-const assistApi = require('../assistActions/api');
-const assistUi = require('../assistActions/ui');
+const api = require('./api.js');
+const ui = require('./ui.js');
+const goalApi = require('../goalActions/api.js');
+const goalUi = require('../goalActions/ui.js');
+const assistApi = require('../assistActions/api.js');
+const assistUi = require('../assistActions/ui.js');
 
 const onCreateGame = (event) => {
   event.preventDefault();

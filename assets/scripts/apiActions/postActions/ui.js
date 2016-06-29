@@ -1,6 +1,6 @@
 'use strict';
 
-const api = require('./api');
+const api = require('./api.js');
 
 const success = (data) => {
   if (data) {
