@@ -250,8 +250,8 @@ webpackJsonp([0],[
 	'use strict';
 
 	var app = {
-	  host: 'http://localhost:3000',
-	  // host: 'https://ironsidegoaltimate.herokuapp.com',
+	  // host: 'http://localhost:3000',
+	  host: 'https://ironsidegoaltimate.herokuapp.com',
 	  user: null,
 	  player: null,
 	  team: null,
@@ -2918,19 +2918,26 @@ webpackJsonp([0],[
 	var show = function show() {
 	  return $.ajax({
 	    url: app.host + '/posts/',
-	    method: "GET"
+	    method: "GET",
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: ''
 	  });
 	};
 
 	var index = function index(postId) {
 	  return $.ajax({
 	    url: app.host + '/posts/' + postId,
-	    method: "GET"
+	    method: "GET",
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: ''
 	  });
 	};
 
 	var create = function create(data) {
-	  console.log(data);
 	  return $.ajax({
 	    url: app.host + '/posts',
 	    method: 'POST',
