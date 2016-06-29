@@ -19,6 +19,12 @@ const showGoalsSuccess = (data) => {
   $('#assists-button').click();
 };
 
+const showOnlyGoalsSuccess = (data) => {
+  $('.goals-data').html('');
+  let goalListingTemplate = require('../../templates/goal.handlebars');
+  $('.goals-data').html(goalListingTemplate(data));
+};
+
 const createPointSuccess = (data) => {
   showGoalsSuccess(data);
   $('#points-button').click();
@@ -34,4 +40,5 @@ module.exports = {
   showGoalsSuccess,
   createPointSuccess,
   deletePointSuccess,
+  showOnlyGoalsSuccess,
 };

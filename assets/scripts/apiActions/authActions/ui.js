@@ -7,6 +7,10 @@ const teamApi = require('../teamActions/api.js');
 const teamUi = require('../teamActions/ui.js');
 const gameApi = require('../gameActions/api.js');
 const gameUi = require('../gameActions/ui.js');
+const goalApi = require('../goalActions/api.js');
+const goalUi = require('../goalActions/ui.js');
+const assistApi = require('../assistActions/api.js');
+const assistUi = require('../assistActions/ui.js');
 
 const success = (data) => {
   if (data) {
@@ -66,6 +70,16 @@ const setPlayer = function(data){
       .then(
         gameApi.show()
         .done(gameUi.showGamesSuccess)
+        .then(
+          goalApi.show()
+          .done(goalUi.showOnlyGoalsSuccess)
+          .then(
+            assistApi.show()
+            .done(assistUi.showAssistsSuccess)
+            .fail(assistUi.failure)
+          )
+          .fail(goalUi.failure)
+        )
         .fail(gameUi.failure)
       )
       .fail(playerUi.failure)
