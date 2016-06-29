@@ -2406,7 +2406,7 @@ webpackJsonp([0],[
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-	  return "<!--  goal data -->\n<table id=\"goals-table\" class=\"table table-striped table-bordered table-hover table-responsive goals-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-3\" data-id="
+	  return "<!--  goal data -->\n<table id=\"goals-table\" class=\"table table-striped table-bordered table-hover table-responsive table-condensed goals-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-3\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">ID</th>\n    <th class=\"content-cell content-header col-xs-3\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
@@ -2558,7 +2558,7 @@ webpackJsonp([0],[
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-	  return "<!-- assists data -->\n<table id=\"assists-table\" class=\"table table-striped table-bordered table-hover table-responsive assists-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-3\" data-id="
+	  return "<!-- assists data -->\n<table id=\"assists-table\" class=\"table table-striped table-bordered table-hover table-responsive table-condensed assists-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-3\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">ID</th>\n    <th class=\"content-cell content-header col-xs-3\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
