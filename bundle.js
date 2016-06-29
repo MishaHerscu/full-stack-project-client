@@ -1941,6 +1941,7 @@ webpackJsonp([0],[
 	};
 
 	var updateTeamStats = function updateTeamStats(team) {
+	  console.log(team);
 
 	  team.gameCount = team.games.length;
 
@@ -1988,9 +1989,10 @@ webpackJsonp([0],[
 
 	var showTeamsSuccess = function showTeamsSuccess(data) {
 	  $('.teams-standings').html('');
+	  var teamsCount = data.teams.length;
 
 	  // update team stats
-	  for (var i = 0, max = data.teams.length; i < max; i++) {
+	  for (var i = 0; i < teamsCount; i++) {
 	    data.teams[i] = updateTeamStats(data.teams[i]);
 	  }
 
@@ -2002,7 +2004,7 @@ webpackJsonp([0],[
 
 	  // set current team
 	  if (app.player !== null && app.player !== undefined) {
-	    for (var _i = 0, _max = data.teams.length; _i < _max; _i++) {
+	    for (var _i = 0, max = data.teams.length; _i < max; _i++) {
 	      if (data.teams[_i].id === app.player.team_id) {
 	        app.team = data.teams[_i];
 	        $('#current-team-id').val(app.team.id);
@@ -2141,6 +2143,8 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var app = __webpack_require__(7);
+	var teamApi = __webpack_require__(33);
+	var teamUi = __webpack_require__(34);
 
 	var success = function success(data) {
 	  if (data) {
@@ -2179,13 +2183,11 @@ webpackJsonp([0],[
 	};
 
 	var createGameSuccess = function createGameSuccess() {
-	  $('#standings-button').click();
-	  $('#games-button').click();
+	  teamApi.show().done(teamUi.showTeamsSuccess).then($('#games-button').click()).fail(teamUi.failure);
 	};
 
 	var deleteGameSuccess = function deleteGameSuccess() {
-	  $('#standings-button').click();
-	  $('#games-button').click();
+	  teamApi.show().done(teamUi.showTeamsSuccess).then($('#games-button').click()).fail(teamUi.failure);
 	};
 
 	module.exports = {
