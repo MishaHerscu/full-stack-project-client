@@ -7,6 +7,7 @@ const hideAll = () => {
   $('.team').hide();
   $('.profile').hide();
   $('.points').hide();
+  $('.bulk-points-add').hide();
 };
 
 module.exports = {

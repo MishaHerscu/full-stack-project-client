@@ -94,8 +94,9 @@
                 <th class="content-cell content-header col-xs-2">Date</th>
                 <th class="content-cell content-header col-xs-3">Team</th>
                 <th class="content-cell content-header col-xs-3">Opponent</th>
-                <th class="content-cell content-header col-xs-2">Won</th>
+                <th class="content-cell content-header col-xs-1">Won</th>
                 <th class="content-cell content-header col-xs-1">Delete</th>
+                <th class="content-cell content-header col-xs-1">Points</th>
               </tr>
             </table>
 
@@ -316,6 +317,147 @@
             <div class="modal-button-container content">
               <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createAttendanceModal" value="Create Attendance!">
             </div>
+
+          </div>
+
+
+          <div class="bulk-points-add content">
+
+            <h3 class="page-title">Bulk Create Points</h3>
+
+            <form id="bulk-create-points">
+              <table id="bulk-create-points-table" class="table table-striped table-bordered table-hover table-responsive bulk-points-data col-xs-12">
+                <tr>
+                  <th class="standings-cell standings-row col-xs-4">Game</th>
+                  <th class="standings-cell standings-row col-xs-4">Scorer</th>
+                  <th class="standings-cell standings-row col-xs-4">Assister</th>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_1]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_1]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_1]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_2]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_2]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_2]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_3]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_3]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_3]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_4]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_4]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_4]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_5]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_5]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_5]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_6]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_6]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_6]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_7]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_7]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_7]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_8]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_8]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_8]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_9]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_9]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_9]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="bulk-points-add-game standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[game_id_10]" class="bulk-points-add-game" placeholder="Game ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[scorer_id_10]" placeholder="Scoring Player ID">
+                  </td>
+                  <td class="standings-cell standings-row col-xs-4">
+                    <input type="number" name="bulk-points[assister_id_10]" placeholder="Assisting Player ID">
+                  </td>
+                </tr>
+
+              </table>
+
+              <input type="submit" name="submit" class="btn btn-default" value="Create!">
+
+            </form>
 
           </div>
 

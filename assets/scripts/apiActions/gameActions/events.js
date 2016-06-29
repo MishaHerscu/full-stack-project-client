@@ -36,15 +36,37 @@ const onDeleteGame = (event) => {
   .fail(ui.failure);
 };
 
+const onBulkCreatePoints = (event) => {
+  event.preventDefault();
+  let data = $(event.target);
+  console.log(data);
+};
+
+const onBulkCreatePointsForm = (event) => {
+  event.preventDefault();
+  let data = $(event.target).data("id");
+
+  $('.bulk-points-add-game').val(data);
+
+  $('#page-title').text('Create Points');
+  helpers.hideAll();
+  $('.bulk-points-add').show();
+};
+
+
 const addHandlers = () => {
   $('#create-game').on('submit', onCreateGame);
+  $('#bulk-create-points').on('submit', onBulkCreatePoints);
   $('#games-button').on('click', onShowGames);
   $(document).on('click', '.game-delete-button', onDeleteGame);
+  $(document).on('click', '.bulk-create-points-button', onBulkCreatePointsForm);
 };
 
 module.exports = {
   addHandlers,
   onShowGames,
   onCreateGame,
-  onDeleteGame
+  onDeleteGame,
+  onBulkCreatePoints,
+  onBulkCreatePointsForm
 };

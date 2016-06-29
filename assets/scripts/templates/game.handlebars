@@ -5,8 +5,9 @@
     <th class="content-cell content-header col-xs-2">Date</th>
     <th class="content-cell content-header col-xs-3">Team</th>
     <th class="content-cell content-header col-xs-3">Opponent</th>
-    <th class="content-cell content-header col-xs-2">Won</th>
+    <th class="content-cell content-header col-xs-1">Won</th>
     <th class="content-cell content-header col-xs-1">Delete</th>
+    <th class="content-cell content-header col-xs-1">Points</th>
   </tr>
   {{#each games}}
     <tr>
@@ -14,9 +15,12 @@
       <td class="standings-cell standings-row col-xs-2">{{date}}</td>
       <td class="standings-cell standings-row col-xs-3">{{team.name}}</td>
       <td class="standings-cell standings-row col-xs-3">{{opponent}}</td>
-      <td class="standings-cell standings-row col-xs-2">{{won}}</td>
+      <td class="standings-cell standings-row col-xs-1">{{won}}</td>
       <td class="standings-cell standings-row col-xs-1">
         <button class="btn btn-default game-delete-button" data-id={{id}}>Delete</button>
+      </td>
+      <td class="standings-cell standings-row col-xs-1">
+        <button class="btn btn-default bulk-create-points-button" data-id={{id}}>Create</button>
       </td>
     </tr>
   {{/each}}
