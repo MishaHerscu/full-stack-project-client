@@ -39,10 +39,12 @@ const showGamesSuccess = (data) => {
 };
 
 const createGameSuccess = () => {
+  $('#standings-button').click();
   $('#games-button').click();
 };
 
 const deleteGameSuccess = () => {
+  $('#standings-button').click();
   $('#games-button').click();
 };
 

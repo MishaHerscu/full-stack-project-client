@@ -1988,8 +1988,6 @@ webpackJsonp([0],[
 
 	var showTeamsSuccess = function showTeamsSuccess(data) {
 	  $('.teams-standings').html('');
-	  // let headerHTML = '<tr><th class="standings-cell standings-header col-xs-2">Ranking</th><th class="standings-cell standings-header col-xs-2">Team</th><th class="standings-cell standings-header col-xs-2">Wins</th><th class="standings-cell standings-header col-xs-2">Losses</th><th class="standings-cell standings-header col-xs-2">Games</th><th class="standings-cell standings-header col-xs-2">Win Pct</th></tr>';
-	  // $('.teams-standings').html(headerHTML);
 
 	  // update team stats
 	  for (var i = 0, max = data.teams.length; i < max; i++) {
@@ -2181,10 +2179,12 @@ webpackJsonp([0],[
 	};
 
 	var createGameSuccess = function createGameSuccess() {
+	  $('#standings-button').click();
 	  $('#games-button').click();
 	};
 
 	var deleteGameSuccess = function deleteGameSuccess() {
+	  $('#standings-button').click();
 	  $('#games-button').click();
 	};
 
