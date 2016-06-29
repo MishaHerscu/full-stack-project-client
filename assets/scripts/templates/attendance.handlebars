@@ -18,7 +18,9 @@
       <td class="standings-cell team-name standings-row col-xs-3">{{game.opponent}}</td>
       <td class="standings-cell standings-row col-xs-1">{{game.won}}</td>
       <td class="standings-cell standings-row col-xs-1">
-        <button class="btn btn-default attendance-delete-button" data-id={{id}}>Delete</button>
+        <button class="btn btn-default attendance-delete-button" data-id={{id}}>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
       </td>
     </tr>
   {{/each}}

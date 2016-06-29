@@ -2220,7 +2220,7 @@ webpackJsonp([0],[
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.won : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n    </tr>\n";
+	    + ">\n          <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n        </button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
@@ -2250,7 +2250,7 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.won || (depth0 != null ? depth0.won : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"won","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default game-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default bulk-create-points-button\" data-id="
+	    + ">\n          <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n        </button>\n      </td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default bulk-create-points-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Create</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2402,7 +2402,7 @@ webpackJsonp([0],[
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.id : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default goal-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n    </tr>\n";
+	    + ">\n          <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n        </button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -2554,7 +2554,7 @@ webpackJsonp([0],[
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.id : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default assist-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n    </tr>\n";
+	    + ">\n          <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n        </button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 

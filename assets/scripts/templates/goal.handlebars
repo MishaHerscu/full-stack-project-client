@@ -14,7 +14,9 @@
       <td class="standings-cell standings-row col-xs-3" data-id={{id}}>{{player.given_name}}</td>
       <td class="standings-cell standings-row col-xs-2" data-id={{id}}>{{game.id}}</td>
       <td class="standings-cell standings-row col-xs-1">
-        <button class="btn btn-default goal-delete-button" data-id={{id}}>Delete</button>
+        <button class="btn btn-default goal-delete-button" data-id={{id}}>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
       </td>
     </tr>
   {{/each}}
