@@ -35,6 +35,7 @@ const onShowGames = (event) => {
 const onDeleteGame = (event) => {
   event.preventDefault();
   let data = $(event.target).data("id");
+  console.log(data);
   api.destroy(data)
   .done(ui.deleteGameSuccess)
   .fail(ui.failure);
