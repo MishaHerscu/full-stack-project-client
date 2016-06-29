@@ -38,8 +38,7 @@ const showGamesSuccess = (data) => {
   $('.games-data').html(gameListingTemplate(data));
 };
 
-const createGameSuccess = (data) => {
-  showGamesSuccess(data);
+const createGameSuccess = () => {
   $('#games-button').click();
 };
 
