@@ -2885,9 +2885,13 @@ webpackJsonp([0],[
 	    return a.updated_at - b.updated_at;
 	  }).reverse();
 
+	  var finalSortedPosts = {
+	    posts: sortedPosts
+	  };
+
 	  $('.team-post-data').html('');
 	  var postListingTemplate = __webpack_require__(51);
-	  $('.team-post-data').html(postListingTemplate(sortedPosts));
+	  $('.team-post-data').html(postListingTemplate(finalSortedPosts));
 	};
 
 	var refreshPostTable = function refreshPostTable() {
@@ -2986,23 +2990,21 @@ webpackJsonp([0],[
 	var Handlebars = __webpack_require__(13);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, alias5=container.lambda;
 
-	  return "    <tr>\n      <td class=\"standings-cell standings-row col-xs-1\">"
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
-	    + alias4(((helper = (helper = helpers.given_name || (depth0 != null ? depth0.given_name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"given_name","hash":{},"data":data}) : helper)))
-	    + " "
-	    + alias4(((helper = (helper = helpers.surname || (depth0 != null ? depth0.surname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"surname","hash":{},"data":data}) : helper)))
+	  return "    <tr>\n      <td class=\"standings-cell standings-row col-xs-2\">"
+	    + alias4(((helper = (helper = helpers.updated_at || (depth0 != null ? depth0.updated_at : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"updated_at","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
-	    + alias4(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"created_at","hash":{},"data":data}) : helper)))
+	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.player : depth0)) != null ? stack1.surname : stack1), depth0))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
+	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.player : depth0)) != null ? stack1.given_name : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-6\">"
 	    + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
 	    + "</td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return "<!--  team post data -->\n<table id=\"team-post-table\" class=\"table table-striped table-bordered table-hover table-responsive team-post-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-1\">ID</th>\n    <th class=\"content-cell content-header col-xs-3\">Player</th>\n    <th class=\"content-cell content-header col-xs-2\">Date</th>\n    <th class=\"content-cell content-header col-xs-6\">Content</th>\n  </tr>\n"
+	  return "<!--  team post data -->\n<table id=\"team-post-table\" class=\"table table-striped table-bordered table-hover table-responsive team-post-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-2\">Date</th>\n    <th class=\"content-cell content-header col-xs-2\">Last Name</th>\n    <th class=\"content-cell content-header col-xs-2\">First Name</th>\n    <th class=\"content-cell content-header col-xs-6\">Content</th>\n  </tr>\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.posts : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "</table>\n";
 	},"useData":true});

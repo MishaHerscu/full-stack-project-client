@@ -21,9 +21,13 @@ const showPostsSuccess = (data) => {
     }
   ).reverse();
 
+  let finalSortedPosts = {
+    posts: sortedPosts
+  };
+
   $('.team-post-data').html('');
   let postListingTemplate = require('../../templates/post.handlebars');
-  $('.team-post-data').html(postListingTemplate(sortedPosts));
+  $('.team-post-data').html(postListingTemplate(finalSortedPosts));
 };
 
 const refreshPostTable = () => {
