@@ -2,19 +2,19 @@
 <table id="games-table" class="table table-striped table-bordered table-hover table-responsive games-data col-xs-12">
   <tr>
     <th class="content-cell content-header col-xs-1">ID</th>
-    <th class="content-cell content-header col-xs-1">Team</th>
     <th class="content-cell content-header col-xs-2">Date</th>
-    <th class="content-cell content-header col-xs-4">Opponent</th>
-    <th class="content-cell content-header col-xs-3">Won</th>
+    <th class="content-cell content-header col-xs-3">Team</th>
+    <th class="content-cell content-header col-xs-3">Opponent</th>
+    <th class="content-cell content-header col-xs-2">Won</th>
     <th class="content-cell content-header col-xs-1">Delete</th>
   </tr>
   {{#each games}}
     <tr>
       <td class="standings-cell standings-row col-xs-1">{{id}}</td>
-      <td class="standings-cell standings-row col-xs-1">{{team.id}}</td>
       <td class="standings-cell standings-row col-xs-2">{{date}}</td>
-      <td class="standings-cell standings-row col-xs-4">{{opponent}}</td>
-      <td class="standings-cell standings-row col-xs-3">{{won}}</td>
+      <td class="standings-cell standings-row col-xs-3">{{team.name}}</td>
+      <td class="standings-cell standings-row col-xs-3">{{opponent}}</td>
+      <td class="standings-cell standings-row col-xs-2">{{won}}</td>
       <td class="standings-cell standings-row col-xs-1">
         <button class="btn btn-default game-delete-button" data-id={{id}}>Delete</button>
       </td>

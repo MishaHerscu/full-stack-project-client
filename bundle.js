@@ -2204,10 +2204,10 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(((helper = (helper = helpers.game_id || (depth0 != null ? depth0.game_id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"game_id","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
-	    + alias4(alias5(((stack1 = ((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.team : stack1)) != null ? stack1.name : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.date : stack1), depth0))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
+	    + alias4(alias5(((stack1 = ((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.team : stack1)) != null ? stack1.name : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell team-name standings-row col-xs-3\">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.opponent : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
@@ -2218,7 +2218,7 @@ webpackJsonp([0],[
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return "<!--  attendances data -->\n<table id=\"attendances-table\" class=\"table table-striped table-bordered table-hover table-responsive attendance-data col-xs-12\">\n  <tr>\n    <th class=\"standings-cell standings-row col-xs-1\">ID</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Game</th>\n    <th class=\"standings-cell standings-row col-xs-3\">Team</th>\n    <th class=\"standings-cell standings-row col-xs-2\">Date</th>\n    <th class=\"standings-cell team-name standings-row col-xs-3\">Opponent</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Won</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Delete</th>\n  </tr>\n"
+	  return "<!--  attendances data -->\n<table id=\"attendances-table\" class=\"table table-striped table-bordered table-hover table-responsive attendance-data col-xs-12\">\n  <tr>\n    <th class=\"standings-cell standings-row col-xs-1\">ID</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Game</th>\n    <th class=\"standings-cell standings-row col-xs-2\">Date</th>\n    <th class=\"standings-cell standings-row col-xs-3\">Team</th>\n    <th class=\"standings-cell team-name standings-row col-xs-3\">Opponent</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Won</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Delete</th>\n  </tr>\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.attendances : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "</table>\n";
 	},"useData":true});
@@ -2234,13 +2234,13 @@ webpackJsonp([0],[
 
 	  return "    <tr>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
-	    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.team : depth0)) != null ? stack1.id : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
 	    + alias4(((helper = (helper = helpers.date || (depth0 != null ? depth0.date : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-4\">"
-	    + alias4(((helper = (helper = helpers.opponent || (depth0 != null ? depth0.opponent : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"opponent","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
+	    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.team : depth0)) != null ? stack1.name : stack1), depth0))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
+	    + alias4(((helper = (helper = helpers.opponent || (depth0 != null ? depth0.opponent : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"opponent","hash":{},"data":data}) : helper)))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
 	    + alias4(((helper = (helper = helpers.won || (depth0 != null ? depth0.won : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"won","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default game-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
@@ -2248,7 +2248,7 @@ webpackJsonp([0],[
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return "<!--  game data -->\n<table id=\"games-table\" class=\"table table-striped table-bordered table-hover table-responsive games-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-1\">ID</th>\n    <th class=\"content-cell content-header col-xs-1\">Team</th>\n    <th class=\"content-cell content-header col-xs-2\">Date</th>\n    <th class=\"content-cell content-header col-xs-4\">Opponent</th>\n    <th class=\"content-cell content-header col-xs-3\">Won</th>\n    <th class=\"content-cell content-header col-xs-1\">Delete</th>\n  </tr>\n"
+	  return "<!--  game data -->\n<table id=\"games-table\" class=\"table table-striped table-bordered table-hover table-responsive games-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-1\">ID</th>\n    <th class=\"content-cell content-header col-xs-2\">Date</th>\n    <th class=\"content-cell content-header col-xs-3\">Team</th>\n    <th class=\"content-cell content-header col-xs-3\">Opponent</th>\n    <th class=\"content-cell content-header col-xs-2\">Won</th>\n    <th class=\"content-cell content-header col-xs-1\">Delete</th>\n  </tr>\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.games : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "</table>\n";
 	},"useData":true});
