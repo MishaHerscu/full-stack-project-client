@@ -222,6 +222,28 @@
               <input type="submit" class="modal-button btn btn-default" data-toggle="modal" data-target="#createTeamModal" value="Create New Team!">
             </div>
 
+            <br>
+
+            <h3 class="page-title">Team Posts</h3>
+
+            <table id="team-post-table" class="table table-striped table-bordered table-hover table-responsive team-post-data col-xs-12">
+              <tr>
+                <th class="standings-cell standings-row col-xs-1">ID</th>
+                <th class="standings-cell standings-row col-xs-3">Player</th>
+                <th class="standings-cell standings-row col-xs-2">Date</th>
+                <th class="standings-cell standings-row col-xs-6">Content</th>
+              </tr>
+            </table>
+            <br><br>
+
+            <form role="form" class="form-group content" id="create-post">
+              <label for="new-team-post">Post:</label>
+              <textarea class="form-control" name="post[content]" rows="5"></textarea>
+              <input type="number" name="post[player_id]" id="create-post-player-id" class="hidden">
+              <input type="number" name="post[team_id]" id="create-post-team-id" class="hidden">
+              <input type="submit" class="modal-button btn btn-default" value="Post!">
+            </form>
+
           </div>
 
           <div class="profile content">

@@ -1,0 +1,17 @@
+<!--  team post data -->
+<table id="team-post-table" class="table table-striped table-bordered table-hover table-responsive team-post-data col-xs-12">
+  <tr>
+    <th class="content-cell content-header col-xs-1">ID</th>
+    <th class="content-cell content-header col-xs-3">Player</th>
+    <th class="content-cell content-header col-xs-2">Date</th>
+    <th class="content-cell content-header col-xs-6">Content</th>
+  </tr>
+  {{#each posts}}
+    <tr>
+      <td class="standings-cell standings-row col-xs-1">{{id}}</td>
+      <td class="standings-cell standings-row col-xs-3">{{given_name}} {{surname}}</td>
+      <td class="standings-cell standings-row col-xs-2">{{created_at}}</td>
+      <td class="standings-cell standings-row col-xs-6">{{content}}</td>
+    </tr>
+  {{/each}}
+</table>

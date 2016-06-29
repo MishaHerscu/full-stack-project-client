@@ -43,6 +43,9 @@ const setPlayerVals = function(){
   $('#current-team-id').val(app.player.team_id);
   $('#create-attendance-player-id').val(app.user.id);
 
+  $('#create-post-player-id').val(app.player.id);
+  $('#create-post-team-id').val(app.player.team_id);
+
   $('#update-player-surname').val(app.player.surname);
   $('#update-player-given-name').val(app.player.given_name);
   $('#update-player-email').val(app.player.email);

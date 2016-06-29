@@ -6,6 +6,8 @@ const helpers = require('../../helpers.js');
 const app = require('../../app.js');
 const api = require('./api');
 const ui = require('./ui');
+const postUi = require('../postActions/ui');
+
 
 const onCreateTeam = (event) => {
   event.preventDefault();
@@ -40,6 +42,8 @@ const onShowTeamPage = (event) => {
 
   helpers.hideAll();
   $('.team').show();
+
+  postUi.refreshPostTable();
 
   if(app.team !== null && app.team !== undefined){
     $('#current-team-rank').text(app.team.rank);
