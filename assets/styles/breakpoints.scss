@@ -3,15 +3,15 @@
 body {
 
   @include breakpoint(small) {
-    font-size: $font-size * .7;
+    font-size: $font-size * 1.5;
   }
 
   @include breakpoint(medium) {
-    font-size: $font-size * .85;
+    font-size: $font-size * 1;
   }
 
   @include breakpoint(large) {
-    font-size: $font-size * 1;
+    font-size: $font-size * .75;
   }
 
 }
