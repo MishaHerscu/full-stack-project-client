@@ -15,7 +15,6 @@ const failure = (error) => {
 };
 
 const updateTeamStats = (team) => {
-  console.log(team);
 
   team.gameCount = team.games.length;
 

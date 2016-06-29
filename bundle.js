@@ -1941,7 +1941,6 @@ webpackJsonp([0],[
 	};
 
 	var updateTeamStats = function updateTeamStats(team) {
-	  console.log(team);
 
 	  team.gameCount = team.games.length;
 
