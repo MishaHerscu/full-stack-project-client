@@ -1,6 +1,8 @@
 'use strict';
 
 const app = require('../../app.js');
+const teamApi = require('../teamActions/api.js');
+const teamUi = require('../teamActions/ui.js');
 
 const success = (data) => {
   if (data) {
@@ -39,13 +41,17 @@ const showGamesSuccess = (data) => {
 };
 
 const createGameSuccess = () => {
-  $('#standings-button').click();
-  $('#games-button').click();
+  teamApi.show()
+  .done(teamUi.showTeamsSuccess)
+  .then($('#games-button').click())
+  .fail(teamUi.failure);
 };
 
 const deleteGameSuccess = () => {
-  $('#standings-button').click();
-  $('#games-button').click();
+  teamApi.show()
+  .done(teamUi.showTeamsSuccess)
+  .then($('#games-button').click())
+  .fail(teamUi.failure);
 };
 
 module.exports = {

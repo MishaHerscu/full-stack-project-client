@@ -15,6 +15,7 @@ const failure = (error) => {
 };
 
 const updateTeamStats = (team) => {
+  console.log(team);
 
   team.gameCount = team.games.length;
 
@@ -62,9 +63,10 @@ const rankTeams = (teams) => {
 
 const showTeamsSuccess = (data) => {
   $('.teams-standings').html('');
+  let teamsCount = data.teams.length;
 
   // update team stats
-  for(let i = 0, max = data.teams.length; i < max; i++){
+  for(let i = 0; i < teamsCount; i++){
     data.teams[i] = updateTeamStats(data.teams[i]);
   }
 
