@@ -43,13 +43,7 @@ const setPlayerStats = (data) => {
     app.playerStats[i].assistCount = app.playerStats[i].assists.length;
     app.playerStats[i].pointCount = app.playerStats[i].goalCount + app.playerStats[i].assistCount;
 
-    // get game count
-    let teamCount = app.teams.length;
-    for(let j = 0; j < teamCount; j++){
-      if(app.teams[j].id === app.team.id){
-        app.playerStats[i].gameCount = app.teams[j].gameCount;
-      }
-    }
+    app.playerStats[i].gameCount = app.playerStats[i].attendances.length;
 
     if(app.playerStats[i].gameCount > 0){
       app.playerStats[i].GPG = Math.round(1000 * app.playerStats[i].goalCount / app.playerStats[i].gameCount) / 1000;
