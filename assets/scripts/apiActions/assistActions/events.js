@@ -39,7 +39,7 @@ const onDeleteAssist = (event) => {
 const addHandlers = () => {
   $('#create-assist').on('submit', onCreateAssist);
   $('#assists-button').on('click', onShowAssists);
-  $(document).on('click', '.assist-delete-button', onDeleteAssist);
+  $('.assist-delete-button').on('click', onDeleteAssist);
 };
 
 module.exports = {

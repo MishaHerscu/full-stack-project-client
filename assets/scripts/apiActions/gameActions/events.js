@@ -126,8 +126,8 @@ const addHandlers = () => {
   $('#create-game').on('submit', onCreateGame);
   $('#bulk-create-points').on('submit', onBulkCreatePoints);
   $('#games-button').on('click', onShowGames);
-  $(document).on('click', '.game-delete-button', onDeleteGame);
-  $(document).on('click', '.bulk-create-points-button', onBulkCreatePointsForm);
+  $('.game-delete-button').on('click', onDeleteGame);
+  $('.bulk-create-points-button').on('click', onBulkCreatePointsForm);
 };
 
 module.exports = {

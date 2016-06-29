@@ -56,7 +56,7 @@ const onDeletePoint = (event) => {
 const addHandlers = () => {
   $('#create-point').on('submit', onCreatePoint);
   $('#points-button').on('click', onShowPoints);
-  $(document).on('click', '.goal-delete-button', onDeletePoint);
+  $('.goal-delete-button').on('click', onDeletePoint);
 };
 
 module.exports = {

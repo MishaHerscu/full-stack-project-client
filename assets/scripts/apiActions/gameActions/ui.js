@@ -1,6 +1,8 @@
 'use strict';
 
 const app = require('../../app.js');
+const events = require('./events.js');
+const attendanceEvents = require('../attendanceActions/events.js');
 
 const success = (data) => {
   if (data) {
@@ -32,10 +34,13 @@ const showGamesSuccess = (data) => {
   $('.attendance-data').html('');
   let attendanceListingTemplate = require('../../templates/attendance.handlebars');
   $('.attendance-data').html(attendanceListingTemplate(attendanceData));
+  $('.attendance-delete-button').on('click', attendanceEvents.onDeleteAttendance);
 
   $('.games-data').html('');
   let gameListingTemplate = require('../../templates/game.handlebars');
   $('.games-data').html(gameListingTemplate(data));
+  $('.game-delete-button').on('click', events.onDeleteGame);
+  $('.bulk-create-points-button').on('click', events.onBulkCreatePointsForm);
 };
 
 const createGameSuccess = () => {

@@ -26,7 +26,6 @@ const onDeleteAttendance = (event) => {
 
 const addHandlers = () => {
   $('#create-attendance').on('submit', onCreateAttendance);
-  $(document).on('click', '.attendance-delete-button', onDeleteAttendance);
 };
 
 module.exports = {

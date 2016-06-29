@@ -1,5 +1,7 @@
 'use strict';
 
+const events = require('./events.js');
+
 const success = (data) => {
   if (data) {
     // console.log(data);
@@ -16,6 +18,7 @@ const showGoalsSuccess = (data) => {
   $('.goals-data').html('');
   let goalListingTemplate = require('../../templates/goal.handlebars');
   $('.goals-data').html(goalListingTemplate(data));
+  $('.goal-delete-button').on('click', events.onDeletePoint);
   $('#assists-button').click();
 };
 
