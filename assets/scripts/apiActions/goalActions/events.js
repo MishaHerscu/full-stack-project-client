@@ -20,7 +20,7 @@ const onCreatePoint = (event) => {
  };
  let assistData = {
    assist: {
-    player_id: data.newPointDetails.scorer_id,
+    player_id: data.newPointDetails.assister_id,
     game_id: data.newPointDetails.game_id
   }
 };

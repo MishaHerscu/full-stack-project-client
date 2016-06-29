@@ -598,6 +598,7 @@ webpackJsonp([0],[
 	  $('.team').hide();
 	  $('.profile').hide();
 	  $('.points').hide();
+	  $('.bulk-points-add').hide();
 	};
 
 	module.exports = {
@@ -2240,15 +2241,17 @@ webpackJsonp([0],[
 	    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.team : depth0)) != null ? stack1.name : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
 	    + alias4(((helper = (helper = helpers.opponent || (depth0 != null ? depth0.opponent : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"opponent","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(((helper = (helper = helpers.won || (depth0 != null ? depth0.won : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"won","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default game-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n    </tr>\n";
+	    + ">Delete</button>\n      </td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default bulk-create-points-button\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">Create</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return "<!--  game data -->\n<table id=\"games-table\" class=\"table table-striped table-bordered table-hover table-responsive games-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-1\">ID</th>\n    <th class=\"content-cell content-header col-xs-2\">Date</th>\n    <th class=\"content-cell content-header col-xs-3\">Team</th>\n    <th class=\"content-cell content-header col-xs-3\">Opponent</th>\n    <th class=\"content-cell content-header col-xs-2\">Won</th>\n    <th class=\"content-cell content-header col-xs-1\">Delete</th>\n  </tr>\n"
+	  return "<!--  game data -->\n<table id=\"games-table\" class=\"table table-striped table-bordered table-hover table-responsive games-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-1\">ID</th>\n    <th class=\"content-cell content-header col-xs-2\">Date</th>\n    <th class=\"content-cell content-header col-xs-3\">Team</th>\n    <th class=\"content-cell content-header col-xs-3\">Opponent</th>\n    <th class=\"content-cell content-header col-xs-1\">Won</th>\n    <th class=\"content-cell content-header col-xs-1\">Delete</th>\n    <th class=\"content-cell content-header col-xs-1\">Points</th>\n  </tr>\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.games : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "</table>\n";
 	},"useData":true});
@@ -2576,6 +2579,10 @@ webpackJsonp([0],[
 	var helpers = __webpack_require__(11);
 	var api = __webpack_require__(36);
 	var ui = __webpack_require__(37);
+	var goalApi = __webpack_require__(40);
+	var goalUi = __webpack_require__(41);
+	var assistApi = __webpack_require__(43);
+	var assistUi = __webpack_require__(44);
 
 	var onCreateGame = function onCreateGame(event) {
 	  event.preventDefault();
@@ -2601,17 +2608,98 @@ webpackJsonp([0],[
 	  api.destroy(data).done(ui.deleteGameSuccess).fail(ui.failure);
 	};
 
+	var isValidPoint = function isValidPoint(pointObject) {
+
+	  var gameId = pointObject.gameId.value;
+	  var scorerId = pointObject.scorerId.value;
+	  var assister = pointObject.assisterId.value;
+
+	  if (gameId > 0 && scorerId > 0 && assister > 0) {
+	    return true;
+	  }
+	};
+
+	var onBulkCreatePoints = function onBulkCreatePoints(event) {
+	  event.preventDefault();
+	  var rawData = $(event.target).serializeArray();
+	  var rawDataLength = rawData.length;
+	  var pointCount = rawDataLength / 3;
+
+	  // split the fields into the points
+	  var new_points = [];
+	  for (var i = 0; i < pointCount; i++) {
+	    var multiplier = 3 * i;
+	    new_points.push({
+	      gameId: rawData[multiplier + 0],
+	      scorerId: rawData[multiplier + 1],
+	      assisterId: rawData[multiplier + 2]
+	    });
+	  }
+
+	  // filter to completed points only (game, scorer, assister)
+	  var finalPoints = [];
+	  for (var j = 0; j < pointCount; j++) {
+	    if (isValidPoint(new_points[j])) {
+	      finalPoints.push(new_points[j]);
+	    }
+	  }
+	  var finalPointCount = finalPoints.length;
+
+	  // create the actual points
+	  for (var k = 0; k < finalPointCount; k++) {
+
+	    var goalData = {
+	      goal: {
+	        player_id: finalPoints[k].scorerId.value,
+	        game_id: finalPoints[k].gameId.value
+	      }
+	    };
+
+	    var assistData = {
+	      assist: {
+	        player_id: finalPoints[k].assisterId.value,
+	        game_id: finalPoints[k].gameId.value
+	      }
+	    };
+
+	    goalApi.create(goalData).fail(goalUi.failure);
+
+	    assistApi.create(assistData).fail(assistUi.failure);
+
+	    helpers.hideAll();
+	    $('#points-button').click();
+	    $('.bulk-points-add-game').val('');
+	    $('.bulk-points-add-scorer').val('');
+	    $('.bulk-points-add-assister').val('');
+	  }
+	};
+
+	var onBulkCreatePointsForm = function onBulkCreatePointsForm(event) {
+	  event.preventDefault();
+	  var data = $(event.target).data("id");
+
+	  $('.bulk-points-add-game').val(data);
+
+	  $('#page-title').text('Create Points');
+	  helpers.hideAll();
+	  $('.bulk-points-add').show();
+	};
+
 	var addHandlers = function addHandlers() {
 	  $('#create-game').on('submit', onCreateGame);
+	  $('#bulk-create-points').on('submit', onBulkCreatePoints);
 	  $('#games-button').on('click', onShowGames);
 	  $(document).on('click', '.game-delete-button', onDeleteGame);
+	  $(document).on('click', '.bulk-create-points-button', onBulkCreatePointsForm);
 	};
 
 	module.exports = {
 	  addHandlers: addHandlers,
 	  onShowGames: onShowGames,
 	  onCreateGame: onCreateGame,
-	  onDeleteGame: onDeleteGame
+	  onDeleteGame: onDeleteGame,
+	  onBulkCreatePoints: onBulkCreatePoints,
+	  onBulkCreatePointsForm: onBulkCreatePointsForm
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -2790,7 +2878,7 @@ webpackJsonp([0],[
 	  };
 	  var assistData = {
 	    assist: {
-	      player_id: data.newPointDetails.scorer_id,
+	      player_id: data.newPointDetails.assister_id,
 	      game_id: data.newPointDetails.game_id
 	    }
 	  };
