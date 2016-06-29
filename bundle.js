@@ -2176,8 +2176,7 @@ webpackJsonp([0],[
 	  $('.games-data').html(gameListingTemplate(data));
 	};
 
-	var createGameSuccess = function createGameSuccess(data) {
-	  showGamesSuccess(data);
+	var createGameSuccess = function createGameSuccess() {
 	  $('#games-button').click();
 	};
 
