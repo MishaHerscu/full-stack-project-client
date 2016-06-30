@@ -1,6 +1,7 @@
 'use strict';
 
 const app = require('../../app.js');
+const helpers = require('../../helpers.js');
 
 const success = (data) => {
   if (data) {
@@ -86,6 +87,7 @@ const showTeamsSuccess = (data) => {
   }
   let teamListingTemplate = require('../../templates/team.handlebars');
   $('.teams-standings').html(teamListingTemplate(data));
+  helpers.onSetAdminRights();
 };
 
 const createTeamSuccess = (data) => {

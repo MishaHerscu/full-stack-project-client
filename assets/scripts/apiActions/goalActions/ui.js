@@ -1,5 +1,7 @@
 'use strict';
 
+const helpers = require('../../helpers.js');
+
 const success = (data) => {
   if (data) {
     // console.log(data);
@@ -16,6 +18,7 @@ const showGoalsSuccess = (data) => {
   $('.goals-data').html('');
   let goalListingTemplate = require('../../templates/goal.handlebars');
   $('.goals-data').html(goalListingTemplate(data));
+  helpers.onSetAdminRights();
   $('#assists-button').click();
 };
 
@@ -23,6 +26,7 @@ const showOnlyGoalsSuccess = (data) => {
   $('.goals-data').html('');
   let goalListingTemplate = require('../../templates/goal.handlebars');
   $('.goals-data').html(goalListingTemplate(data));
+  helpers.onSetAdminRights();
 };
 
 const createPointSuccess = (data) => {

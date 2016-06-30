@@ -1,6 +1,7 @@
 'use strict';
 
 const app = require('../../app.js');
+const helpers = require('../../helpers.js');
 const teamApi = require('../teamActions/api.js');
 const teamUi = require('../teamActions/ui.js');
 
@@ -34,13 +35,12 @@ const showGamesSuccess = (data) => {
   $('.attendance-data').html('');
   let attendanceListingTemplate = require('../../templates/attendance.handlebars');
   $('.attendance-data').html(attendanceListingTemplate(attendanceData));
+  helpers.onSetAdminRights();
 
   $('.games-data').html('');
   let gameListingTemplate = require('../../templates/game.handlebars');
   $('.games-data').html(gameListingTemplate(data));
-
-  console.log(app.player.user);
-  console.log(app.player.user.admin);
+  helpers.onSetAdminRights();
 };
 
 const createGameSuccess = () => {

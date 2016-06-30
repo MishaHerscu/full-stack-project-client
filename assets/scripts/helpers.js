@@ -31,4 +31,5 @@ const addHandlers = () => {
 module.exports = {
   hideAll,
   addHandlers,
+  onSetAdminRights,
 };

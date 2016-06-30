@@ -1,6 +1,7 @@
 'use strict';
 
 const api = require('./api.js');
+const helpers = require('../../helpers.js');
 
 const success = (data) => {
   if (data) {
@@ -28,6 +29,7 @@ const showPostsSuccess = (data) => {
   $('.team-post-data').html('');
   let postListingTemplate = require('../../templates/post.handlebars');
   $('.team-post-data').html(postListingTemplate(finalSortedPosts));
+  helpers.onSetAdminRights();
 };
 
 const refreshPostTable = () => {

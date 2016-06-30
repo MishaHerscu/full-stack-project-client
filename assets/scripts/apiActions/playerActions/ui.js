@@ -32,6 +32,7 @@ const setTeamMembers = (data) => {
   }
   let playerListingTemplate = require('../../templates/player.handlebars');
   $('.team-members-data').html(playerListingTemplate(app.teamMembers));
+  helpers.onSetAdminRights();
 };
 
 const setPlayerStats = (data) => {
@@ -77,11 +78,13 @@ const showPlayersSuccess = (data) => {
   let statsData = { statPlayers: app.playerStats };
   let statPlayerListingTemplate = require('../../templates/statPlayer.handlebars');
   $('.players-stats-data').html(statPlayerListingTemplate(statsData));
+  helpers.onSetAdminRights();
 
   // show player contact info
   let profileData = { players: app.playerStats };
   let playerListingTemplate = require('../../templates/player.handlebars');
   $('.players-profile-data').html(playerListingTemplate(profileData));
+  helpers.onSetAdminRights();
 
   if(app.player !== null && app.player !== undefined){
     setTeamMembers(data);
