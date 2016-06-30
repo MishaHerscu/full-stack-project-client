@@ -38,6 +38,9 @@ const showGamesSuccess = (data) => {
   $('.games-data').html('');
   let gameListingTemplate = require('../../templates/game.handlebars');
   $('.games-data').html(gameListingTemplate(data));
+
+  console.log(app.player.user);
+  console.log(app.player.user.admin);
 };
 
 const createGameSuccess = () => {
