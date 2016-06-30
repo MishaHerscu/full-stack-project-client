@@ -15,11 +15,9 @@ const hideAll = () => {
 const onSetAdminRights = () => {
   if(app.player !== null && app.player !== undefined){
     if(app.player.user.admin === 'true'){
-      $('.admin-only').addClass('active');
-      $('.admin-only').removeClass('disabled');
+      $('.admin-only').prop('disabled', false);
     } else {
-      $('.admin-only').addClass('disabled');
-      $('.admin-only').removeClass('active');
+      $('.admin-only').prop('disabled', true);
     }
   }
 };

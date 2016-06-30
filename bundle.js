@@ -81,9 +81,9 @@ webpackJsonp([0],[
 
 	var onSignUp = function onSignUp(event) {
 	  event.preventDefault();
-	  var data = getFormFields(event.target);
-
 	  $('#sign-up-admin').val('false');
+
+	  var data = getFormFields(event.target);
 
 	  api.signUp(data).done(ui.success).then(ui.signUpSuccess).fail(ui.failure);
 	};
@@ -481,6 +481,7 @@ webpackJsonp([0],[
 	  }
 	  var playerListingTemplate = __webpack_require__(12);
 	  $('.team-members-data').html(playerListingTemplate(app.teamMembers));
+	  helpers.onSetAdminRights();
 	};
 
 	var setPlayerStats = function setPlayerStats(data) {
@@ -524,11 +525,13 @@ webpackJsonp([0],[
 	  var statsData = { statPlayers: app.playerStats };
 	  var statPlayerListingTemplate = __webpack_require__(32);
 	  $('.players-stats-data').html(statPlayerListingTemplate(statsData));
+	  helpers.onSetAdminRights();
 
 	  // show player contact info
 	  var profileData = { players: app.playerStats };
 	  var playerListingTemplate = __webpack_require__(12);
 	  $('.players-profile-data').html(playerListingTemplate(profileData));
+	  helpers.onSetAdminRights();
 
 	  if (app.player !== null && app.player !== undefined) {
 	    setTeamMembers(data);
@@ -616,11 +619,9 @@ webpackJsonp([0],[
 	var onSetAdminRights = function onSetAdminRights() {
 	  if (app.player !== null && app.player !== undefined) {
 	    if (app.player.user.admin === 'true') {
-	      $('.admin-only').addClass('active');
-	      $('.admin-only').removeClass('disabled');
+	      $('.admin-only').prop('disabled', false);
 	    } else {
-	      $('.admin-only').addClass('disabled');
-	      $('.admin-only').removeClass('active');
+	      $('.admin-only').prop('disabled', true);
 	    }
 	  }
 	};
@@ -631,7 +632,8 @@ webpackJsonp([0],[
 
 	module.exports = {
 	  hideAll: hideAll,
-	  addHandlers: addHandlers
+	  addHandlers: addHandlers,
+	  onSetAdminRights: onSetAdminRights
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -1951,6 +1953,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var app = __webpack_require__(7);
+	var helpers = __webpack_require__(11);
 
 	var success = function success(data) {
 	  if (data) {
@@ -2036,6 +2039,7 @@ webpackJsonp([0],[
 	  }
 	  var teamListingTemplate = __webpack_require__(35);
 	  $('.teams-standings').html(teamListingTemplate(data));
+	  helpers.onSetAdminRights();
 	};
 
 	var createTeamSuccess = function createTeamSuccess(data) {
@@ -2166,6 +2170,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var app = __webpack_require__(7);
+	var helpers = __webpack_require__(11);
 	var teamApi = __webpack_require__(33);
 	var teamUi = __webpack_require__(34);
 
@@ -2199,10 +2204,12 @@ webpackJsonp([0],[
 	  $('.attendance-data').html('');
 	  var attendanceListingTemplate = __webpack_require__(38);
 	  $('.attendance-data').html(attendanceListingTemplate(attendanceData));
+	  helpers.onSetAdminRights();
 
 	  $('.games-data').html('');
 	  var gameListingTemplate = __webpack_require__(39);
 	  $('.games-data').html(gameListingTemplate(data));
+	  helpers.onSetAdminRights();
 	};
 
 	var createGameSuccess = function createGameSuccess() {
@@ -2356,6 +2363,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var helpers = __webpack_require__(11);
+
 	var success = function success(data) {
 	  if (data) {
 	    // console.log(data);
@@ -2372,6 +2381,7 @@ webpackJsonp([0],[
 	  $('.goals-data').html('');
 	  var goalListingTemplate = __webpack_require__(42);
 	  $('.goals-data').html(goalListingTemplate(data));
+	  helpers.onSetAdminRights();
 	  $('#assists-button').click();
 	};
 
@@ -2379,6 +2389,7 @@ webpackJsonp([0],[
 	  $('.goals-data').html('');
 	  var goalListingTemplate = __webpack_require__(42);
 	  $('.goals-data').html(goalListingTemplate(data));
+	  helpers.onSetAdminRights();
 	};
 
 	var createPointSuccess = function createPointSuccess(data) {
@@ -2516,6 +2527,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var helpers = __webpack_require__(11);
+
 	var success = function success(data) {
 	  if (data) {
 	    // console.log(data);
@@ -2532,6 +2545,7 @@ webpackJsonp([0],[
 	  $('.assists-data').html('');
 	  var assistListingTemplate = __webpack_require__(45);
 	  $('.assists-data').html(assistListingTemplate(data));
+	  helpers.onSetAdminRights();
 	};
 
 	var createAssistSuccess = function createAssistSuccess(data) {
@@ -2893,6 +2907,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var api = __webpack_require__(50);
+	var helpers = __webpack_require__(11);
 
 	var success = function success(data) {
 	  if (data) {
@@ -2918,6 +2933,7 @@ webpackJsonp([0],[
 	  $('.team-post-data').html('');
 	  var postListingTemplate = __webpack_require__(51);
 	  $('.team-post-data').html(postListingTemplate(finalSortedPosts));
+	  helpers.onSetAdminRights();
 	};
 
 	var refreshPostTable = function refreshPostTable() {
