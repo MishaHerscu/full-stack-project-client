@@ -44,6 +44,7 @@ webpackJsonp([0],[
 	var assistEvents = __webpack_require__(53);
 	var attendanceEvents = __webpack_require__(54);
 	var postEvents = __webpack_require__(57);
+	var helpersEvents = __webpack_require__(11);
 
 	// const bookEvents = require('./books/book-events.js');
 
@@ -59,6 +60,7 @@ webpackJsonp([0],[
 	  assistEvents.addHandlers();
 	  attendanceEvents.addHandlers();
 	  postEvents.addHandlers();
+	  helpersEvents.addHandlers();
 
 	  teamEvents.onPageLoad();
 	});
@@ -80,6 +82,9 @@ webpackJsonp([0],[
 	var onSignUp = function onSignUp(event) {
 	  event.preventDefault();
 	  var data = getFormFields(event.target);
+
+	  $('#sign-up-admin').val('false');
+
 	  api.signUp(data).done(ui.success).then(ui.signUpSuccess).fail(ui.failure);
 	};
 
@@ -596,6 +601,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var app = __webpack_require__(7);
+
 	var hideAll = function hideAll() {
 	  $('.standings').hide();
 	  $('.games').hide();
@@ -606,8 +613,25 @@ webpackJsonp([0],[
 	  $('.bulk-points-add').hide();
 	};
 
+	var onSetAdminRights = function onSetAdminRights() {
+	  if (app.player !== null && app.player !== undefined) {
+	    if (app.player.user.admin === 'true') {
+	      $('.admin-only').addClass('active');
+	      $('.admin-only').removeClass('disabled');
+	    } else {
+	      $('.admin-only').addClass('disabled');
+	      $('.admin-only').removeClass('active');
+	    }
+	  }
+	};
+
+	var addHandlers = function addHandlers() {
+	  $(document).click(onSetAdminRights);
+	};
+
 	module.exports = {
-	  hideAll: hideAll
+	  hideAll: hideAll,
+	  addHandlers: addHandlers
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -2219,7 +2243,7 @@ webpackJsonp([0],[
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.opponent : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.won : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2249,9 +2273,9 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.opponent || (depth0 != null ? depth0.opponent : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"opponent","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(((helper = (helper = helpers.won || (depth0 != null ? depth0.won : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"won","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default game-delete-button\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default game-delete-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default bulk-create-points-button\" data-id="
+	    + ">Delete</button>\n      </td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default bulk-create-points-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Create</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2401,7 +2425,7 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.id : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default goal-delete-button\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default goal-delete-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2553,7 +2577,7 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.id : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default assist-delete-button\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default assist-delete-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
