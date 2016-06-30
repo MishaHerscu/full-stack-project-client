@@ -7,7 +7,6 @@ const ui = require('./ui.js');
 
 const onSignUp = (event) => {
   event.preventDefault();
-  $('#sign-up-admin').val('false');
 
   let data = getFormFields(event.target);
 
