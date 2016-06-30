@@ -17,9 +17,11 @@ const onSetAdminRights = () => {
     if(app.player.user.admin === 'true'){
       $('.admin-only').prop('disabled', false);
       $('#admin-status-title').show();
+      $('#non-admin-status-title').hide();
     } else {
       $('.admin-only').prop('disabled', true);
       $('#admin-status-title').hide();
+      $('#non-admin-status-title').show();
     }
   }
 };

@@ -33,6 +33,11 @@ input:invalid {
   margin-right: 10px;
 }
 
+.non-admin-title {
+  color: $non-admin-blue;
+  margin-right: 10px;
+}
+
 .page-state-title {
   float: left;
   font-weight: bold;
