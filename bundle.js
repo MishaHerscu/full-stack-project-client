@@ -82,7 +82,6 @@ webpackJsonp([0],[
 
 	var onSignUp = function onSignUp(event) {
 	  event.preventDefault();
-	  $('#sign-up-admin').val('false');
 
 	  var data = getFormFields(event.target);
 
