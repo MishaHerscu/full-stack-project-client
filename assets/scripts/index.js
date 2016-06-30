@@ -20,6 +20,7 @@ const helpersEvents = require('./helpers.js');
 
 $('.signed-in').hide();
 $('.signed-out').show();
+$('#admin-status-title').hide();
 
 $(() => {
   authEvents.addHandlers();

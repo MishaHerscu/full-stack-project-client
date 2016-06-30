@@ -28,6 +28,11 @@ input:invalid {
 //   border: 1px solid $valid-green;
 // }
 
+.admin-title {
+  color: $admin-red;
+  margin-right: 10px;
+}
+
 .page-state-title {
   float: left;
   font-weight: bold;
