@@ -2253,7 +2253,7 @@ webpackJsonp([0],[
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.opponent : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.won : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button admin-only\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
