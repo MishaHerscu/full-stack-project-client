@@ -49,6 +49,7 @@ const onShowProfilePage = (event) => {
 
 const onEditProfile = (event) => {
   event.preventDefault();
+  authUi.setPlayerVals();
 
   $('#editProfileModal').modal('hide');
   let data = getFormFields(event.target);
@@ -70,12 +71,24 @@ const onDeleteAccount = (event) => {
   .fail(ui.failure);
 };
 
+const onSetupEditProfile = (event) => {
+  event.preventDefault();
+  $('#edit-profile').html('');
+  authUi.setPlayerVals();
+
+  let playerEditListingTemplate = require('../../templates/teamsMenu.handlebars');
+  $('#edit-profile').html(playerEditListingTemplate({ teams: app.teams }));
+  helpers.onSetAdminRights();
+};
+
+
 const addHandlers = () => {
   $('#create-player').on('submit', onCreatePlayer);
   $('#players-button').on('click', onShowPlayers);
   $('#profile-button').on('click', onShowProfilePage);
   $('#edit-profile').on('submit', onEditProfile);
   $('#delete-account').on('click', onDeleteAccount);
+  $('#edit-profile-modal-button').on('click', onSetupEditProfile);
 };
 
 module.exports = {
@@ -85,4 +98,5 @@ module.exports = {
   onCreatePlayer,
   onEditProfile,
   onDeleteAccount,
+  onSetupEditProfile,
 };
