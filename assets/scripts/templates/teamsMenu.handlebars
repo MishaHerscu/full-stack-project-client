@@ -1,5 +1,4 @@
 <!--  edit profile menu -->
-<script></script>
 <form id="edit-profile">
       <input type="text" id="update-player-surname" name="newPlayerDetails[surname]" placeholder="last name"><br>
       <input type="text" id="update-player-given-name" name="newPlayerDetails[given_name]" placeholder="first name"><br>
@@ -19,7 +18,7 @@
       <br>
       {{#each teams}}
         <label class="radio-inline">
-          <input type="radio" name="newPlayerDetails[team_id]" value="{{id}}" checked>{{name}}
+          <input type="radio" name="newPlayerDetails[team_id]" value={{id}} checked>{{name}}
           <br>
         </label>
       {{/each}}

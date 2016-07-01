@@ -44,7 +44,7 @@ webpackJsonp([0],[
 	var assistEvents = __webpack_require__(54);
 	var attendanceEvents = __webpack_require__(55);
 	var postEvents = __webpack_require__(58);
-	var helpersEvents = __webpack_require__(11);
+	var helpersEvents = __webpack_require__(9);
 
 	// const bookEvents = require('./books/book-events.js');
 
@@ -275,8 +275,9 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var app = __webpack_require__(7);
-	var playerApi = __webpack_require__(9);
-	var playerUi = __webpack_require__(10);
+	var helpers = __webpack_require__(9);
+	var playerApi = __webpack_require__(10);
+	var playerUi = __webpack_require__(11);
 	var teamApi = __webpack_require__(33);
 	var teamUi = __webpack_require__(34);
 	var gameApi = __webpack_require__(36);
@@ -311,11 +312,7 @@ webpackJsonp([0],[
 	  $('#profile-email').text(app.player.email);
 	  $('#profile-phone-number').text(app.player.phone_number);
 	  $('#profile-captain').text(app.player.captain);
-	  $('#profile-team').text(app.teams.filter(function (team) {
-	    if (app.player.team_id === team.id) {
-	      return true;
-	    }
-	  })[0].name);
+	  $('#profile-team').text(helpers.getTeamName(app.player, app.teams));
 
 	  $('#update-player-user-id').val(app.user.id);
 	  $('#current-team-id').val(app.player.team_id);
@@ -392,6 +389,71 @@ webpackJsonp([0],[
 
 	var app = __webpack_require__(7);
 
+	var hideAll = function hideAll() {
+	  $('.standings').hide();
+	  $('.games').hide();
+	  $('.players').hide();
+	  $('.team').hide();
+	  $('.profile').hide();
+	  $('.points').hide();
+	  $('.bulk-points-add').hide();
+	};
+
+	var onSetAdminRights = function onSetAdminRights() {
+	  if (app.player !== null && app.player !== undefined) {
+	    if (app.player.user.admin === 'true') {
+	      $('.admin-only').prop('disabled', false);
+	      $('#admin-status-title').show();
+	      $('#non-admin-status-title').hide();
+	    } else {
+	      $('.admin-only').prop('disabled', true);
+	      $('#admin-status-title').hide();
+	      $('#non-admin-status-title').show();
+	    }
+	  }
+	};
+
+	var getTeamName = function getTeamName(player, teams) {
+	  app.team = teams.filter(function (team) {
+	    if (player.team_id === team.id) {
+	      return true;
+	    }
+	  })[0];
+	  var teamName = app.team.name;
+	  return teamName;
+	};
+
+	var getTeamRank = function getTeamRank(player, teams) {
+	  app.team = teams.filter(function (team) {
+	    if (player.team_id === team.id) {
+	      return true;
+	    }
+	  })[0];
+	  var teamRank = app.team.rank;
+	  return teamRank;
+	};
+
+	var addHandlers = function addHandlers() {
+	  $(document).click(onSetAdminRights);
+	};
+
+	module.exports = {
+	  hideAll: hideAll,
+	  addHandlers: addHandlers,
+	  onSetAdminRights: onSetAdminRights,
+	  getTeamName: getTeamName,
+	  getTeamRank: getTeamRank
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var app = __webpack_require__(7);
+
 	var show = function show() {
 	  return $.ajax({
 	    url: app.host + '/players/',
@@ -449,12 +511,12 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 	var app = __webpack_require__(7);
 
 	var success = function success(data) {
@@ -543,6 +605,7 @@ webpackJsonp([0],[
 	    for (var m = 0, max = app.playerStats.length; m < max; m++) {
 	      if (app.playerStats[m].id === app.player.id) {
 	        $('#profile-rank').text(app.playerStats[m].rank);
+	        $('#team-rank').text(helpers.getTeamRank(app.player, app.teams));
 	        $('#profile-games').text(app.playerStats[m].gameCount);
 	        $('#profile-goals').text(app.playerStats[m].goalCount);
 	        $('#profile-assists').text(app.playerStats[m].assistCount);
@@ -600,49 +663,6 @@ webpackJsonp([0],[
 	  editProfileSuccess: editProfileSuccess,
 	  deleteAccountSuccess: deleteAccountSuccess,
 	  setPlayerStats: setPlayerStats
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var app = __webpack_require__(7);
-
-	var hideAll = function hideAll() {
-	  $('.standings').hide();
-	  $('.games').hide();
-	  $('.players').hide();
-	  $('.team').hide();
-	  $('.profile').hide();
-	  $('.points').hide();
-	  $('.bulk-points-add').hide();
-	};
-
-	var onSetAdminRights = function onSetAdminRights() {
-	  if (app.player !== null && app.player !== undefined) {
-	    if (app.player.user.admin === 'true') {
-	      $('.admin-only').prop('disabled', false);
-	      $('#admin-status-title').show();
-	      $('#non-admin-status-title').hide();
-	    } else {
-	      $('.admin-only').prop('disabled', true);
-	      $('#admin-status-title').hide();
-	      $('#non-admin-status-title').show();
-	    }
-	  }
-	};
-
-	var addHandlers = function addHandlers() {
-	  $(document).click(onSetAdminRights);
-	};
-
-	module.exports = {
-	  hideAll: hideAll,
-	  addHandlers: addHandlers,
-	  onSetAdminRights: onSetAdminRights
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -1962,7 +1982,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var app = __webpack_require__(7);
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 
 	var success = function success(data) {
 	  if (data) {
@@ -2179,7 +2199,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var app = __webpack_require__(7);
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 	var teamApi = __webpack_require__(33);
 	var teamUi = __webpack_require__(34);
 
@@ -2372,7 +2392,7 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 
 	var success = function success(data) {
 	  if (data) {
@@ -2536,7 +2556,7 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 
 	var success = function success(data) {
 	  if (data) {
@@ -2629,7 +2649,7 @@ webpackJsonp([0],[
 
 	var getFormFields = __webpack_require__(5);
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 	var api = __webpack_require__(36);
 	var ui = __webpack_require__(37);
 	var goalApi = __webpack_require__(40);
@@ -2765,10 +2785,10 @@ webpackJsonp([0],[
 
 	var getFormFields = __webpack_require__(5);
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 	var app = __webpack_require__(7);
-	var api = __webpack_require__(9);
-	var ui = __webpack_require__(10);
+	var api = __webpack_require__(10);
+	var ui = __webpack_require__(11);
 	var authApi = __webpack_require__(6);
 	var authUi = __webpack_require__(8);
 
@@ -2859,15 +2879,15 @@ webpackJsonp([0],[
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-	  return "        <label class=\"radio-inline\">\n          <input type=\"radio\" name=\"newPlayerDetails[team_id]\" value=\""
+	  return "        <label class=\"radio-inline\">\n          <input type=\"radio\" name=\"newPlayerDetails[team_id]\" value="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + "\" checked>"
+	    + " checked>"
 	    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
 	    + "\n          <br>\n        </label>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return "<!--  edit profile menu -->\n<script></script>\n<form id=\"edit-profile\">\n      <input type=\"text\" id=\"update-player-surname\" name=\"newPlayerDetails[surname]\" placeholder=\"last name\"><br>\n      <input type=\"text\" id=\"update-player-given-name\" name=\"newPlayerDetails[given_name]\" placeholder=\"first name\"><br>\n      <input type=\"email\" id=\"update-player-email\" name=\"newPlayerDetails[email]\" placeholder=\"email address\"><br>\n      <input type=\"text\" id=\"update-player-phone-number\" name=\"newPlayerDetails[phone_number]\" placeholder=\"phone number\"><br>\n      <!-- <input type=\"text\" id=\"update-player-captain\" name=\"newPlayerDetails[captain]\" placeholder=\"captain? yes/no\"><br> -->\n      Are you a captain?\n      <br>\n      <label class=\"radio-inline\">\n        <input type=\"radio\" name=\"newPlayerDetails[captain]\" value=\"Yes\" checked>Yes\n      </label>\n      <label class=\"radio-inline\">\n        <input type=\"radio\" name=\"newPlayerDetails[captain]\" value=\"No\">No\n      </label>\n      <br>\n      Which team are you on?\n      <br>\n"
+	  return "<!--  edit profile menu -->\n<form id=\"edit-profile\">\n      <input type=\"text\" id=\"update-player-surname\" name=\"newPlayerDetails[surname]\" placeholder=\"last name\"><br>\n      <input type=\"text\" id=\"update-player-given-name\" name=\"newPlayerDetails[given_name]\" placeholder=\"first name\"><br>\n      <input type=\"email\" id=\"update-player-email\" name=\"newPlayerDetails[email]\" placeholder=\"email address\"><br>\n      <input type=\"text\" id=\"update-player-phone-number\" name=\"newPlayerDetails[phone_number]\" placeholder=\"phone number\"><br>\n      <!-- <input type=\"text\" id=\"update-player-captain\" name=\"newPlayerDetails[captain]\" placeholder=\"captain? yes/no\"><br> -->\n      Are you a captain?\n      <br>\n      <label class=\"radio-inline\">\n        <input type=\"radio\" name=\"newPlayerDetails[captain]\" value=\"Yes\" checked>Yes\n      </label>\n      <label class=\"radio-inline\">\n        <input type=\"radio\" name=\"newPlayerDetails[captain]\" value=\"No\">No\n      </label>\n      <br>\n      Which team are you on?\n      <br>\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.teams : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "      <br>\n      <input type=\"text\" class=\"hidden\" id=\"update-player-user-id\" name=\"newPlayerDetails[user_id]\" placeholder=\"user_id\">\n      <input type=\"submit\" name=\"submit\" class=\"btn btn-default\" value=\"Update!\">\n</form>\n";
 	},"useData":true});
@@ -2880,7 +2900,7 @@ webpackJsonp([0],[
 
 	var getFormFields = __webpack_require__(5);
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 	var app = __webpack_require__(7);
 	var api = __webpack_require__(33);
 	var ui = __webpack_require__(34);
@@ -2951,7 +2971,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var api = __webpack_require__(51);
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 
 	var success = function success(data) {
 	  if (data) {
@@ -3103,7 +3123,7 @@ webpackJsonp([0],[
 
 	var getFormFields = __webpack_require__(5);
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 	var api = __webpack_require__(40);
 	var ui = __webpack_require__(41);
 	var assistApi = __webpack_require__(43);
@@ -3167,7 +3187,7 @@ webpackJsonp([0],[
 
 	var getFormFields = __webpack_require__(5);
 
-	var helpers = __webpack_require__(11);
+	var helpers = __webpack_require__(9);
 	var api = __webpack_require__(43);
 	var ui = __webpack_require__(44);
 

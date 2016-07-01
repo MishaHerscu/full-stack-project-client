@@ -1,6 +1,7 @@
 'use strict';
 
 const app = require('../../app.js');
+const helpers = require('../../helpers.js');
 const playerApi = require('../playerActions/api.js');
 const playerUi = require('../playerActions/ui.js');
 const teamApi = require('../teamActions/api.js');
@@ -37,13 +38,7 @@ const setPlayerVals = function(){
   $('#profile-email').text(app.player.email);
   $('#profile-phone-number').text(app.player.phone_number);
   $('#profile-captain').text(app.player.captain);
-  $('#profile-team').text(
-    app.teams.filter(function(team){
-      if(app.player.team_id === team.id){
-        return true;
-      }
-    })[0].name
-  );
+  $('#profile-team').text(helpers.getTeamName(app.player, app.teams));
 
   $('#update-player-user-id').val(app.user.id);
   $('#current-team-id').val(app.player.team_id);
@@ -132,5 +127,5 @@ module.exports = {
   signInSuccess,
   signOutSuccess,
   setPlayer,
-  setPlayerVals
+  setPlayerVals,
 };

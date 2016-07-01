@@ -26,6 +26,26 @@ const onSetAdminRights = () => {
   }
 };
 
+const getTeamName = function(player, teams){
+  app.team = teams.filter(function(team){
+    if(player.team_id === team.id){
+      return true;
+    }
+  })[0];
+  let teamName = app.team.name;
+  return teamName;
+};
+
+const getTeamRank = function(player, teams){
+  app.team = teams.filter(function(team){
+    if(player.team_id === team.id){
+      return true;
+    }
+  })[0];
+  let teamRank = app.team.rank;
+  return teamRank;
+};
+
 const addHandlers = () => {
   $(document).click(onSetAdminRights);
 };
@@ -34,4 +54,6 @@ module.exports = {
   hideAll,
   addHandlers,
   onSetAdminRights,
+  getTeamName,
+  getTeamRank
 };
