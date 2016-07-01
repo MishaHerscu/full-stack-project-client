@@ -74,11 +74,11 @@ const onDeleteAccount = (event) => {
 const onSetupEditProfile = (event) => {
   event.preventDefault();
   $('#edit-profile').html('');
-  authUi.setPlayerVals();
 
   let playerEditListingTemplate = require('../../templates/teamsMenu.handlebars');
   $('#edit-profile').html(playerEditListingTemplate({ teams: app.teams }));
   helpers.onSetAdminRights();
+  authUi.setPlayerVals();
 };
 
 
