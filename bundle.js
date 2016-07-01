@@ -2255,7 +2255,7 @@ webpackJsonp([0],[
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.opponent : stack1), depth0))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.won : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn-lg btn-default attendance-delete-button\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2285,9 +2285,9 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.opponent || (depth0 != null ? depth0.opponent : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"opponent","hash":{},"data":data}) : helper)))
 	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
 	    + alias4(((helper = (helper = helpers.won || (depth0 != null ? depth0.won : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"won","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default game-delete-button admin-only\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn-lg btn-default game-delete-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default bulk-create-points-button admin-only\" data-id="
+	    + ">Delete</button>\n      </td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn-lg btn-default bulk-create-points-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Create</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2441,7 +2441,7 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.id : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default goal-delete-button admin-only\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn-lg btn-default goal-delete-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2596,7 +2596,7 @@ webpackJsonp([0],[
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">"
 	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.id : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default assist-delete-button admin-only\" data-id="
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn-lg btn-default assist-delete-button admin-only\" data-id="
 	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
 	    + ">Delete</button>\n      </td>\n    </tr>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2865,7 +2865,7 @@ webpackJsonp([0],[
 
 	  return "<!--  edit profile menu -->\n<script></script>\n<form id=\"edit-profile\">\n      <input type=\"text\" id=\"update-player-surname\" name=\"newPlayerDetails[surname]\" placeholder=\"last name\"><br>\n      <input type=\"text\" id=\"update-player-given-name\" name=\"newPlayerDetails[given_name]\" placeholder=\"first name\"><br>\n      <input type=\"email\" id=\"update-player-email\" name=\"newPlayerDetails[email]\" placeholder=\"email address\"><br>\n      <input type=\"text\" id=\"update-player-phone-number\" name=\"newPlayerDetails[phone_number]\" placeholder=\"phone number\"><br>\n      <!-- <input type=\"text\" id=\"update-player-captain\" name=\"newPlayerDetails[captain]\" placeholder=\"captain? yes/no\"><br> -->\n      Are you a captain?\n      <br>\n      <label class=\"radio-inline\">\n        <input type=\"radio\" name=\"newPlayerDetails[captain]\" value=\"Yes\" checked>Yes\n      </label>\n      <label class=\"radio-inline\">\n        <input type=\"radio\" name=\"newPlayerDetails[captain]\" value=\"No\">No\n      </label>\n      <br>\n      Which team are you on?\n      <br>\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.teams : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "      <br>\n      <input type=\"text\" class=\"hidden\" id=\"update-player-user-id\" name=\"newPlayerDetails[user_id]\" placeholder=\"user_id\">\n      <input type=\"submit\" name=\"submit\" class=\"btn btn-default\" value=\"Update!\">\n</form>\n";
+	    + "      <br>\n      <input type=\"text\" class=\"hidden\" id=\"update-player-user-id\" name=\"newPlayerDetails[user_id]\" placeholder=\"user_id\">\n      <input type=\"submit\" name=\"submit\" class=\"btn-lg btn-default\" value=\"Update!\">\n</form>\n";
 	},"useData":true});
 
 /***/ },
