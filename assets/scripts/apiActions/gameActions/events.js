@@ -2,6 +2,7 @@
 
 const getFormFields = require('../../../../lib/get-form-fields');
 
+const app = require('../../app.js');
 const helpers = require('../../helpers.js');
 const api = require('./api.js');
 const ui = require('./ui.js');
@@ -122,11 +123,20 @@ const onBulkCreatePointsForm = (event) => {
   $('.bulk-points-add').show();
 };
 
+const onSetupGameCreation = (event) => {
+  event.preventDefault();
+  $('#create-game').html('');
+
+  let createGameListingTemplate = require('../../templates/createGame.handlebars');
+  $('#create-game').html(createGameListingTemplate({ teams: app.teams }));
+  helpers.onSetAdminRights();
+};
 
 const addHandlers = () => {
   $('#create-game').on('submit', onCreateGame);
   $('#bulk-create-points').on('submit', onBulkCreatePoints);
   $('#games-button').on('click', onShowGames);
+  $('#create-game-modal-button').on('click', onSetupGameCreation);
   $(document).on('click', '.game-delete-button', onDeleteGame);
   $(document).on('click', '.bulk-create-points-button', onBulkCreatePointsForm);
 };
@@ -137,5 +147,6 @@ module.exports = {
   onCreateGame,
   onDeleteGame,
   onBulkCreatePoints,
-  onBulkCreatePointsForm
+  onBulkCreatePointsForm,
+  onSetupGameCreation
 };

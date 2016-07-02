@@ -1,0 +1,26 @@
+<!--  create-game form -->
+<form id="create-game">
+  <input type="date" name="game[date]" placeholder="date"><br>
+  <!-- <input type="text" name="game[opponent]" placeholder="opponent"><br> -->
+  Opponent?
+  <br>
+  {{#each teams}}
+    <label class="radio-inline">
+      <input type="radio" name="game[opponent]" value={{id}} checked>{{name}}
+      <br>
+    </label>
+  {{/each}}
+  <br>
+  <input type="number" class="hidden" id="current-team-id" name="game[team_id]" placeholder="team">
+  <!-- <input type="text" name="game[won]" placeholder="won? true/false"><br> -->
+  Won?
+  <br>
+  <label class="radio-inline">
+    <input type="radio" name="game[won]" value="true" />true
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="game[won]" value="false" />false
+  </label>
+  <br>
+  <input type="submit" name="submit" class="btn btn-default" value="Create!">
+</form>
