@@ -15,7 +15,17 @@ const failure = (error) => {
   console.error(error);
 };
 
+const onSetupCreateProfile = () => {
+  $('#create-player').html('');
+
+  let playerCreateListingTemplate = require('../../templates/createPlayer.handlebars');
+  $('#create-player').html(playerCreateListingTemplate({ teams: app.teams }));
+  helpers.onSetAdminRights();
+  $('#create-player-user-id').val(app.user.id);
+};
+
 const noProfile = () => {
+  onSetupCreateProfile();
   $('#create-player-user-id').val(app.user.id);
   $('#createPlayerModal').modal('show');
 };
@@ -150,4 +160,5 @@ module.exports = {
   editProfileSuccess,
   deleteAccountSuccess,
   setPlayerStats,
+  onSetupCreateProfile,
 };

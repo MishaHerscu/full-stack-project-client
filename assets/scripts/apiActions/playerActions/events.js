@@ -75,12 +75,12 @@ const onSetupEditProfile = (event) => {
   event.preventDefault();
   $('#edit-profile').html('');
 
-  let playerEditListingTemplate = require('../../templates/teamsMenu.handlebars');
+  let playerEditListingTemplate = require('../../templates/editPlayer.handlebars');
   $('#edit-profile').html(playerEditListingTemplate({ teams: app.teams }));
+  $('#create-player-user-id').val(app.user.id);
   helpers.onSetAdminRights();
   authUi.setPlayerVals();
 };
-
 
 const addHandlers = () => {
   $('#create-player').on('submit', onCreatePlayer);

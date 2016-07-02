@@ -1,0 +1,28 @@
+<!--  create player form -->
+<form id="create-player">
+    <input type="text" name="player[surname]" placeholder="last name"><br>
+    <input type="text" name="player[given_name]" placeholder="first name"><br>
+    <input type="email" id="create-player-email" name="player[email]" placeholder="email address"><br>
+    <input type="text" name="player[phone_number]" placeholder="phone number"><br>
+    <!-- <input type="text" name="player[captain]" placeholder="captain? yes/no"><br> -->
+    Are you a captain?
+    <br>
+    <label class="radio-inline">
+      <input type="radio" name="player[captain]" value="Yes" />Yes
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="player[captain]" value="No" />No
+    </label>
+    <br>
+    Which team are you on?
+    <br>
+    {{#each teams}}
+      <label class="radio-inline">
+        <input type="radio" name="player[team_id]" value={{id}} checked>{{name}}
+        <br>
+      </label>
+    {{/each}}
+    <br>
+    <input type="text" class="hidden" id="create-player-user-id" name="player[user_id]" placeholder="user_id">
+    <input type="submit" name="submit" class="btn btn-default" value="Create!">
+</form>

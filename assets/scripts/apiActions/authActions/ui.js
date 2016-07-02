@@ -52,7 +52,6 @@ const setPlayerVals = function(){
   $('#update-player-email').val(app.player.email);
   $('#update-player-phone-number').val(app.player.phone_number);
   $('#update-player-team-id').val(app.player.team_id);
-  $('#update-player-user-id').val(app.user.id);
 };
 
 const setPlayer = function(data){
