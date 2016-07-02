@@ -36,7 +36,6 @@ const onShowGames = (event) => {
 const onDeleteGame = (event) => {
   event.preventDefault();
   let data = $(event.target).data("id");
-  console.log(data);
   api.destroy(data)
   .done(ui.deleteGameSuccess)
   .fail(ui.failure);
@@ -129,6 +128,7 @@ const onSetupGameCreation = (event) => {
 
   let createGameListingTemplate = require('../../templates/createGame.handlebars');
   $('#create-game').html(createGameListingTemplate({ teams: app.teams }));
+  $('#current-team-id').val(app.team.id);
   helpers.onSetAdminRights();
 };
 
