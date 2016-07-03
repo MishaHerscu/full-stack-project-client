@@ -8,6 +8,10 @@ const api = require('./api.js');
 const ui = require('./ui.js');
 const authApi = require('../authActions/api.js');
 const authUi = require('../authActions/ui.js');
+const teamApi = require('../teamActions/api.js');
+const teamUi = require('../teamActions/ui.js');
+const gameApi = require('../gameActions/api.js');
+const gameUi = require('../gameActions/ui.js');
 
 const onCreatePlayer = (event) => {
   event.preventDefault();
@@ -16,6 +20,11 @@ const onCreatePlayer = (event) => {
 
   api.create(data)
   .done(ui.createPlayerSuccess)
+  .then(
+    gameApi.show()
+    .done(gameUi.showGamesSuccess)
+    .fail(gameUi.failure)
+  )
   .fail(ui.failure);
 };
 
@@ -49,7 +58,14 @@ const onShowProfilePage = (event) => {
 
 const onEditProfile = (event) => {
   event.preventDefault();
-  authUi.setPlayerVals();
+
+  if(app.teams){
+    authUi.setPlayerVals();
+  }else{
+    teamApi.show()
+    .done(teamUi.showTeamsSuccess)
+    .then(authUi.setPlayerVals);
+  }
 
   $('#editProfileModal').modal('hide');
   let data = getFormFields(event.target);
@@ -79,7 +95,14 @@ const onSetupEditProfile = (event) => {
   $('#edit-profile').html(playerEditListingTemplate({ teams: app.teams }));
   $('#create-player-user-id').val(app.user.id);
   helpers.onSetAdminRights();
-  authUi.setPlayerVals();
+
+  if(app.teams){
+    authUi.setPlayerVals();
+  }else{
+    teamApi.show()
+    .done(teamUi.showTeamsSuccess)
+    .then(authUi.setPlayerVals);
+  }
 };
 
 const addHandlers = () => {

@@ -38,6 +38,7 @@ const setPlayerVals = function(){
   $('#profile-email').text(app.player.email);
   $('#profile-phone-number').text(app.player.phone_number);
   $('#profile-captain').text(app.player.captain);
+
   $('#profile-team').text(helpers.getTeamName(app.player, app.teams));
 
   $('#update-player-user-id').val(app.user.id);
@@ -52,6 +53,8 @@ const setPlayerVals = function(){
   $('#update-player-email').val(app.player.email);
   $('#update-player-phone-number').val(app.player.phone_number);
   $('#update-player-team-id').val(app.player.team_id);
+
+  $('#create-player-email').val(app.player.email);
 };
 
 const setPlayer = function(data){
@@ -63,33 +66,29 @@ const setPlayer = function(data){
       setPlayerVals();
     }
   }
-  if(app.player !== null && app.player !== undefined){
-    teamApi.show()
-    .done(teamUi.showTeamsSuccess)
+  teamApi.show()
+  .done(teamUi.showTeamsSuccess)
+  .then(
+    playerApi.show()
+    .done(playerUi.showPlayersSuccess)
     .then(
-      playerApi.show()
-      .done(playerUi.showPlayersSuccess)
+      gameApi.show()
+      .done(gameUi.showGamesSuccess)
       .then(
-        gameApi.show()
-        .done(gameUi.showGamesSuccess)
+        goalApi.show()
+        .done(goalUi.showOnlyGoalsSuccess)
         .then(
-          goalApi.show()
-          .done(goalUi.showOnlyGoalsSuccess)
-          .then(
-            assistApi.show()
-            .done(assistUi.showAssistsSuccess)
-            .fail(assistUi.failure)
-          )
-          .fail(goalUi.failure)
+          assistApi.show()
+          .done(assistUi.showAssistsSuccess)
+          .fail(assistUi.failure)
         )
-        .fail(gameUi.failure)
+        .fail(goalUi.failure)
       )
-      .fail(playerUi.failure)
+      .fail(gameUi.failure)
     )
-    .fail(teamUi.failure);
-  }else{
-    playerUi.noProfile();
-  }
+    .fail(playerUi.failure)
+  )
+  .fail(teamUi.failure);
 };
 
 const signInSuccess = (data) => {

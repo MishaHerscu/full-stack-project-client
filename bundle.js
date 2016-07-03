@@ -312,6 +312,7 @@ webpackJsonp([0],[
 	  $('#profile-email').text(app.player.email);
 	  $('#profile-phone-number').text(app.player.phone_number);
 	  $('#profile-captain').text(app.player.captain);
+
 	  $('#profile-team').text(helpers.getTeamName(app.player, app.teams));
 
 	  $('#update-player-user-id').val(app.user.id);
@@ -326,6 +327,8 @@ webpackJsonp([0],[
 	  $('#update-player-email').val(app.player.email);
 	  $('#update-player-phone-number').val(app.player.phone_number);
 	  $('#update-player-team-id').val(app.player.team_id);
+
+	  $('#create-player-email').val(app.player.email);
 	};
 
 	var setPlayer = function setPlayer(data) {
@@ -337,11 +340,7 @@ webpackJsonp([0],[
 	      setPlayerVals();
 	    }
 	  }
-	  if (app.player !== null && app.player !== undefined) {
-	    teamApi.show().done(teamUi.showTeamsSuccess).then(playerApi.show().done(playerUi.showPlayersSuccess).then(gameApi.show().done(gameUi.showGamesSuccess).then(goalApi.show().done(goalUi.showOnlyGoalsSuccess).then(assistApi.show().done(assistUi.showAssistsSuccess).fail(assistUi.failure)).fail(goalUi.failure)).fail(gameUi.failure)).fail(playerUi.failure)).fail(teamUi.failure);
-	  } else {
-	    playerUi.noProfile();
-	  }
+	  teamApi.show().done(teamUi.showTeamsSuccess).then(playerApi.show().done(playerUi.showPlayersSuccess).then(gameApi.show().done(gameUi.showGamesSuccess).then(goalApi.show().done(goalUi.showOnlyGoalsSuccess).then(assistApi.show().done(assistUi.showAssistsSuccess).fail(assistUi.failure)).fail(goalUi.failure)).fail(gameUi.failure)).fail(playerUi.failure)).fail(teamUi.failure);
 	};
 
 	var signInSuccess = function signInSuccess(data) {
@@ -537,6 +536,7 @@ webpackJsonp([0],[
 	  $('#create-player').html(playerCreateListingTemplate({ teams: app.teams }));
 	  helpers.onSetAdminRights();
 	  $('#create-player-user-id').val(app.user.id);
+	  $('#create-player-email').val($('#sign-in-email').val());
 	};
 
 	var noProfile = function noProfile() {
@@ -2250,27 +2250,29 @@ webpackJsonp([0],[
 	var showGamesSuccess = function showGamesSuccess(data) {
 	  app.games = data.games;
 
-	  var attendancesCount = app.player.attendances.length;
-	  var gamesCount = app.games.length;
-	  for (var i = 0; i < attendancesCount; i++) {
-	    for (var j = 0; j < gamesCount; j++) {
-	      if (app.player.attendances[i].game_id === app.games[j].id) {
-	        app.player.attendances[i].game = app.games[j];
-	      }
-	    }
-	  }
-
-	  var attendanceData = { attendances: app.player.attendances };
-
-	  $('.attendance-data').html('');
-	  var attendanceListingTemplate = __webpack_require__(39);
-	  $('.attendance-data').html(attendanceListingTemplate(attendanceData));
-	  helpers.onSetAdminRights();
-
 	  $('.games-data').html('');
-	  var gameListingTemplate = __webpack_require__(40);
+	  var gameListingTemplate = __webpack_require__(39);
 	  $('.games-data').html(gameListingTemplate(data));
 	  helpers.onSetAdminRights();
+
+	  if (app.player) {
+
+	    var attendancesCount = app.player.attendances.length;
+	    var gamesCount = app.games.length;
+
+	    for (var i = 0; i < attendancesCount; i++) {
+	      for (var j = 0; j < gamesCount; j++) {
+	        if (app.player.attendances[i].game_id === app.games[j].id) {
+	          app.player.attendances[i].game = app.games[j];
+	        }
+	      }
+	    }
+	    var attendanceData = { attendances: app.player.attendances };
+	    $('.attendance-data').html('');
+	    var attendanceListingTemplate = __webpack_require__(40);
+	    $('.attendance-data').html(attendanceListingTemplate(attendanceData));
+	    helpers.onSetAdminRights();
+	  }
 	};
 
 	var createGameSuccess = function createGameSuccess() {
@@ -2292,38 +2294,6 @@ webpackJsonp([0],[
 
 /***/ },
 /* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Handlebars = __webpack_require__(13);
-	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, alias5=container.lambda;
-
-	  return "    <tr>\n      <td class=\"standings-cell standings-row col-xs-1\">"
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
-	    + alias4(((helper = (helper = helpers.game_id || (depth0 != null ? depth0.game_id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"game_id","hash":{},"data":data}) : helper)))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
-	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.date : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
-	    + alias4(alias5(((stack1 = ((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.team : stack1)) != null ? stack1.name : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell team-name standings-row col-xs-3\">"
-	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.opponent : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
-	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.won : stack1), depth0))
-	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button\" data-id="
-	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-	    + ">Delete</button>\n      </td>\n    </tr>\n";
-	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1;
-
-	  return "<!--  attendances data -->\n<table id=\"attendances-table\" class=\"table table-striped table-bordered table-hover table-responsive attendance-data col-xs-12\">\n  <tr>\n    <th class=\"standings-cell standings-row col-xs-1\">ID</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Game</th>\n    <th class=\"standings-cell standings-row col-xs-2\">Date</th>\n    <th class=\"standings-cell standings-row col-xs-3\">Team</th>\n    <th class=\"standings-cell team-name standings-row col-xs-3\">Opponent</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Won</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Delete</th>\n  </tr>\n"
-	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.attendances : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "</table>\n";
-	},"useData":true});
-
-/***/ },
-/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(13);
@@ -2351,6 +2321,38 @@ webpackJsonp([0],[
 
 	  return "<!--  game data -->\n<table id=\"games-table\" class=\"table table-striped table-bordered table-hover table-responsive games-data col-xs-12\">\n  <tr>\n    <th class=\"content-cell content-header col-xs-1\">ID</th>\n    <th class=\"content-cell content-header col-xs-2\">Date</th>\n    <th class=\"content-cell content-header col-xs-3\">Team</th>\n    <th class=\"content-cell content-header col-xs-3\">Opponent</th>\n    <th class=\"content-cell content-header col-xs-1\">Won</th>\n    <th class=\"content-cell content-header col-xs-1\">Delete</th>\n    <th class=\"content-cell content-header col-xs-1\">Points</th>\n  </tr>\n"
 	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.games : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "</table>\n";
+	},"useData":true});
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(13);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+	    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, alias5=container.lambda;
+
+	  return "    <tr>\n      <td class=\"standings-cell standings-row col-xs-1\">"
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
+	    + alias4(((helper = (helper = helpers.game_id || (depth0 != null ? depth0.game_id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"game_id","hash":{},"data":data}) : helper)))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-2\">"
+	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.date : stack1), depth0))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-3\">"
+	    + alias4(alias5(((stack1 = ((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.team : stack1)) != null ? stack1.name : stack1), depth0))
+	    + "</td>\n      <td class=\"standings-cell team-name standings-row col-xs-3\">"
+	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.opponent : stack1), depth0))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">"
+	    + alias4(alias5(((stack1 = (depth0 != null ? depth0.game : depth0)) != null ? stack1.won : stack1), depth0))
+	    + "</td>\n      <td class=\"standings-cell standings-row col-xs-1\">\n        <button class=\"btn btn-default attendance-delete-button\" data-id="
+	    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+	    + ">Delete</button>\n      </td>\n    </tr>\n";
+	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1;
+
+	  return "<!--  attendances data -->\n<table id=\"attendances-table\" class=\"table table-striped table-bordered table-hover table-responsive attendance-data col-xs-12\">\n  <tr>\n    <th class=\"standings-cell standings-row col-xs-1\">ID</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Game</th>\n    <th class=\"standings-cell standings-row col-xs-2\">Date</th>\n    <th class=\"standings-cell standings-row col-xs-3\">Team</th>\n    <th class=\"standings-cell team-name standings-row col-xs-3\">Opponent</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Won</th>\n    <th class=\"standings-cell standings-row col-xs-1\">Delete</th>\n  </tr>\n"
+	    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.attendances : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "</table>\n";
 	},"useData":true});
 
@@ -2857,13 +2859,17 @@ webpackJsonp([0],[
 	var ui = __webpack_require__(11);
 	var authApi = __webpack_require__(6);
 	var authUi = __webpack_require__(8);
+	var teamApi = __webpack_require__(34);
+	var teamUi = __webpack_require__(35);
+	var gameApi = __webpack_require__(37);
+	var gameUi = __webpack_require__(38);
 
 	var onCreatePlayer = function onCreatePlayer(event) {
 	  event.preventDefault();
 	  $('#createPlayerModal').modal('hide');
 	  var data = getFormFields(event.target);
 
-	  api.create(data).done(ui.createPlayerSuccess).fail(ui.failure);
+	  api.create(data).done(ui.createPlayerSuccess).then(gameApi.show().done(gameUi.showGamesSuccess).fail(gameUi.failure)).fail(ui.failure);
 	};
 
 	var onShowPlayers = function onShowPlayers(event) {
@@ -2892,7 +2898,12 @@ webpackJsonp([0],[
 
 	var onEditProfile = function onEditProfile(event) {
 	  event.preventDefault();
-	  authUi.setPlayerVals();
+
+	  if (app.teams) {
+	    authUi.setPlayerVals();
+	  } else {
+	    teamApi.show().done(teamUi.showTeamsSuccess).then(authUi.setPlayerVals);
+	  }
 
 	  $('#editProfileModal').modal('hide');
 	  var data = getFormFields(event.target);
@@ -2914,7 +2925,12 @@ webpackJsonp([0],[
 	  $('#edit-profile').html(playerEditListingTemplate({ teams: app.teams }));
 	  $('#create-player-user-id').val(app.user.id);
 	  helpers.onSetAdminRights();
-	  authUi.setPlayerVals();
+
+	  if (app.teams) {
+	    authUi.setPlayerVals();
+	  } else {
+	    teamApi.show().done(teamUi.showTeamsSuccess).then(authUi.setPlayerVals);
+	  }
 	};
 
 	var addHandlers = function addHandlers() {

@@ -20,27 +20,29 @@ const failure = (error) => {
 const showGamesSuccess = (data) => {
   app.games = data.games;
 
-  let attendancesCount = app.player.attendances.length;
-  let gamesCount = app.games.length;
-  for (let i = 0; i < attendancesCount; i++){
-    for (let j = 0; j < gamesCount; j++){
-      if(app.player.attendances[i].game_id === app.games[j].id){
-        app.player.attendances[i].game = app.games[j];
-      }
-    }
-  }
-
-  let attendanceData = { attendances: app.player.attendances };
-
-  $('.attendance-data').html('');
-  let attendanceListingTemplate = require('../../templates/attendance.handlebars');
-  $('.attendance-data').html(attendanceListingTemplate(attendanceData));
-  helpers.onSetAdminRights();
-
   $('.games-data').html('');
   let gameListingTemplate = require('../../templates/game.handlebars');
   $('.games-data').html(gameListingTemplate(data));
   helpers.onSetAdminRights();
+
+  if(app.player){
+
+    let attendancesCount = app.player.attendances.length;
+    let gamesCount = app.games.length;
+
+    for (let i = 0; i < attendancesCount; i++){
+      for (let j = 0; j < gamesCount; j++){
+        if(app.player.attendances[i].game_id === app.games[j].id){
+          app.player.attendances[i].game = app.games[j];
+        }
+      }
+    }
+    let attendanceData = { attendances: app.player.attendances };
+    $('.attendance-data').html('');
+    let attendanceListingTemplate = require('../../templates/attendance.handlebars');
+    $('.attendance-data').html(attendanceListingTemplate(attendanceData));
+    helpers.onSetAdminRights();
+  }
 };
 
 const createGameSuccess = () => {
