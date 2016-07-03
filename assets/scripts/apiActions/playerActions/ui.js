@@ -22,6 +22,7 @@ const onSetupCreateProfile = () => {
   $('#create-player').html(playerCreateListingTemplate({ teams: app.teams }));
   helpers.onSetAdminRights();
   $('#create-player-user-id').val(app.user.id);
+  $('#create-player-email').val($('#sign-in-email').val());
 };
 
 const noProfile = () => {
